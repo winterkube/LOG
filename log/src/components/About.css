@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
+
+.about {
+    margin-top: 50px;
+
+
+}
+
+.about h6{
+
+    font-family: "Cabin Sketch";
+    font-size: 70px;
+
+    color:rgba(164, 115, 88, 0.943);
+
+    position: relative;
+    top: 50px;
+
+    text-align: center;
+    text-shadow: 0px 0px 5px rgb(176, 124, 98);
+
+}
+
+/* !*hexa cabin font *!*/
+/*.about h7{*/
+
+    /*font-family: "Cabin Sketch";*/
+    /*font-size: 60px;*/
+
+    /*color:rgb(117, 87, 58);*/
+
+/*    text-shadow: 0px 0px 5px rgb(176, 124, 98);*/
+
+/*}*/
+
+/*!* hexa lexend font *!*/
+/*.about h8{*/
+
+
+    /*font-family: "Lexend";*/
+    /*font-size: 25px;*/
+
+    /*color:rgb(88, 68, 49);*/
+/*}*/
+
+
+.hexaContainer{
+    margin-left: 16%;
+    margin-right: 10%;
+
+    display: flex;
+    align-items: flex-start; /* Align items at the top */
+    padding: 25px;           /* Optional: padding inside the container */
+    max-width: 850px;        /* Optional: limit the container width */
+}
+
+.hexImage {
+    width: 220px;            /* Set the desired image width */
+    height: auto;            /* Maintain aspect ratio */
+    margin-right: 20px;
+}
+
+.hexContent {
+    flex: 1;                 /* Take up remaining space */
+}
+
+.hexTitle {
+    margin: 0;               /* Remove default margins */
+
+    text-align: left;        /* Align text to the left */
+
+    font-family: "Cabin Sketch";
+    font-size: 60px;
+    text-shadow: 0px 0px 5px rgb(176, 124, 98);
+
+    color:rgb(117, 87, 58);
+}
+
+
+.hexDesc {
+    margin-top: 10px;        /* Space between title and description */
+    text-align: left;        /* Align text to the left */
+
+    font-family: "Lexend";
+    font-size: 25px;
+
+    color:rgb(88, 68, 49);
+}
+
+
+.hexaopen{
+
+    margin-left: 15%;
+    margin-right: 42%;
+
+}
+
+
+.hexafree{
+
+
+    margin-left: 15%;
+    margin-right: 42%;
+
+}
