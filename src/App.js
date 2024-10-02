@@ -26,23 +26,23 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'games',
+        path: 'LOG/games',
         element: <Games />,
       },
       {
-        path: 'about',
+        path: 'LOG/about',
         element: <About />,
       },
       {
-        path: 'login',
+        path: 'LOG/login',
         element: <Login />,
       },
       {
-        path: 'forgot-password',
+        path: 'LOG/forgot-password',
         element: <ForgotPassword />,
       },
       {
-        path: 'games/snake',
+        path: 'LOG/games/snake',
         element: <Snake />,
       },
       // Add more child routes here
