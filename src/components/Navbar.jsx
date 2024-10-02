@@ -19,7 +19,7 @@ function Navbar() {
 
             {/* HOME LOGO */}
             <div id="home">
-                <Link to="/" title="Home">
+                <Link to="/LOG" title="Home">
                     <img src={homeIcon} alt="Home" height="75" />
                 </Link>
                 <h5>HOME</h5>
@@ -27,7 +27,7 @@ function Navbar() {
 
             {/* GAMES LOGO */}
             <div id="gaming">
-                <Link to="/games" title="Games">
+                <Link to="/LOG/games" title="Games">
                     <img src={gamingIcon} alt="Games" height="75" />
                 </Link>
                 <h5>GAMES</h5>
@@ -35,7 +35,7 @@ function Navbar() {
 
             {/* ABOUT LOGO */}
             <div id="about">
-                <Link to="/about" title="About">
+                <Link to="/LOG/about" title="About">
                     <img src={aboutIcon} alt="About" height="75" />
                 </Link>
                 <h5>ABOUT</h5>
@@ -43,7 +43,7 @@ function Navbar() {
 
             {/* LOGIN LOGO */}
             <div id="login">
-                <Link to="/login" title="Login">
+                <Link to="/LOG/login" title="Login">
                     <img src={loginIcon} alt="Login" height="75" />
                 </Link>
                 <h5>LOGIN</h5>
