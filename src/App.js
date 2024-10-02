@@ -18,7 +18,7 @@ const Test = () => {
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/LOG/',
     element: <Layout />, // Use Layout as the root element
     children: [
       {
