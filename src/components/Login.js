@@ -32,7 +32,7 @@ function Login() {
     // Handle "Go back home" click
     const handleGoBackHome = () => {
         // Navigate to the home page
-        history('/');
+        history('/LOG/');
     };
 
     // Handle "Try logging in anyway" click
@@ -74,7 +74,7 @@ function Login() {
                     <button type="submit">Login</button>
 
                     <div className="forgot-password">
-                        <a href="/forgot-password">Forgot Password?</a>
+                        <a href="/LOG/forgot-password">Forgot Password?</a>
                     </div>
                 </form>
             ) : (

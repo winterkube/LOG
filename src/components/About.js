@@ -31,7 +31,7 @@ function About() {
                 <div className = "hexContent">
                     <div className = "hexTitle"> UPLOAD <br/> </div>
                     <div className = "hexDesc"> Anyone can contribute and upload their very own games for others to play in the ‎
-                        <Link to="/games" title="Games">
+                        <Link to="/LOG/games" title="Games">
                              games
                         </Link>
                         ‎ section. Make sure it is compatible with HTML!</div>
@@ -47,7 +47,7 @@ function About() {
                     <div className = "hexTitle"> OPEN SOURCE <br/></div>
                     <div className = "hexDesc"> LOG is open source for everyone and can be viewed at our public github ‎
 
-                        <Link to="https://github.com/winterkube/LOGwebsite" title="Github">
+                        <Link to="https://github.com/winterkube/LOGwebsite" title="Github repo" target="_blank">
                             repository.
                         </Link>
 
