@@ -18,11 +18,11 @@ function LOG() {
             </div>
 
             <h4>
-                LOG
+                LOG...?
                 <br/>
             </h4>
 
-            <h1>Click me</h1>
+            <h1>You shouldn't be here...</h1>
 
 
             <ScrollRestoration />

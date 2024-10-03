@@ -13,9 +13,6 @@ function About() {
     return (
         <div className="about">
 
-            <div id="logo" style={{textAlign: 'center'}}>
-                <img src={logoImage} alt="Logo" height={250}/>
-            </div>
 
             <h4> About LOG </h4>
 

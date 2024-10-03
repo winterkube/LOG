@@ -9,6 +9,7 @@ import Login from './components/Login';
 import ForgotPassword from "./components/ForgotPassword";
 
 import Snake from './components/games/Snake';
+import HowToMath from './components/games/HowToMath/HowToMath';
 
 const Test = () => {
 
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: '/LOG/games/snake',
         element: <Snake />,
+      },
+      {
+        path: '/LOG/games/howtomath',
+        element: <HowToMath />,
       },
       // Add more child routes here
     ],

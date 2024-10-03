@@ -285,9 +285,7 @@ function Snake() {
 
     return (
         <div className="snake" style={{ textAlign: 'center' }}>
-            <div id="logo" style={{ textAlign: 'center' }}>
-                <img src={logoImage} alt="Logo" height={250} />
-            </div>
+
 
             <h4> SNAKE (but harder) </h4>
 

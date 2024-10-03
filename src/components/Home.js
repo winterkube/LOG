@@ -20,10 +20,6 @@ function Home() {
     return (
         <div className="home">
 
-            {/* LOGO */}
-            <div id="logo" style={{ textAlign: 'center' }}>
-                <img src={logoImage} alt="Logo" height={250} />
-            </div>
 
             <h4>
                 HOME

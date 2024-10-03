@@ -10,14 +10,15 @@ function Games() {
     return (
         <div className="games">
 
-            <div id="logo" style={{textAlign: 'center'}}>
-                <img src={logoImage} alt="Logo" height={250}/>
-            </div>
 
             <h4> GAMES </h4>
 
-            <div className="snake">
+            <div className="link">
                 <a href="/LOG/games/snake">SNAKE (but harder)</a>
+            </div>
+
+            <div className="link">
+                <a href="/LOG/games/howtomath">HOW TO MATH</a>
             </div>
 
             <div id="construct" style={{textAlign: 'center'}}>

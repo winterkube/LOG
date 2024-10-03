@@ -1,13 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
 
-.games {
+
+.how-to-math {
     text-align: center;
-    margin-top: 50px;
+
 }
 
-.link {
+.how-to-math h1 {
+    font-size: 50px;
+}
+
+.how-to-math h2 {
     font-family: "Lexend", serif;
-    font-size: 35px;
-    padding: 35px;
+    font-size: 30px;
+    color: #916c51;
 }
