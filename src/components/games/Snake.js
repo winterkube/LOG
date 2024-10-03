@@ -43,7 +43,7 @@ function Snake() {
 
         let currentScore = 0;
         let currentHighScore = 0;
-        let currentRank = '';
+        let currentRank = '‎';
         let fruitnum = 0;
         let fruittype = '';
         let fruitColor = 'red'; // Initialize with default color
@@ -208,7 +208,7 @@ function Snake() {
             }
 
             if (currentHighScore === 0) {
-                currentRank = '';
+                currentRank = '‎';
             } else if (currentHighScore < 10) {
                 currentRank = 'you suck';
             } else if (currentHighScore < 20) {

@@ -2,16 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
 
 
-body{
-
-    background-image: url(./images/bgleft.png), url(./images/bgright.png);
-    background-size:3000px;
-    background-position: left, right;
-
-    background-repeat: repeat-y;
-
-}
-
 .home {
     text-align: center;
     margin-top: 50px;

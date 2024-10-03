@@ -50,7 +50,7 @@ body{
   background-image: url(components/images/bgleft.png), url(components/images/bgright.png);
   background-size:3000px;
   background-position: left, right;
-
+  height: 100vh;
   background-repeat: repeat-y;
 
   padding-bottom: 150px;
