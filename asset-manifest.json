@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/LOG/static/css/main.507367d2.css",
-    "main.js": "/LOG/static/js/main.ebe224d4.js",
+    "main.css": "/LOG/static/css/main.09f1a452.css",
+    "main.js": "/LOG/static/js/main.544683e5.js",
     "static/js/453.2fbaf6ba.chunk.js": "/LOG/static/js/453.2fbaf6ba.chunk.js",
     "static/media/plank.png": "/LOG/static/media/plank.7140b50c4b9f4be6464b.png",
     "static/media/construct.png": "/LOG/static/media/construct.b39a6f3d3ce40d924c7c.png",
@@ -14,15 +14,16 @@
     "static/media/bgright.png": "/LOG/static/media/bgright.4c8dc14b40e6f3732cb7.png",
     "static/media/gamingicon.png": "/LOG/static/media/gamingicon.dea4bbef238c97d4d63d.png",
     "static/media/lock.png": "/LOG/static/media/lock.f4826a2ee7732fe1267f.png",
+    "static/media/snakelegend.png": "/LOG/static/media/snakelegend.51a3a1a5a5ba2b27ad69.png",
     "static/media/loginicon.png": "/LOG/static/media/loginicon.f59ef603e9743cc77f58.png",
     "static/media/homeicon.png": "/LOG/static/media/homeicon.9aeba798dcdfcb89331b.png",
     "index.html": "/LOG/index.html",
-    "main.507367d2.css.map": "/LOG/static/css/main.507367d2.css.map",
-    "main.ebe224d4.js.map": "/LOG/static/js/main.ebe224d4.js.map",
+    "main.09f1a452.css.map": "/LOG/static/css/main.09f1a452.css.map",
+    "main.544683e5.js.map": "/LOG/static/js/main.544683e5.js.map",
     "453.2fbaf6ba.chunk.js.map": "/LOG/static/js/453.2fbaf6ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.507367d2.css",
-    "static/js/main.ebe224d4.js"
+    "static/css/main.09f1a452.css",
+    "static/js/main.544683e5.js"
   ]
 }
