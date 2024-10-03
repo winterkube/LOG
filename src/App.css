@@ -46,6 +46,7 @@
 
 body{
 
+
   background-image: url(components/images/bgleft.png), url(components/images/bgright.png);
   background-size:3000px;
   background-position: left, right;
