@@ -1,6 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
 
+/* src/components/Navbar.css */
+
+.navbar {
+
+    position: fixed;
+    top: 10px; /* Adjust as needed */
+    right: 1px;
+    height: 110px; /* Adjust based on your plank image */
+
+
+    display: flex;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+
+    z-index: 99;
+
+}
+
+.navbar.collapsed {
+
+    transform: translateX(calc(100% - 120px)); /* Adjust to hide the navbar except the arrow */
+}
+
+.plank-image {
+    height: 110px; /* Match the navbar height */
+    width: 480px;
+}
+
+.toggle-button {
+    position: absolute;
+    left: 55px; /* Position it to the left of the navbar */
+    top: 9px;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.nav-buttons {
+    left: 80px;
+    top: 24px;
+    position: absolute;
+    display: flex;
+    gap: 23px;
+    margin-left: 50px; /* Adjust to position buttons over the plank */
+}
+
+/*.nav-buttons a {*/
+/*    text-decoration: none;*/
+/*    color: white; !* Adjust based on your design *!*/
+/*    font-size: 18px;*/
+/*    font-family: 'YourFont', sans-serif; !* Replace with your font *!*/
+/*}*/
+
+/*.nav-buttons a:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
+
 
 
 
@@ -8,76 +68,89 @@
 .navbar h5{
 
     font-family: "Lexend";
-    font-size: 20px;
+    font-size: 18px;
     color:rgba(117, 80, 59, 0.943);
 
     position: relative;
-    bottom: 40px;
+    bottom: 34px;
 
     text-align: center;
 
 }
 
+.arrow-icon {
 
+    /*position:fixed;*/
+    /*top: 37px;*/
+    /*right: 418px;*/
 
+    /*z-index: 100;*/
 
-#plank{
-
-    position: fixed;
-    top: 8px;
-
-    right: 1px;
-
-    z-index: 99;
-
-}
-
-#home{
-
-    position:fixed;
-    top:28px;
-    right:320px;
-
-    z-index: 100;
-
+    width: 55px;
+    height: 70px;
 
 }
 
-#gaming{
-
-    position:fixed;
-    top:28px;
-    right:217px;
-
-    z-index: 100;
-
-}
-
-#about{
-
-    position:fixed;
-    top: 28px;
-    right:120px;
-
-    z-index: 100;
-}
-
-#login{
-
-    position:fixed;
-    top: 28px;
-    right:20px;
-
-    z-index: 100;
 
 
-}
 
-#arrow{
-    position:fixed;
-    top: 28px;
-    right:20px;
+/*#plank{*/
 
-    z-index: 100;
+/*    position: fixed;*/
+/*    top: 8px;*/
 
-}
+/*    right: 1px;*/
+
+/*    z-index: 99;*/
+
+/*}*/
+
+/*#home{*/
+
+/*    position:fixed;*/
+/*    top:28px;*/
+/*    right:320px;*/
+
+/*    z-index: 100;*/
+
+
+/*}*/
+
+/*#gaming{*/
+
+/*    position:fixed;*/
+/*    top:28px;*/
+/*    right:217px;*/
+
+/*    z-index: 100;*/
+
+/*}*/
+
+/*#about{*/
+
+/*    position:fixed;*/
+/*    top: 28px;*/
+/*    right:120px;*/
+
+/*    z-index: 100;*/
+/*}*/
+
+/*#login{*/
+
+/*    position:fixed;*/
+/*    top: 28px;*/
+/*    right:20px;*/
+
+/*    z-index: 100;*/
+
+
+/*}*/
+
+/*#arrow{*/
+/*    position:fixed;*/
+/*    top: 28px;*/
+/*    right:20px;*/
+
+/*    z-index: 100;*/
+
+/* }*/

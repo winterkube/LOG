@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import SnakeLegendImg from '../images/snakelegend.png'; // Adjust the path as needed
-import logoImage from "../images/log logo.png";
+import logoImage from '../images/log logo.png';
 
 import '../../App.css';
 import './Snake.css'; // Optional: Import CSS for styling
@@ -46,10 +46,38 @@ function Snake() {
         let currentRank = '';
         let fruitnum = 0;
         let fruittype = '';
+        let fruitColor = 'red'; // Initialize with default color
 
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
         }
+
+        function setFruitType() {
+            if (fruitnum < 30) {
+                fruittype = 'apple';
+                fruitColor = 'red';
+            } else if (fruitnum >= 30 && fruitnum < 60) {
+                fruittype = 'grape';
+                fruitColor = 'orchid';
+            } else if (fruitnum >= 60 && fruitnum < 78) {
+                if (snake.maxCells > 8) {
+                    fruittype = 'orange';
+                    fruitColor = 'orange';
+                } else {
+                    fruittype = 'kiwi';
+                    fruitColor = 'greenyellow';
+                }
+            } else if (fruitnum >= 78 && fruitnum < 98) {
+                fruittype = 'kiwi';
+                fruitColor = 'greenyellow';
+            } else if (fruitnum >= 98) {
+                fruittype = 'acai';
+                fruitColor = 'black';
+            }
+        }
+
+        // Initial fruit type and color
+        setFruitType();
 
         // Game loop function
         function loop(timestamp) {
@@ -100,8 +128,11 @@ function Snake() {
         function draw() {
             context.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Set fruit color
+            context.fillStyle = fruitColor;
+
             // Draw fruit
-            drawFruit();
+            context.fillRect(fruit.x, fruit.y, grid - 1, grid - 1);
 
             // Draw snake
             context.fillStyle = 'green';
@@ -116,29 +147,6 @@ function Snake() {
         }
 
         function handleFruit() {
-            // Decide fruit type and set color
-            if (fruitnum < 30) {
-                fruittype = 'apple';
-                context.fillStyle = 'red';
-            } else if (fruitnum >= 30 && fruitnum < 60) {
-                fruittype = 'grape';
-                context.fillStyle = 'orchid';
-            } else if (fruitnum >= 60 && fruitnum < 78) {
-                if (snake.maxCells > 8) {
-                    fruittype = 'orange';
-                    context.fillStyle = 'orange';
-                } else {
-                    fruittype = 'kiwi';
-                    context.fillStyle = 'greenyellow';
-                }
-            } else if (fruitnum >= 78 && fruitnum < 98) {
-                fruittype = 'kiwi';
-                context.fillStyle = 'greenyellow';
-            } else if (fruitnum >= 98) {
-                fruittype = 'acai';
-                context.fillStyle = 'black';
-            }
-
             // Check if snake ate the fruit
             if (snake.cells[0].x === fruit.x && snake.cells[0].y === fruit.y) {
                 // Adjust snake length and score based on fruit type
@@ -151,7 +159,7 @@ function Snake() {
                         break;
                     case 'orange':
                         snake.maxCells -= 5;
-                        snake.cells.length = Math.max(snake.maxCells, 1);
+                        snake.cells.length = Math.max(snake.maxCells, 2);
                         break;
                     case 'kiwi':
                         snake.maxCells += 8;
@@ -163,16 +171,17 @@ function Snake() {
                         break;
                 }
                 currentScore++;
+
+                // Generate new fruit number
                 fruitnum = getRandomInt(0, 100);
+
+                // Set new fruit type and color immediately
+                setFruitType();
 
                 // Spawn new fruit
                 fruit.x = getRandomInt(0, 25) * grid;
                 fruit.y = getRandomInt(0, 25) * grid;
             }
-        }
-
-        function drawFruit() {
-            context.fillRect(fruit.x, fruit.y, grid - 1, grid - 1);
         }
 
         function checkCollision() {
@@ -194,7 +203,6 @@ function Snake() {
             }
 
             // Determine rank
-
             if (currentHighScore < 0) {
                 currentRank = 'how tf did u get here';
             }
@@ -227,6 +235,10 @@ function Snake() {
             // Reset fruit
             fruit.x = getRandomInt(0, 25) * grid;
             fruit.y = getRandomInt(0, 25) * grid;
+
+            // Reset fruit type and color
+            fruitnum = getRandomInt(0, 100);
+            setFruitType();
         }
 
         // Keyboard event handlers
@@ -272,12 +284,9 @@ function Snake() {
     }, []); // Empty dependency array ensures this runs once on mount
 
     return (
-
-
-        <div className = "snake" style={{textAlign: 'center'}}>
-
-            <div id="logo" style={{textAlign: 'center'}}>
-                <img src={logoImage} alt="Logo" height={250}/>
+        <div className="snake" style={{ textAlign: 'center' }}>
+            <div id="logo" style={{ textAlign: 'center' }}>
+                <img src={logoImage} alt="Logo" height={250} />
             </div>
 
             <h4> SNAKE (but harder) </h4>
@@ -287,7 +296,7 @@ function Snake() {
                 width="400"
                 height="400"
                 id="game"
-                style={{border: '1px solid black'}}
+                style={{ border: '1px solid black' }}
             ></canvas>
             <h1>Score = {score}</h1>
             <h1>High Score = {highScore}</h1>
@@ -302,8 +311,8 @@ function Snake() {
             >
                 {rank}
             </div>
-            <div style={{textAlign: 'center'}}>
-                <img src={SnakeLegendImg} height="400" alt="Snake Legend"/>
+            <div style={{ textAlign: 'center' }}>
+                <img src={SnakeLegendImg} height="400" alt="Snake Legend" />
             </div>
         </div>
     );
