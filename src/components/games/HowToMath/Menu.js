@@ -14,7 +14,7 @@ function handleSettingsButtonClick() {
     // Start the game or transition to the next scene
 }
 
-function Menu({ onStart }) {
+function Menu({ onStart, onSettings }) {
     return (
         <div className="menu">
 
