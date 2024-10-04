@@ -1,7 +1,7 @@
 // src/components/games/HowToMath/LevelSelect.js
 
 import React from 'react';
-
+import './HowToMath.css';
 function LevelSelect({ onLevelSelect }) {
     return (
         <div className="level-select">

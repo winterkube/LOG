@@ -1,0 +1,66 @@
+
+
+.play-button {
+
+
+    position: absolute;
+    /* Adjust position as needed */
+    top: 50%;
+    left: 50%;
+    transform: translate(-5%, -50%) rotate(1deg);
+    /* Start with 0 rotation */
+
+    transform-origin: center;
+    animation: rotatePlayButton 0.5s infinite alternate;
+    cursor: pointer;
+}
+
+.settings-button {
+
+    position: absolute;
+    /* Adjust position as needed */
+    top: 50%;
+    left: 50%;
+    transform: translate(-5%, 50%) rotate(1deg);
+    /* Start with 0 rotation */
+
+    transform-origin: center;
+    animation: rotateSettingsButton 0.5s infinite alternate;
+    cursor: pointer;
+}
+
+@keyframes rotatePlayButton {
+    0% {
+        transform: translate(-5%, -50%) rotate(1deg);
+    }
+    49.99999%{
+        transform: translate(-5%, -50%) rotate(1deg);
+    }
+    50%{
+        transform: translate(-5%, -50%) rotate(-1deg);
+    }
+    99.99999%{
+        transform: translate(-5%, -50%) rotate(-1deg);
+    }
+    100% {
+        transform: translate(-5%, -50%) rotate(1deg);
+    }
+}
+
+@keyframes rotateSettingsButton {
+    0% {
+        transform: translate(-5%, 50%) rotate(1deg);
+    }
+    49.99999%{
+        transform: translate(-5%, 50%) rotate(1deg);
+    }
+    50%{
+        transform: translate(-5%, 50%) rotate(-1deg);
+    }
+    99.99999%{
+        transform: translate(-5%, 50%) rotate(-1deg);
+    }
+    100% {
+        transform: translate(-5%, 50%) rotate(1deg);
+    }
+}

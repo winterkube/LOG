@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Cutscenes } from './cutscenes/cutsceneData';
-
+import './HowToMath.css';
 function Cutscene({ onCutsceneEnd, levelNumber }) {
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
     const [currentDialogueIndex, setCurrentDialogueIndex] = useState(0);

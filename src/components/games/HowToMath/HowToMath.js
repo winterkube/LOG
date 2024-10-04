@@ -1,6 +1,6 @@
 // src/components/games/HowToMath.js
 
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Menu from './Menu';
 import LevelSelect from './LevelSelect';
 import Gameplay from './Gameplay';
@@ -10,23 +10,26 @@ import { Levels } from './levels/levelData';
 
 import './HowToMath.css';
 
-// Inside HowToMath.js or in a separate utility file
-
 function resizeCanvas(canvas, context) {
+    // Get the size the canvas is displayed
     const { width, height } = canvas.getBoundingClientRect();
 
-    // Adjust the canvas size
-    canvas.width = width;
-    canvas.height = height;
+    // If the canvas size does not match the displayed size, update it
+    if (canvas.width !== width || canvas.height !== height) {
+        const oldWidth = canvas.width;
+        const oldHeight = canvas.height;
 
-    // Scale the drawing context to match the new size
-    context.scale(width / canvas.width, height / canvas.height);
+        // Adjust the canvas size
+        canvas.width = width;
+        canvas.height = height;
+
+        // Optionally adjust the drawing to the new size
+        // If you're using scaling, you may need to adjust the context scale
+        // context.scale(width / oldWidth, height / oldHeight);
+    }
 
     // Redraw the canvas content if necessary
-    // drawContent(context);
 }
-
-
 
 function HowToMath() {
     const canvasRef = useRef(null);
@@ -34,9 +37,6 @@ function HowToMath() {
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
-
-        // Set up initial drawing (optional)
-        // ...
 
         // Handle window resize
         const handleResize = () => {
@@ -53,7 +53,6 @@ function HowToMath() {
         };
     }, []);
 
-
     const [currentScene, setCurrentScene] = useState('menu');
     const [gameData, setGameData] = useState(null); // To pass data between scenes
 
@@ -61,7 +60,6 @@ function HowToMath() {
         switch (currentScene) {
             case 'menu':
                 return <Menu onStart={() => setCurrentScene('levelSelect')} />;
-            // ...in renderScene
             case 'levelSelect':
                 return (
                     <LevelSelect
@@ -71,12 +69,11 @@ function HowToMath() {
                         }}
                     />
                 );
-
             case 'cutscene':
                 return (
                     <Cutscene
-                        onCutsceneEnd={() => setCurrentScene('gamePlay')}
-                        level={gameData.level}
+                        onCutsceneEnd={() => setCurrentScene('gameplay')}
+                        level={gameData.levelNumber}
                     />
                 );
             case 'gameplay':
@@ -85,7 +82,7 @@ function HowToMath() {
                         levelData={Levels[gameData.levelNumber]}
                         onGameEnd={(performanceData) => {
                             setGameData({ ...gameData, performanceData });
-                            setCurrentScene('performanceOverview');
+                            setCurrentScene('results');
                         }}
                     />
                 );
@@ -103,23 +100,17 @@ function HowToMath() {
 
     return (
         <div className="how-to-math">
-
             <h1>HOW TO MATH</h1>
-            <h2> by WinterKube </h2>
+            <h2>by WinterKube</h2>
 
             <div className="game-container">
-                <canvas
-                    ref={canvasRef}
-                    style={{border: '2px solid black'}}
-                    id="gameCanvas">
-
-                </canvas>
+                <canvas ref={canvasRef} id="gameCanvas"></canvas>
                 {renderScene()}
             </div>
-
-
         </div>
     );
 }
+
+
 
 export default HowToMath;

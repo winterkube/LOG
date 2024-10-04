@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './HowToMath.css';
 function Results({ data, onRestart }) {
     return (
         <div className="results">
