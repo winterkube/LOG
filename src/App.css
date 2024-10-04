@@ -44,6 +44,14 @@
 }
 
 
+/*.content {*/
+/*  flex: 1;*/
+/*  padding-top: 50px;    !* Existing top padding *!*/
+/*  padding-bottom: 50px; !* New bottom padding *!*/
+/*}*/
+
+
+
 body{
 
 
@@ -53,7 +61,6 @@ body{
   height: 100vh;
   background-repeat: repeat-y;
 
-  padding-bottom: 150px;
   overflow-x: hidden;
 
 }

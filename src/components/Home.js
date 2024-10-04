@@ -1,6 +1,6 @@
 // src/Home.js
 import React from 'react';
-import './Home.css'; // Import the stylesheet
+import './styles/Home.css'; // Import the stylesheet
 
 // Import images
 import logoImage from './images/log logo.png';

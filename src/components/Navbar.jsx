@@ -4,7 +4,7 @@
 // src/components/NavBar.js
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import './styles/Navbar.css';
 
 // Import images
 import plankImage from './images/plank.png';

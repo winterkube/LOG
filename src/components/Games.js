@@ -1,6 +1,6 @@
 
 import '../App.css';
-import './Games.css';
+import './styles/Games.css';
 
 import React from 'react';
 import logoImage from "./images/log logo.png";

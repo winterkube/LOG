@@ -7,6 +7,7 @@ import Games from './components/Games';
 import About from './components/About';
 import Login from './components/Login';
 import ForgotPassword from "./components/ForgotPassword";
+import Footer from './components/Footer';
 
 import Snake from './components/games/Snake';
 import HowToMath from './components/games/HowToMath/HowToMath';

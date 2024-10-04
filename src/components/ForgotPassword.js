@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import './ForgotPassword.css';
+import './styles/ForgotPassword.css';
 
 import hitsfx from './sfx/hitsfx.mp3';
 

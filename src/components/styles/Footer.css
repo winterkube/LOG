@@ -1,0 +1,51 @@
+/* src/components/Footer.css */
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap');
+
+
+.footer {
+    background-color: #e3a990; /* Customize as needed */
+    background-image: url(../images/footer.png);
+    background-size: 100% 100%;
+
+    margin-top: 100px;
+
+    padding: 50px 5% 50px;
+
+
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #584431;
+}
+
+.footer-left p {
+    font-family: "Lexend", serif;
+    margin: 0;
+    font-size: 20px;
+}
+
+.footer-right {
+    font-family: "Lexend", serif;
+    display: flex;
+    align-items: center;
+}
+
+.footer-right span {
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.footer-right span:hover {
+    text-decoration: underline;
+}
+
+.footer-right .separator {
+    margin: 0 10px;
+    cursor: default;
+    color: #584431;
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // If you're using React Router
-import './Login.css';
+import './styles/Login.css';
 import constructImage from "./images/construct.png";
 
 function Login() {
