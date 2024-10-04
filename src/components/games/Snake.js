@@ -294,7 +294,7 @@ function Snake() {
                 width="400"
                 height="400"
                 id="game"
-                style={{ border: '1px solid black' }}
+                style={{ border: '2px solid black' }}
             ></canvas>
             <h1>Score = {score}</h1>
             <h1>High Score = {highScore}</h1>

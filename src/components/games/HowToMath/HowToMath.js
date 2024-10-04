@@ -1,6 +1,6 @@
 // src/components/games/HowToMath.js
 
-import React, { useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Menu from './Menu';
 import LevelSelect from './LevelSelect';
 import Gameplay from './Gameplay';
@@ -10,9 +10,48 @@ import { Levels } from './levels/levelData';
 
 import './HowToMath.css';
 
+// Inside HowToMath.js or in a separate utility file
+
+function resizeCanvas(canvas, context) {
+    const { width, height } = canvas.getBoundingClientRect();
+
+    // Adjust the canvas size
+    canvas.width = width;
+    canvas.height = height;
+
+    // Scale the drawing context to match the new size
+    context.scale(width / canvas.width, height / canvas.height);
+
+    // Redraw the canvas content if necessary
+    // drawContent(context);
+}
+
 
 
 function HowToMath() {
+    const canvasRef = useRef(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+
+        // Set up initial drawing (optional)
+        // ...
+
+        // Handle window resize
+        const handleResize = () => {
+            resizeCanvas(canvas, context);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Initial resize
+        resizeCanvas(canvas, context);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
 
     const [currentScene, setCurrentScene] = useState('menu');
@@ -65,8 +104,20 @@ function HowToMath() {
     return (
         <div className="how-to-math">
 
+            <h1>HOW TO MATH</h1>
+            <h2> by WinterKube </h2>
 
-            {renderScene()}
+            <div className="game-container">
+                <canvas
+                    ref={canvasRef}
+                    style={{border: '2px solid black'}}
+                    id="gameCanvas">
+
+                </canvas>
+                {renderScene()}
+            </div>
+
+
         </div>
     );
 }
