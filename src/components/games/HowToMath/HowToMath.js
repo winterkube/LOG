@@ -10,7 +10,11 @@ import { Levels } from './levels/levelData';
 
 import './HowToMath.css';
 
+
+
 function HowToMath() {
+
+
     const [currentScene, setCurrentScene] = useState('menu');
     const [gameData, setGameData] = useState(null); // To pass data between scenes
 
@@ -60,6 +64,8 @@ function HowToMath() {
 
     return (
         <div className="how-to-math">
+
+
             {renderScene()}
         </div>
     );
