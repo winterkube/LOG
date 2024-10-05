@@ -1,45 +1,46 @@
+/* src/components/games/HowToMath/styles/Menu.css */
 
+.play-button,
+.settings-button {
+    position: absolute;
+    left: 110%; /* Start off-screen to the right */
+    cursor: pointer;
+}
 
 .play-button {
-
-
-    position: absolute;
-    /* Adjust position as needed */
-    top: 50%;
-    left: 50%;
-    transform: translate(-5%, -50%) rotate(1deg);
-    /* Start with 0 rotation */
-
-    transform-origin: center;
-    animation: rotatePlayButton 0.5s infinite alternate;
-    cursor: pointer;
+    top: 50%; /* Center vertically */
+    transform: translate(-5%, -50%) rotate(1deg); /* Adjusted transform */
+    animation: slideIn 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
 }
 
 .settings-button {
-
-    position: absolute;
-    /* Adjust position as needed */
-    top: 50%;
-    left: 50%;
-    transform: translate(-5%, 50%) rotate(1deg);
-    /* Start with 0 rotation */
-
-    transform-origin: center;
-    animation: rotateSettingsButton 0.5s infinite alternate;
-    cursor: pointer;
+    top: 50%; /* Center vertically */
+    transform: translate(-5%, 50%) rotate(1deg); /* Adjusted transform */
+    animation: slideIn 0.5s forwards ease-out 0.1s, rotateSettingsButton 0.5s infinite steps(1, end) 0.5s;
 }
 
+/*@keyframes nuttin {*/
+/*    from {*/
+/*        left: 110%;*/
+/*    }*/
+/*    to {*/
+/*        left: 110%;*/
+/*    }*/
+/*}*/
+
+@keyframes slideIn {
+    from {
+        left: 100%;
+    }
+    to {
+        left: 50%;
+    }
+}
 @keyframes rotatePlayButton {
     0% {
         transform: translate(-5%, -50%) rotate(1deg);
     }
-    49.99999%{
-        transform: translate(-5%, -50%) rotate(1deg);
-    }
-    50%{
-        transform: translate(-5%, -50%) rotate(-1deg);
-    }
-    99.99999%{
+    50% {
         transform: translate(-5%, -50%) rotate(-1deg);
     }
     100% {
@@ -51,13 +52,7 @@
     0% {
         transform: translate(-5%, 50%) rotate(1deg);
     }
-    49.99999%{
-        transform: translate(-5%, 50%) rotate(1deg);
-    }
-    50%{
-        transform: translate(-5%, 50%) rotate(-1deg);
-    }
-    99.99999%{
+    50% {
         transform: translate(-5%, 50%) rotate(-1deg);
     }
     100% {

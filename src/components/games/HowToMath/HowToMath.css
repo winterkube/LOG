@@ -21,12 +21,20 @@
     color: #916c51;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
 .game-container {
-    max-width: 640px; /* Adjust as needed */
     position: relative;
     width: 100%;
-    padding-top: 480px; /* Adjust for aspect ratio (e.g., 4:3 is 75%) */
+    max-width: 640px; /* Adjust as needed */
+    height: 480px; /* Adjust for aspect ratio */
     margin: 0 auto;
+    overflow: hidden; /* Hide content outside the container */
 }
 
 #gameCanvas {
