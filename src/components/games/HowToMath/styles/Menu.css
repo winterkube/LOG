@@ -1,5 +1,7 @@
 /* src/components/games/HowToMath/styles/Menu.css */
 
+
+
 .play-button,
 .settings-button {
     position: absolute;
@@ -8,25 +10,36 @@
 }
 
 .play-button {
-    top: 50%; /* Center vertically */
-    transform: translate(-5%, -50%) rotate(1deg); /* Adjusted transform */
+    top: 55%; /* Center vertically */
+    transform: translate(5%, -50%) rotate(1deg); /* Adjusted transform */
     animation: slideIn 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
+
 }
 
 .settings-button {
-    top: 50%; /* Center vertically */
-    transform: translate(-5%, 50%) rotate(1deg); /* Adjusted transform */
+    top: 55%; /* Center vertically */
+    transform: translate(5%, 50%) rotate(1deg); /* Adjusted transform */
     animation: slideIn 0.5s forwards ease-out 0.1s, rotateSettingsButton 0.5s infinite steps(1, end) 0.5s;
 }
 
-/*@keyframes nuttin {*/
-/*    from {*/
-/*        left: 110%;*/
-/*    }*/
-/*    to {*/
-/*        left: 110%;*/
-/*    }*/
+/*.cheeb-container {*/
+/*    */
 /*}*/
+
+.cheeba {
+    top: 50%;
+
+    transform: translate(-100%, 48%); /* Adjusted transform */
+
+    width: 340px;
+    height: 340px;
+    background-image: url('../assets/cheeba1.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    animation: slideIn2 0.5s forwards ease-out 0.1s, alternateImagesCheeba 0.5s infinite steps(1, end) 0.5s;
+}
 
 @keyframes slideIn {
     from {
@@ -36,26 +49,52 @@
         left: 50%;
     }
 }
-@keyframes rotatePlayButton {
+@keyframes slideIn2 {
+    from {
+        transform: translate(-100%, 48%);
+    }
+    to {
+        transform: translate(-5%, 48%);
+    }
+}
+
+@keyframes alternateImagesCheeba {
     0% {
-        transform: translate(-5%, -50%) rotate(1deg);
+        background-image: url('../assets/cheeba1.png');
     }
     50% {
-        transform: translate(-5%, -50%) rotate(-1deg);
+        background-image: url('../assets/cheeba2.png');
     }
     100% {
-        transform: translate(-5%, -50%) rotate(1deg);
+        background-image: url('../assets/cheeba1.png');
+    }
+}
+
+
+
+
+
+
+@keyframes rotatePlayButton {
+    0% {
+        transform: translate(5%, -50%) rotate(1deg);
+    }
+    50% {
+        transform: translate(5%, -50%) rotate(-1deg);
+    }
+    100% {
+        transform: translate(5%, -50%) rotate(1deg);
     }
 }
 
 @keyframes rotateSettingsButton {
     0% {
-        transform: translate(-5%, 50%) rotate(1deg);
+        transform: translate(5%, 50%) rotate(1deg);
     }
     50% {
-        transform: translate(-5%, 50%) rotate(-1deg);
+        transform: translate(5%, 50%) rotate(-1deg);
     }
     100% {
-        transform: translate(-5%, 50%) rotate(1deg);
+        transform: translate(5%, 50%) rotate(1deg);
     }
 }
