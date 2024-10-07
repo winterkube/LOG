@@ -23,9 +23,9 @@ function Games() {
 
             <div className="link">
                 <a
-                    // href="/LOG/games/howtomath"
-                   onClick={wip}
-                   href="#"
+                    href="/LOG/games/howtomath"
+                   // onClick={wip}
+                   // href="#"
                 >
                     HOW TO MATH</a>
             </div>
