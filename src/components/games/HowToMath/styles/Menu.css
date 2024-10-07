@@ -1,60 +1,115 @@
 /* src/components/games/HowToMath/styles/Menu.css */
 
+/* Define CSS variables in the root */
+:root {
+    --xPosPlay: 43%;
+    --yPosPlay: -15%;
+
+    --xPosSettings: 43%;
+    --yPosSettings: 80%;
+}
 
 
-.play-button,
-.settings-button {
+.bg {
+    background-image: url("../assets/classroom.png");
+    background-size: 100%;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.flash {
     position: absolute;
-    left: 110%; /* Start off-screen to the right */
-    cursor: pointer;
+    background: rgba(255, 255, 255, 0);
+    background-size: 100%;
+    width: 640px;
+    height: 480px;
+    transform: translate(-1000%, -1161.7%); /* Adjusted transform */
+    animation: fadeOut 2s;
 }
 
-.play-button {
-    top: 55%; /* Center vertically */
-    transform: translate(5%, -50%) rotate(1deg); /* Adjusted transform */
-    animation: slideIn 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
-
+@keyframes fadeOut {
+    0% {
+        background: rgba(255,255,255,1);
+        transform: translate(0%, -116.7%);
+    }
+    50% {
+        background: rgba(255,255,255,0);
+        transform: translate(0%, -116.7%);
+    }
+    100% {
+        transform: translate(-1000%, -1116.7%);
+    }
 }
 
-.settings-button {
-    top: 55%; /* Center vertically */
-    transform: translate(5%, 50%) rotate(1deg); /* Adjusted transform */
-    animation: slideIn 0.5s forwards ease-out 0.1s, rotateSettingsButton 0.5s infinite steps(1, end) 0.5s;
-}
-
-/*.cheeb-container {*/
-/*    */
-/*}*/
 
 .cheeba {
     top: 50%;
 
     transform: translate(-100%, 48%); /* Adjusted transform */
 
-    width: 340px;
-    height: 340px;
+    width: 300px;
+    height: 280px;
     background-image: url('../assets/cheeba1.png');
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat;
 
-    animation: slideIn2 0.5s forwards ease-out 0.1s, alternateImagesCheeba 0.5s infinite steps(1, end) 0.5s;
+    animation: slideIn2 0.5s forwards ease-out, alternateImagesCheeba 0.5s infinite steps(1, end);
 }
 
-@keyframes slideIn {
-    from {
-        left: 100%;
-    }
-    to {
-        left: 50%;
-    }
+.leyvi {
+    top: 50%;
+
+    transform: translate(-100%, -48%); /* Adjusted transform */
+
+    width: 300px;
+    height: 280px;
+    background-image: url('../assets/leyvi1.png');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    animation: slideIn3 0.5s forwards ease-out 0.1s, alternateImagesLeyvi 0.5s infinite steps(1, end);
 }
+
+.blackboard {
+
+    position: absolute;
+    background-image: url("../assets/blackboard.png");
+    top: 55%;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    width: 300px;
+    height: 300px;
+
+    transform: translate(112%, -90%); /* Adjusted transform */
+}
+
+/*@keyframes slideIn {*/
+/*    from {*/
+/*        left: 100%;*/
+/*    }*/
+/*    to {*/
+/*        left: 25%;*/
+/*    }*/
+/*}*/
 @keyframes slideIn2 {
     from {
-        transform: translate(-100%, 48%);
+        transform: translate(-80%, -20%);
     }
     to {
-        transform: translate(-5%, 48%);
+        transform: translate(-12%, -20%);
+    }
+}
+
+@keyframes slideIn3 { /* leyvi */
+    from {
+        transform: translate(-80%, 48%);
+    }
+    to {
+        transform: translate(45%, 48%);
     }
 }
 
@@ -70,31 +125,193 @@
     }
 }
 
+@keyframes alternateImagesLeyvi {
+    0% {
+        background-image: url('../assets/leyvi1.png');
+    }
+    50% {
+        background-image: url('../assets/leyvi2.png');
+    }
+    100% {
+        background-image: url('../assets/leyvi1.png');
+    }
+}
+
+/*.play-button,*/
+/*.settings-button {*/
+/*    position: absolute;*/
+/*    left: 110%; !* Start off-screen to the right *!*/
+/*    cursor: pointer;*/
+/*    z-index: 5;*/
+/*}*/
+
+/*.play-button {*/
+/*    top: 55%; !* Center vertically *!*/
+/*    transform: translate(25%, -20%) rotate(1deg); !* Adjusted transform *!*/
+/*    animation: slideIn 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;*/
 
 
+/*}*/
+
+/*.settings-button {*/
+/*    top: 55%; !* Center vertically *!*/
+/*    transform: translate(25%, 75%) rotate(1deg); !* Adjusted transform *!*/
+/*    animation: slideIn 0.5s forwards ease-out 0.05s, rotateSettingsButton 0.5s infinite steps(1, end) 0.5s;*/
+/*}*/
+
+.button {
+    position: absolute;
+    cursor: pointer;
+    z-index: 5;
+}
+
+/* Play and Settings Buttons */
+.play-button {
+    left: 43%;
+}
+.settings-button {
+    left: 110%;
+}
+
+.play-button {
+    top: 55%;
+    transform: translate(var(--xPosPlay), var(--yPosPlay)) rotate(1deg);
+    animation: slideInButtons 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
+}
+
+.settings-button {
+    top: 55%;
+    transform: translate(var(--xPosSettings), var(--yPosSettings)) rotate(1deg);
+    animation: slideInButtons 0.5s forwards ease-out, rotateSettingsButton 0.5s infinite steps(1, end) 0.55s;
+}
 
 
 
 @keyframes rotatePlayButton {
     0% {
-        transform: translate(5%, -50%) rotate(1deg);
+        transform: translate(var(--xPosPlay), var(--yPosPlay)) rotate(1deg);
     }
     50% {
-        transform: translate(5%, -50%) rotate(-1deg);
+        transform: translate(var(--xPosPlay), var(--yPosPlay)) rotate(-1deg);
     }
     100% {
-        transform: translate(5%, -50%) rotate(1deg);
+        transform: translate(var(--xPosPlay), var(--yPosPlay)) rotate(1deg);
     }
 }
 
 @keyframes rotateSettingsButton {
     0% {
-        transform: translate(5%, 50%) rotate(1deg);
+        transform: translate(var(--xPosSettings), var(--yPosSettings)) rotate(1deg);
     }
     50% {
-        transform: translate(5%, 50%) rotate(-1deg);
+        transform: translate(var(--xPosSettings), var(--yPosSettings)) rotate(-1deg);
     }
     100% {
-        transform: translate(5%, 50%) rotate(1deg);
+        transform: translate(var(--xPosSettings), var(--yPosSettings)) rotate(1deg);
+    }
+}
+
+/* Volume and Back Buttons */
+.volume-button{
+    left: 43%;
+}
+.back-button {
+    left: 110%;
+}
+.trials-button{
+    left: 43%;
+}
+
+.volume-button {
+    top: 55%;
+    transform: translate(var(--xPosPlay), var(--yPosPlay));
+    animation: slideInSettings 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
+
+}
+
+.trials-button {
+    top: 55%;
+    transform: translate(var(--xPosPlay), var(--yPosPlay));
+    animation: slideInSettings 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
+
+}
+
+.back-button {
+    top: 55%;
+    transform: translate(var(--xPosSettings), var(--yPosSettings));
+    animation: slideInSettings 0.5s forwards ease-out, rotateSettingsButton 0.5s infinite steps(1, end) 0.5s;
+    animation-delay: 0.05s;
+}
+
+.play-button.exit{
+
+    animation: slideOutButtons 0.5s forwards ease-out 0.05s;
+}
+.settings-button.exit {
+    animation: slideOutButtons 0.5s forwards ease-out;
+
+}
+
+.volume-button.exit {
+    animation: slideOutButtons 0.5s forwards ease-out 0.05s;
+}
+.trials-button.exit {
+    animation: slideOutButtons 0.5s forwards ease-out 0.05s;
+}
+.back-button.exit {
+    animation: slideOutButtons 0.5s forwards ease-out;
+
+}
+
+/*.play-button.exit,*/
+/*.settings-button.exit,*/
+/*.volume-button.exit,*/
+/*.back-button.exit {*/
+/*    animation-play-state: running;*/
+/*}*/
+
+
+@keyframes slideInSettings {
+    from {
+        left: 110%;
+    }
+    to {
+        left: var(--xPosPlay);
+    }
+}
+
+@keyframes slideOutSettings {
+    from {
+        left: var(--xPosPlay);
+    }
+    to {
+        left: 110%;
+    }
+}
+
+.play-button:not(.exit){
+    animation: slideInButtons 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
+}
+.settings-button:not(.exit) {
+    animation: slideInButtons 0.5s forwards ease-out, rotateSettingsButton 0.5s infinite steps(1, end) 0.5s;
+    animation-delay: 0.05s;
+}
+
+/* Keyframes */
+@keyframes slideInButtons {
+    from {
+        left: 110%;
+    }
+    to {
+        left: var(--xPosPlay);
+    }
+}
+
+@keyframes slideOutButtons {
+    from {
+        left: var(--xPosPlay);
+    }
+    to {
+        left: 110%;
     }
 }

@@ -7,6 +7,10 @@ import logoImage from "./images/log logo.png";
 import constructImage from './images/construct.png';
 
 function Games() {
+    const wip = () => {
+        window.confirm('not ready yet!!');
+    }
+
     return (
         <div className="games">
 
@@ -18,7 +22,12 @@ function Games() {
             </div>
 
             <div className="link">
-                <a href="/LOG/games/howtomath">HOW TO MATH</a>
+                <a
+                    // href="/LOG/games/howtomath"
+                   onClick={wip}
+                   href="#"
+                >
+                    HOW TO MATH</a>
             </div>
 
             <div id="construct" style={{textAlign: 'center'}}>
