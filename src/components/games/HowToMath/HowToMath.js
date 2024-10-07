@@ -23,6 +23,8 @@ import leyvi1Image from './assets/leyvi1.png';
 import leyvi2Image from './assets/leyvi2.png';
 import classroomImage from './assets/classroom.png';
 import blackboardImage from './assets/blackboard.png';
+import startButton1 from './assets/startbtn1.png';
+import startButton2 from './assets/startbtn2.png';
 
 function resizeCanvas(canvas) {
     // Get the size the canvas is displayed
@@ -87,6 +89,7 @@ function HowToMath() {
 
         // Preload images
         const imageSources = [
+
             playButtonImage,
             settingsButtonImage,
             volumeButtonImage,
@@ -98,6 +101,8 @@ function HowToMath() {
             leyvi2Image,
             classroomImage,
             blackboardImage,
+            startButton1,
+            startButton2,
 
             // Add any other images used in your game
         ];

@@ -14,6 +14,8 @@ function Menu({ onStart }) {
 
     const [animateExit, setAnimateExit] = useState(false);
 
+    const [flashExit, setFlashExit] = useState(false);
+
     const goToSettings = () => {
         setAnimateExit(true);
         setTimeout(() => {
@@ -37,6 +39,15 @@ function Menu({ onStart }) {
             setIsPlayOpen(true);
             setAnimateExit(false);
         }, 300);
+    };
+
+    const goToTrials = () => {
+        setAnimateExit(true);
+        setFlashExit(true);
+        setTimeout(() => {
+
+            onStart();
+        }, 500);
     };
 
     const volumeFunc = () => {
@@ -96,7 +107,7 @@ function Menu({ onStart }) {
                             src={trialsButtonImage}
                             alt="trials Button"
                             className={`trials-button button ${animateExit ? 'exit' : ''}`}
-                            onClick={onStart}
+                            onClick={goToTrials}
                             width="230"
                         />
                         <img
@@ -110,7 +121,7 @@ function Menu({ onStart }) {
 
                 )}
 
-                <div className="flash"></div>
+                <div className={`flash ${flashExit ? 'exit' : ''}`}></div>
             </div>
         </>
     );

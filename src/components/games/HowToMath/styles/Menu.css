@@ -24,7 +24,12 @@
     width: 640px;
     height: 480px;
     transform: translate(-1000%, -1161.7%); /* Adjusted transform */
-    animation: fadeOut 2s;
+    animation: fadeOut 1.5s;
+    z-index: 6;
+}
+
+.flash.exit {
+    animation: fadeIn 1s;
 }
 
 @keyframes fadeOut {
@@ -32,7 +37,7 @@
         background: rgba(255,255,255,1);
         transform: translate(0%, -116.7%);
     }
-    50% {
+    65% {
         background: rgba(255,255,255,0);
         transform: translate(0%, -116.7%);
     }
@@ -41,6 +46,19 @@
     }
 }
 
+@keyframes fadeIn {
+    0% {
+        background: rgb(0, 0, 0, 0);
+        transform: translate(0%, -116.7%);
+    }
+    50% {
+        background: rgb(0, 0, 0);
+        transform: translate(0%, -116.7%);
+    }
+    100% {
+        transform: translate(-1000%, -1116.7%);
+    }
+}
 
 .cheeba {
     top: 50%;
