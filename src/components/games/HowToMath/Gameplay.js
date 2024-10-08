@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { useGameLogic } from './hooks/useGameLogic';
 import './HowToMath.css';
+import './styles/Gameplay.css';
+
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }

@@ -11,10 +11,32 @@
 
 
 .bg {
+
     background-image: url("../assets/classroom.png");
     background-size: 100%;
-    background-position: bottom;
+    background-position: top;
     background-repeat: no-repeat;
+
+    animation: changeBG 2.5s linear infinite;
+}
+
+@keyframes changeBG {
+    0% {
+        background-image: url("../assets/classroom.png");
+    }
+    25% {
+        background-image: url("../assets/classroom2.png");
+    }
+    50% {
+        background-image: url("../assets/classroom3.png");
+    }
+    75% {
+        background-image: url("../assets/classroom4.png");
+    }
+    100% {
+        background-image: url("../assets/classroom.png");
+    }
+
 }
 
 .flash {
@@ -24,7 +46,7 @@
     width: 640px;
     height: 480px;
     transform: translate(-1000%, -1161.7%); /* Adjusted transform */
-    animation: fadeOut 1.5s;
+    animation: fadeOut 1.25s;
     z-index: 6;
 }
 
@@ -65,7 +87,7 @@
 
     transform: translate(-100%, 48%); /* Adjusted transform */
 
-    width: 300px;
+    width: 290px;
     height: 280px;
     background-image: url('../assets/cheeba1.png');
     background-size: 100%;
@@ -78,9 +100,9 @@
 .leyvi {
     top: 50%;
 
-    transform: translate(-100%, -48%); /* Adjusted transform */
+    transform: translate(-100%, -52%); /* Adjusted transform */
 
-    width: 300px;
+    width: 290px;
     height: 280px;
     background-image: url('../assets/leyvi1.png');
     background-size: 100%;
@@ -124,10 +146,10 @@
 
 @keyframes slideIn3 { /* leyvi */
     from {
-        transform: translate(-80%, 48%);
+        transform: translate(-80%, 52%);
     }
     to {
-        transform: translate(45%, 48%);
+        transform: translate(50%, 52%);
     }
 }
 
@@ -183,6 +205,7 @@
     z-index: 5;
 }
 
+
 /* Play and Settings Buttons */
 .play-button {
     left: 43%;
@@ -203,6 +226,10 @@
     animation: slideInButtons 0.5s forwards ease-out, rotateSettingsButton 0.5s infinite steps(1, end) 0.55s;
 }
 
+/*.play-button:active {*/
+
+/*    transform: scale(0.5, 0.5);*/
+/*}*/
 
 
 @keyframes rotatePlayButton {

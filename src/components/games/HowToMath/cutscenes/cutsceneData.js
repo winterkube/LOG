@@ -1,20 +1,27 @@
-// src/components/games/HowToMath/cutscenes/CutsceneData.js
+// src/components/games/HowToMath/cutscenes/cutsceneData.js
+
+import csTestImage1 from '../assets/cs test.png';
+import csTestImage2 from '../assets/cs test2.png';
 
 export const Cutscenes = {
     1: [
         {
             type: 'image',
-            src: 'path/to/image1.png',
-            dialogues: [
-                'Welcome to Level 1!',
-                'Are you ready to test your math skills?',
-            ],
+            dialogues: [' '],
+            src: csTestImage1,
+
         },
         {
-            type: 'video',
-            src: 'path/to/intro.mp4',
+            type: 'image',
+            dialogues: ['test 123'],
+            src: csTestImage1,
+
         },
-        // More steps...
+        {
+            type: 'image',
+            dialogues: ['test 456'],
+            src: csTestImage2,
+
+        },
     ],
-    // Add cutscenes for other levels
 };

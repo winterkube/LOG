@@ -22,6 +22,9 @@ import cheeba2Image from './assets/cheeba2.png';
 import leyvi1Image from './assets/leyvi1.png';
 import leyvi2Image from './assets/leyvi2.png';
 import classroomImage from './assets/classroom.png';
+import classroomImage2 from './assets/classroom2.png';
+import classroomImage3 from './assets/classroom3.png';
+import classroomImage4 from './assets/classroom4.png';
 import blackboardImage from './assets/blackboard.png';
 import startButton1 from './assets/startbtn1.png';
 import startButton2 from './assets/startbtn2.png';
@@ -59,6 +62,9 @@ function HowToMath() {
             leyvi1Image,
             leyvi2Image,
             classroomImage,
+            classroomImage2,
+            classroomImage3,
+            classroomImage4,
             blackboardImage,
             startButton1,
             startButton2,
@@ -151,15 +157,12 @@ function HowToMath() {
                 return (
                     <LevelSelect
                         onLevelSelect={(levelNumber) => {
-
                             if (levelNumber > 0) {
-                                setGameData({levelNumber});
+                                setGameData({ levelNumber });
                                 setCurrentScene('cutscene');
                             } else {
                                 setCurrentScene('menu');
-
                             }
-
                         }}
                     />
                 );
@@ -175,7 +178,7 @@ function HowToMath() {
                     <Gameplay
                         levelData={Levels[gameData.levelNumber]}
                         onGameEnd={(performanceData) => {
-                            setGameData({...gameData, performanceData});
+                            setGameData({ ...gameData, performanceData });
                             setCurrentScene('results');
                         }}
                     />
@@ -184,7 +187,9 @@ function HowToMath() {
                 return (
                     <Results
                         data={gameData.performanceData}
-                        onRestart={() => setCurrentScene('menu')}
+                        onContinue={() => setCurrentScene('levelSelect')}
+                        onRetry={() => setCurrentScene('cutscene')}
+                        onMenu={() => setCurrentScene('menu')}
                     />
                 );
             default:

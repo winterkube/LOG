@@ -1,14 +1,78 @@
 // src/components/games/HowToMath/Menu.js
 
 import React, { useState, useEffect } from 'react';
+import './HowToMath.css';
 import './styles/Menu.css';
 import playButtonImage from './assets/play button.png';
 import settingsButtonImage from './assets/settings button.png';
 import volumeButtonImage from './assets/volume button.png';
 import backButtonImage from './assets/back button.png';
 import trialsButtonImage from './assets/trials button.png';
+import trialBox from "./assets/trial box.png";
+import crumpledPaper from "./assets/crumpled paper.png";
+import cheeba1Image from "./assets/cheeba1.png";
+import cheeba2Image from "./assets/cheeba2.png";
+import leyvi1Image from "./assets/leyvi1.png";
+import leyvi2Image from "./assets/leyvi2.png";
+import classroomImage from "./assets/classroom.png";
+import classroomImage2 from "./assets/classroom2.png";
+import classroomImage3 from "./assets/classroom3.png";
+import classroomImage4 from "./assets/classroom4.png";
+import blackboardImage from "./assets/blackboard.png";
 
 function Menu({ onStart }) {
+
+
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+
+    function preloadMImages(imageArray, callback) {
+        let loadedMImages = 0;
+        const totalImages = imageArray.length;
+
+        imageArray.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                loadedMImages++;
+                if (loadedMImages === totalImages) {
+                    callback();
+                }
+            };
+            img.onerror = () => {
+                loadedMImages++;
+                if (loadedMImages === totalImages) {
+                    callback();
+                }
+            };
+        });
+    }
+
+    useEffect(() => {
+        const imageSources = [
+            playButtonImage,
+            settingsButtonImage,
+            volumeButtonImage,
+            backButtonImage,
+            trialsButtonImage,
+            cheeba1Image,
+            cheeba2Image,
+            leyvi1Image,
+            leyvi2Image,
+            classroomImage,
+            classroomImage2,
+            classroomImage3,
+            classroomImage4,
+            blackboardImage,
+
+            // Add any other images used in your game
+        ];
+
+        preloadMImages(imageSources, () => {
+            setImagesLoaded(true);
+        });
+    }, []);
+
+
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isPlayOpen, setIsPlayOpen] = useState(false);
     const [animateExit, setAnimateExit] = useState(false);
@@ -65,7 +129,18 @@ function Menu({ onStart }) {
 
     return (
         <>
+            <>
+            {!imagesLoaded && (
+                <div className="loading-screen">
+                    <p>Loading...</p>
+                </div>
+            )}
+            </>
+
             <div className="bg">
+
+
+
                 <div className="blackboard"></div>
                 <div className="leyvi"></div>
                 <div className="cheeba"></div>

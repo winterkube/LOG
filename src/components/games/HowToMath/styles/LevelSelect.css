@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
 
 :root {
-    --xPosFlash: 10%;
+    --xPosFlash: 8%;
     --yPosFlash1: -1000%;
     --yPosFlash2: -32.5%;
 
@@ -18,25 +18,76 @@
     /*height: 100vh;*/
     /*width: 100vw;*/
 
-    background: #a2b9ec ;
-    background-image: linear-gradient(90deg, rgb(104, 134, 211) 1px, transparent 1px),
-    linear-gradient(rgb(82, 73, 208) 1px, transparent 1px);
-    /*linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px),*/
+    background: transparent;
+    background-image:
+    linear-gradient(rgb(135, 128, 224, 0.5) 2px, transparent 1px);
     /*linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px) no-repeat center;*/
     background-size: 50px 50px;
     /*position: relative;*/
     /*overflow: hidden;*/
-    animation: moveBackground 5s linear infinite;
+    animation: moveBackground 2.5s linear infinite;
     /*transition: opacity 1s ease-in-out; !* Fade out home content *!*/
+
+    z-index: -2;
+}
+
+.trialsBG {
+    left:0%;
+    position: absolute;
+    width: 660px;
+    height: 500px;
+    background-image: url("../assets/crumpled paper.png");
+    background-size: 660px 500px;
+    z-index: -1;
+}
+
+.trialsBG2 {
+    left:0%;
+    position: absolute;
+    width: 660px;
+    height: 500px;
+    background-image: linear-gradient(transparent, rgba(104, 193, 255, 0.34));
+    background-size: 660px 500px;
+    z-index: -1;
+}
+.trialsBG3 {
+    left:0%;
+    top: 80%;
+    position: absolute;
+    width: 660px;
+    height: 100px;
+    background-image: linear-gradient(transparent, rgba(255, 255, 255, 0.53));
+    background-size: 660px 100px;
+    background-position: bottom;
 
     z-index: 1;
 }
+
 @keyframes moveBackground {
     0% {
         background-position: 0 0;
+        background-image:
+                linear-gradient(rgb(135, 128, 224, 0.5) 2px, transparent 1px);
+    }
+    24% {
+        background-position: 12px 12px;
+        background-image:
+                linear-gradient(rgb(135, 128, 224, 0.3) 2.5px, transparent 1px);
+    }
+    50% {
+        background-position: 25px 25px;
+        background-image:
+                linear-gradient(rgb(135, 128, 224, 0.1) 3px, transparent 1px);
+    }
+    74% {
+        background-position: 37px 37px;
+        background-image:
+                linear-gradient(rgb(135, 128, 224, 0.3) 2.5px, transparent 1px);
     }
     100% {
-        background-position: 100px 100px;
+        background-position: 50px 50px;
+        background-image:
+                linear-gradient(rgb(135, 128, 224, 0.5) 2px, transparent 1px);
     }
 }
 
@@ -45,38 +96,135 @@
     font-family: "Londrina Sketch", serif;
     font-size: 70px;
     font-weight: bold;
-    color: #5e5ee5;
+    color: #7070f5;
 
     padding-top: 20px;
-    text-shadow: 3px 3px 1px #b59ce7;
+    padding-bottom: 20px;
+    text-shadow: 3px 3px 1px #bca5e7;
+
+    background: rgba(255, 255, 255, 0.25);
 
 }
 
-.level-select button{
-    position: relative;
-    font-family: "Work Sans", serif;
-    font-size: 20px;
-    font-weight: normal;
-
-
-    background-color: #8d87f5; /* Green */
-    border: none;
+.back-button2 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    text-shadow: 1px 1px 3px #333349;
+    font-family: 'Cabin Sketch', serif;
+    font-weight: 300;
+    font-size: 30px;
+    background-color: #a09afc;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    padding: 8px 15px;
     cursor: pointer;
+    z-index: 2;
+    border:5px solid white;
+    border-radius: 2px;
+    box-shadow: 2px 2px 3px black;
 }
+/* Level Buttons Container */
+.level-buttons-container {
+    position: absolute;
+    top: 150px;
+    left: 55%;
+    transform: translateX(-50%);
+    width: 55%;
+    height: calc(100% - 200px); /* Adjust height as needed */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    padding-bottom: 20px;
+    border-bottom: 3px solid white;
+    border-top: 3px solid white;
+    box-shadow:
+            inset 0px 11px 8px -8px #ffffff,
+            inset 0px -11px 8px -8px #ffffff;
+
+    animation: slideInLevels 1s forwards ease-out;
+}
+
+/* Level Buttons */
+.level-buttons-container button {
+    width: 100%;
+    max-width: 330px; /* Adjust as needed */
+    height: 200px; /* Adjust as needed */
+    margin: 2px 0;
+    font-family: 'Cabin Sketch', serif;
+    font-size: 30px;
+    font-weight: normal;
+    color: white;
+    padding: 32px;
+    border: none;
+    background-color: transparent;
+    background-image: url("../assets/trial box.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+    text-shadow: 1px 1px 3px #373759;
+}
+
+@keyframes slideInLevels {
+    from {
+        transform: translate(-50%, 180%);
+    }
+    to {
+        transform: translate(-50%, 0%);
+    }
+}
+
+
+/* Optional: Customize scrollbar */
+.level-buttons-container::-webkit-scrollbar {
+    width: 14px;
+}
+
+.level-buttons-container::-webkit-scrollbar-track {
+    background: rgba(200, 200, 200, 0.4);
+    opacity: 50%;
+}
+
+.level-buttons-container::-webkit-scrollbar-thumb {
+    background: rgba(250, 250, 250, 0.6);
+    opacity: 50%;
+}
+
+.level-buttons-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(225, 225, 225, 0.5);
+    opacity: 0.5;
+}
+
+
+/*.level-select button{*/
+/*    position: relative;*/
+/*    font-family: "Work Sans", serif;*/
+/*    font-size: 20px;*/
+/*    font-weight: normal;*/
+
+
+/*    background-color: #8d87f5; !* Green *!*/
+/*    border: 4px;*/
+/*    color: white;*/
+/*    padding: 15px 32px;*/
+/*    text-align: center;*/
+/*    text-decoration: none;*/
+/*    display: grid;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .flash2 {
+    top: 32%;
     position: absolute;
     background: rgb(0, 0, 0,0);
     background-size: 100%;
-    width: 640px;
-    height: 480px;
+    width: 660px;
+    height: 500px;
     transform: translate(var(--xPosFlash), var(--yPosFlash1)); /* Adjusted transform */
-    animation: fadeOutB 1.5s;
+    animation: fadeOutB 1s;
     z-index: 5;
 }
 
@@ -113,5 +261,96 @@
     }
     100% {
         transform: translate(var(--xPosFlash), var(--yPosFlash1));
+    }
+}
+
+
+/* Shapes & Animation
+*/
+.back-shapes {
+    transform: rotate(-90deg);
+    width: 640px;
+    height: 640px;
+    left: 5px;
+    position: absolute;
+    overflow: hidden;
+}
+
+.back-shapes img {
+    opacity: 0.2;
+    position: absolute;
+    width: 1.5%;
+}
+
+.floating {
+    position: absolute;
+    animation-name: floating;
+    -webkit-animation-name: floating;
+    animation-duration: 5s;
+    -webkit-animation-duration: 5s;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+}
+.floating.circle {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAnCAYAAACMo1E1AAAABHNCSVQICAgIfAhkiAAAA0pJREFUWIXdmL1O40AQx8fZ5BxQCqRrLqKxqKjAOl0JvMHxBIjHyCu4dGkJ+khpQNa9QeTyZIkihbtYCKWwbC1KFXbtvYJxbrIYMOBD1o20UhDe//x2dnb2w1BKQVut25SQYRhG+Vs1NGLjvToI0yHNwKawFWV7L+yb4AhQFwC6QRB8tyzrxDTN3V6vN2SMfc3zPBVCLFar1d18Pp8eHR2FACCxvQ1UKfVqg8eIMADo+75/kKbphRDiVtUwIcRtmqYXvu8fAEAfdYxafmuC9TzPs5IkuSyK4qEOlG5FUTwkSXLpeZ4FAL06gHXA+mEYnkops1f851LKe6VU/tJHUsosDMNTjOKLgK+CxXE8KopCVDjhWZZNZrPZ2Xg83rdtewcABrZt74zH4/3ZbHaWZdlESskroijiOB69BvgSmBnH8ahq9JzzK8dxLBTvweZqLRdNDwD6juNYnPOrKh0ENJ8DfDbHwjA81SMmpUyiKDoHgO06iU0W0nYURedSykSPIE5xZQ5WCTLP8yw9x5bL5dR13b26yVw1YNd195bL5VQbcIaLhL0IV+ZZkiSXesQQrPtWME2767runh7BJEkuq/LvSdR83z/QywVO5Zf3gmmAX6IoOtem9wHr4Eb09M5mmqYXtCPn/AoAtgCg8xEw4qMDAFv6IknT9AIAzEo4HNWAVn4pJcdV+SQfPgjIHMexaJkRQtwCwIDOzkaHIAiO6WiyLJvUKZbvnN5+lmUT6i8IgmMaiA7ZZpllWSd0310sFr8AIFeo2JShXo76a0P/rPybwhmmae7Sj29ubn4DQN4kGLEc9deG/tfnwo0wc86vSZRz3JIanVI6tbZt7yiyF3POr4Gk0QYcLZBSynvQEvQf5N0ADwtKqcdCT+HotEKe52n5mzE2sG27sWN8ldm23WWMDar8A2DOYYIqIcSC/m80Gn0DmgPNmoH66wChf1UuQBo5tVqt7mjvw8PDH0BWT8PGUH9t6H9dGShcPp/Pp/Tj4XD4EwAYvVk1YajHUH9t6P9vddATtJU7BHZq595ajqjNp5L2nufK6LXyJEyFWnmHIKLtu31pgO27t+qArbvxa4DteyvRAD/9lanV73P/z8tmDVgAaMGb8GfYHwpq7kYvpXclAAAAAElFTkSuQmCC");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.5;
+}
+.floating.square {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABHNCSVQICAgIfAhkiAAAAUNJREFUWIXt2DFugzAUBuD/EVMGJMyQsZ3aA+QQ3ZjrIzKQgYWD5ACVOjRjBkBiSHF4XRJEIzmBCgiD/83Ysj9ZxrJNzIylRHQLREQAaMbxmTuz0WKUUk9Zlj0XRbHSWk8OEkKwlPKklNonSfLTYojISdP0JYqiz6kR16nr+o2Ivpi5cS4fy7JczQ25Hte51XDuCFOF1vpQVdWOiEb73ZiZfN/fCCHWgzBVVe3CMPwAcAQwBogAeHmeb6WU74Mw5xk5jozBrZk2Yjr5sxf8W0L3d4tFLWCLMcViTLEYUyzGFIsxxWJMsRhTFoXpc7iiPgejPv3ca2DEMDMB8C7FkTDeud9hGN/3N3meb6e4HQzGCCHWplP8VFnUAm4xQRCcHgHojisAgJkbpdS367qvc79CxHG8Z+YGAKh7JXr0+wwt6eXqFzNGfAM6wJFPAAAAAElFTkSuQmCC");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.5;
+}
+.floating.triangle {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAjCAYAAAAJ+yOQAAAABHNCSVQICAgIfAhkiAAABARJREFUWIXNVj2IGlsU/sa/3XWDRWCICyFNTF4Rq7AQSJUmiKRN2rAuBlKlM03gRV4lj9hYmSLwigQMCA9iZcAmNrIpDLurNiNKoiiODE+HmXXezNz7ird3ubvPdf17cQ9MMXfunPud75zvniNQSnHZzbFqANPYUkEKguDY3t52C4Kw3OAppUt5ADjC4bBP1/U/w+GwD4Bjab6XBFAAsNZqtV5RSmmr1XoFYA2AcJlAOlOp1E3btgeUUmrb9iCVSt0E4LwUII9Z3FAU5T3lTFGU9wA2lsHmMkC6isXiA0qpTU+bXSwWHwBwrRQk/r0dNnVd/0rHmK7rXwFsLiqiRUF66vX6cx7Y0dGRxL/X6/XnADwrAQnAEYvF/KZpdhkgwzB+7O7u/mIYxg+2ZppmNxaL+Rdhc16AAoD1Xq+X4lmr1Wo7ADZrtdoOv97r9VIA1ucV0bwgnblc7i4hxGBANE0rHtefE8CmpmlF9o0QYuRyubvzXklzpRmAV1XVzxwIq1Ao3GdKBuAqFAr3CSEW26Oq6mcA3nnSPg9Id6VSecKns9/vv+PTycqh3++/4/dVKpUnANz/K0gAjlAodNUwjBMFW5alJBKJG2cZAuBIJBI3LMtS2F7DMKRQKHR1VjZnFctau91+zbPTbDZj510xADzNZjPG72+3269n7esziSWdTt+ybVtlB45Go0ogEDh34gHgCAQCvtFoVGH/2LatptPpW7OIaBYWNxRF+cizUi6XH13U9gC4yuXyI/4/RVE+ztLXpwXpKpVKDymlhB00GAw+TXMQC3AwGHzicJJSqfRw2r4+lVhEUbyi6/q3kxMIOcpkMsFpUwbAmclkgoSQI+ZD1/VvoihemUZE0xzgaTQaL/h0dTqdN7MUPxNdp9N5w/tpNBovpunrF7IYj8evW5YlM8emabaj0ei1ma8RwBGNRq+ZptlmvizLkuPx+PWLfF0U/bosy2/56CVJejbvVAPAI0nSM96fLMtvL+rrE8WSz+fvEUJM5lDTtL1F5kM2f2qatsd8EkLMfD5/b5KIJjpTVfULF/RSJu1xk7yqql8mBX+eI3e1Wn3Kp0VRlA+z3G0TQLI79wPvv1qtPj2vr49lMRKJiIZhfD+h0LaHyWTyNgDP8Si26ONJJpO3bdsesjMMw/geiUTEcWyyqQUAIAiCAMDT6XR+8/v9L9m6LMvZw8PDP3w+n4kl2XA4dAeDwR1RFB+ztW63+/vW1tavAP6mPLAzLDqz2ewdQohOV2CEED2bzd7BmSbxn1o5075+uo1rt6dYlCQpvEqAzCRJCvNsurgyIfv7+3sHBwcBXdcdlmUJy6q/ac3lclGv10sopX8BIGx9nHB+OrgxRikH7BTIy2r/AAlu0j5Iy8AaAAAAAElFTkSuQmCC");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.5;
+}
+.floating.cross {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAABHNCSVQICAgIfAhkiAAAAgJJREFUWIXN2MFO4zAQBuDfbSpaiUOvvTRS3w6EoEChwAvsZS9IvAnwOK5rV5V7Se8cNrOHNVXWpMk4caEj5dDInvkySeMkgohwbNH5aUBZJP4OIYQA0HU//9ABWllXo+MN7gDobzab+/V6fQbgxCWIDTqx1k6ttdPSGkQEBxUABsaYJ/oXuZTyGkAfgPgc12ZzNfpa6zkR5USUa63nfo3ihMRae0f/Ry6lvIkBKwHtalhrZwCSz7H+hU5u23V7Mpn8llKel7Y58JRpra/G4/EvB9wfjCMhIsoXi8Vtk47V5a08fZwEy+UyCNYE9AUVE9YUVIpiwmZVsDagvag2sLagShQTdlcsEANUiwqEJTFALBSzA/cAhjFAbBQHlmXZWwxQEIoB86MRKBhVgA2UUg8VsFwp9QBgEApqhHKwLoBhlmXvZaLtdvsKYAig2yj/ATs1/5ZOhV5T/n0sOorx73sv298EFgXk/mV771N1a2UwKmDpqLyjh8BigVhrH/uxJxaIO48Diwrizq97tI4O4uapeks6CKgt7GAgbl6l1NTPW5ycWGtnMUFc2Gq1ukTFy6gfZIx5TNP0GcAHuQqh4eZ9pGn6bIx5hPfC2+v1Tv0J+46mdYc4HTPGPMFbuEXx4AtfRC4AYDQavbTpUFl4NUShRr4b49c7hu9TX1DHEEf5efEvSKr5qd+QqggAAAAASUVORK5CYII=");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.5;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0%) rotate(-55deg);
+    }
+    50% {
+        transform: translateY(500%) rotate(55deg);
+    }
+    100% {
+        transform: translateY(0%) rotate(-55deg);
+    }
+}
+@-webkit-keyframes floating {
+    0% {
+        transform: translateY(0%);
+    }
+    50% {
+        transform: translateY(500%);
+    }
+    100% {
+        transform: translateY(0%);
     }
 }

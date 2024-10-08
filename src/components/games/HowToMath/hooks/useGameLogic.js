@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export function useGameLogic(questions, onGameEnd) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [timeLeft, setTimeLeft] = useState(5);
+    const [timeLeft, setTimeLeft] = useState(50);
     const [score, setScore] = useState(0);
     const timerRef = useRef(null);
 
@@ -17,7 +17,7 @@ export function useGameLogic(questions, onGameEnd) {
     }, [currentQuestionIndex]);
 
     const startTimer = () => {
-        setTimeLeft(5);
+        setTimeLeft(50);
         timerRef.current = setInterval(() => {
             setTimeLeft((prevTime) => {
                 if (prevTime <= 1) {
