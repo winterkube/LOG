@@ -1,6 +1,6 @@
 // src/components/games/HowToMath/Menu.js
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/Menu.css';
 import playButtonImage from './assets/play button.png';
 import settingsButtonImage from './assets/settings button.png';
@@ -11,13 +11,20 @@ import trialsButtonImage from './assets/trials button.png';
 function Menu({ onStart }) {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isPlayOpen, setIsPlayOpen] = useState(false);
-
     const [animateExit, setAnimateExit] = useState(false);
-
     const [flashExit, setFlashExit] = useState(false);
+
+    // New state variable to control initial animations
+    const [animateEnter, setAnimateEnter] = useState(false);
+
+    useEffect(() => {
+        // Trigger enter animations when the component mounts
+        setAnimateEnter(true);
+    }, []);
 
     const goToSettings = () => {
         setAnimateExit(true);
+        setAnimateEnter(false); // Stop enter animations
         setTimeout(() => {
             setIsSettingsOpen(true);
             setAnimateExit(false);
@@ -26,6 +33,7 @@ function Menu({ onStart }) {
 
     const goBack = () => {
         setAnimateExit(true);
+        setAnimateEnter(false); // Stop enter animations
         setTimeout(() => {
             setIsSettingsOpen(false);
             setIsPlayOpen(false);
@@ -35,6 +43,7 @@ function Menu({ onStart }) {
 
     const goToPlay = () => {
         setAnimateExit(true);
+        setAnimateEnter(false); // Stop enter animations
         setTimeout(() => {
             setIsPlayOpen(true);
             setAnimateExit(false);
@@ -43,16 +52,16 @@ function Menu({ onStart }) {
 
     const goToTrials = () => {
         setAnimateExit(true);
+        setAnimateEnter(false); // Stop enter animations
         setFlashExit(true);
         setTimeout(() => {
-
             onStart();
         }, 500);
     };
 
     const volumeFunc = () => {
-        window.confirm('just lower ur computer volume idiot');
-    }
+        window.confirm('just lower your computer volume xd');
+    };
 
     return (
         <>
@@ -66,14 +75,14 @@ function Menu({ onStart }) {
                         <img
                             src={playButtonImage}
                             alt="Play Button"
-                            className={`play-button button ${animateExit ? 'exit' : ''}`}
+                            className={`play-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                             onClick={goToPlay}
                             width="230"
                         />
                         <img
                             src={settingsButtonImage}
                             alt="Settings Button"
-                            className={`settings-button button ${animateExit ? 'exit' : ''}`}
+                            className={`settings-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                             onClick={goToSettings}
                             width="230"
                         />
@@ -85,16 +94,14 @@ function Menu({ onStart }) {
                         <img
                             src={volumeButtonImage}
                             alt="Volume Button"
-                            className={`volume-button button ${animateExit ? 'exit' : ''}`}
+                            className={`volume-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                             onClick={volumeFunc}
                             width="230"
                         />
-
-
                         <img
                             src={backButtonImage}
                             alt="Back Button"
-                            className={`back-button button ${animateExit ? 'exit' : ''}`}
+                            className={`back-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                             onClick={goBack}
                             width="230"
                         />
@@ -105,20 +112,19 @@ function Menu({ onStart }) {
                     <>
                         <img
                             src={trialsButtonImage}
-                            alt="trials Button"
-                            className={`trials-button button ${animateExit ? 'exit' : ''}`}
+                            alt="Trials Button"
+                            className={`trials-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                             onClick={goToTrials}
                             width="230"
                         />
                         <img
                             src={backButtonImage}
                             alt="Back Button"
-                            className={`back-button button ${animateExit ? 'exit' : ''}`}
+                            className={`back-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                             onClick={goBack}
                             width="230"
                         />
                     </>
-
                 )}
 
                 <div className={`flash ${flashExit ? 'exit' : ''}`}></div>

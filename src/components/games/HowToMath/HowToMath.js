@@ -25,43 +25,14 @@ import classroomImage from './assets/classroom.png';
 import blackboardImage from './assets/blackboard.png';
 import startButton1 from './assets/startbtn1.png';
 import startButton2 from './assets/startbtn2.png';
+import {wait} from "@testing-library/user-event/dist/utils";
 
-function resizeCanvas(canvas) {
-    // Get the size the canvas is displayed
-    const { width, height } = canvas.getBoundingClientRect();
 
-    // Adjust the canvas size
-    canvas.width = width;
-    canvas.height = height;
-
-    // Redraw the canvas content if necessary
-}
-
-function preloadImages(imageArray, callback) {
-    let loadedImages = 0;
-    const totalImages = imageArray.length;
-
-    imageArray.forEach((src) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-            loadedImages++;
-            if (loadedImages === totalImages) {
-                callback();
-            }
-        };
-        img.onerror = () => {
-            // Handle image load error if needed
-            loadedImages++;
-            if (loadedImages === totalImages) {
-                callback();
-            }
-        };
-    });
-}
 
 function LoadingScreen() {
+
     return (
+
         <div className="loading-screen">
             <p>Loading...</p>
             {/* You can add a spinner or any loading animation here */}
@@ -73,23 +44,11 @@ function HowToMath() {
     const canvasRef = useRef(null);
     const [currentScene, setCurrentScene] = useState('loading');
     const [gameData, setGameData] = useState(null); // To pass data between scenes
+    const [imagesLoaded, setImagesLoaded] = useState(false); // New state variable
 
+    // Preload images only once
     useEffect(() => {
-        const canvas = canvasRef.current;
-
-        // Handle window resize
-        const handleResize = () => {
-            resizeCanvas(canvas);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        // Initial resize
-        resizeCanvas(canvas);
-
-        // Preload images
         const imageSources = [
-
             playButtonImage,
             settingsButtonImage,
             volumeButtonImage,
@@ -108,35 +67,99 @@ function HowToMath() {
         ];
 
         preloadImages(imageSources, () => {
-            // All images are loaded, update the scene
+            setImagesLoaded(true);
             setCurrentScene('start');
         });
+    }, []);
+
+    // Handle window resize
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const handleResize = () => {
+            resizeCanvas(canvas);
+        };
+
+        window.addEventListener('resize', handleResize);
+        resizeCanvas(canvas); // Initial resize
 
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
 
+    function resizeCanvas(canvas) {
+        const { width, height } = canvas.getBoundingClientRect();
+        canvas.width = width;
+        canvas.height = height;
+        // Redraw canvas content if necessary
+    }
+
+    function preloadImages(imageArray, callback) {
+        let loadedImages = 0;
+        const totalImages = imageArray.length;
+
+        imageArray.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                loadedImages++;
+                if (loadedImages === totalImages) {
+                    callback();
+                }
+            };
+            img.onerror = () => {
+                loadedImages++;
+                if (loadedImages === totalImages) {
+                    callback();
+                }
+            };
+        });
+    }
+
+
     function startGame() {
         setCurrentScene('menu');
     }
 
     const renderScene = () => {
+        if (!imagesLoaded) {
+            return <LoadingScreen />;
+        }
+
         switch (currentScene) {
+
             case 'loading':
+                if (!imagesLoaded) {
+                    return <LoadingScreen />;
+                }
                 return <LoadingScreen />;
             case 'start':
+                if (!imagesLoaded) {
+                    return <LoadingScreen />;
+                }
                 return (
                     <div className="startButton" onClick={startGame}> </div>
                 );
             case 'menu':
-                return <Menu onStart={() => setCurrentScene('levelSelect')}/>;
+                return (
+                    <Menu
+                        onStart={() => setCurrentScene('levelSelect')}
+                        key={currentScene} // Force re-mounting the component
+                    />
+                );
             case 'levelSelect':
                 return (
                     <LevelSelect
                         onLevelSelect={(levelNumber) => {
-                            setGameData({levelNumber});
-                            setCurrentScene('cutscene');
+
+                            if (levelNumber > 0) {
+                                setGameData({levelNumber});
+                                setCurrentScene('cutscene');
+                            } else {
+                                setCurrentScene('menu');
+
+                            }
+
                         }}
                     />
                 );

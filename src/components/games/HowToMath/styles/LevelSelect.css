@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
+
+:root {
+    --xPosFlash: 10%;
+    --yPosFlash1: -1000%;
+    --yPosFlash2: -32.5%;
+
+}
+
+.level-select {
+
+    margin: -10%;
+    height: 500px;
+    background-size: 100%;
+    /*height: 100vh;*/
+    /*width: 100vw;*/
+
+    background: #a2b9ec ;
+    background-image: linear-gradient(90deg, rgb(104, 134, 211) 1px, transparent 1px),
+    linear-gradient(rgb(82, 73, 208) 1px, transparent 1px);
+    /*linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px),*/
+    /*linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px) no-repeat center;*/
+    background-size: 50px 50px;
+    /*position: relative;*/
+    /*overflow: hidden;*/
+    animation: moveBackground 5s linear infinite;
+    /*transition: opacity 1s ease-in-out; !* Fade out home content *!*/
+
+    z-index: 1;
+}
+@keyframes moveBackground {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100px 100px;
+    }
+}
+
+.level-select h2 {
+    position: relative;
+    font-family: "Londrina Sketch", serif;
+    font-size: 70px;
+    font-weight: bold;
+    color: #5e5ee5;
+
+    padding-top: 20px;
+    text-shadow: 3px 3px 1px #b59ce7;
+
+}
+
+.level-select button{
+    position: relative;
+    font-family: "Work Sans", serif;
+    font-size: 20px;
+    font-weight: normal;
+
+
+    background-color: #8d87f5; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.flash2 {
+    position: absolute;
+    background: rgb(0, 0, 0,0);
+    background-size: 100%;
+    width: 640px;
+    height: 480px;
+    transform: translate(var(--xPosFlash), var(--yPosFlash1)); /* Adjusted transform */
+    animation: fadeOutB 1.5s;
+    z-index: 5;
+}
+
+.flash2.exit {
+    animation: fadeInB 1s;
+}
+
+@keyframes fadeOutB {
+    0% {
+        background: rgb(0, 0, 0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    50% {
+        background: rgba(0,0,0,0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    75% {
+        background: rgba(0,0,0,0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    100% {
+        transform: translate(var(--xPosFlash), var(--yPosFlash1));
+    }
+}
+
+@keyframes fadeInB {
+    0% {
+        background: rgb(0, 0, 0,0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    65% {
+        background: rgba(0,0,0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    100% {
+        transform: translate(var(--xPosFlash), var(--yPosFlash1));
+    }
+}

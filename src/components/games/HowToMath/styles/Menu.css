@@ -72,7 +72,7 @@
     background-position: center;
     background-repeat: no-repeat;
 
-    animation: slideIn2 0.5s forwards ease-out, alternateImagesCheeba 0.5s infinite steps(1, end);
+    animation: slideIn2 0.8s forwards ease-out, alternateImagesCheeba 0.5s infinite steps(1, end);
 }
 
 .leyvi {
@@ -87,7 +87,7 @@
     background-position: center;
     background-repeat: no-repeat;
 
-    animation: slideIn3 0.5s forwards ease-out 0.1s, alternateImagesLeyvi 0.5s infinite steps(1, end);
+    animation: slideIn3 0.8s forwards ease-out 0.1s, alternateImagesLeyvi 0.5s infinite steps(1, end);
 }
 
 .blackboard {
@@ -261,6 +261,25 @@
     animation-delay: 0.05s;
 }
 
+.play-button.enter {
+    animation: slideInButtons 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
+}
+
+.settings-button.enter {
+    animation: slideInButtons 0.5s forwards ease-out 0.05s, rotateSettingsButton 0.5s infinite steps(1, end) 0.55s;
+}
+
+.volume-button.enter,
+.trials-button.enter {
+    animation: slideInSettings 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
+}
+
+.back-button.enter {
+    animation: slideInSettings 0.5s forwards ease-out, rotateSettingsButton 0.5s infinite steps(1, end) 0.5s;
+}
+
+
+
 .play-button.exit{
 
     animation: slideOutButtons 0.5s forwards ease-out 0.05s;
@@ -307,13 +326,13 @@
     }
 }
 
-.play-button:not(.exit){
-    animation: slideInButtons 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
-}
-.settings-button:not(.exit) {
-    animation: slideInButtons 0.5s forwards ease-out, rotateSettingsButton 0.5s infinite steps(1, end) 0.5s;
-    animation-delay: 0.05s;
-}
+/*.play-button:not(.exit){*/
+/*    animation: slideInButtons 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;*/
+/*}*/
+/*.settings-button:not(.exit) {*/
+/*    animation: slideInButtons 0.5s forwards ease-out, rotateSettingsButton 0.5s infinite steps(1, end) 0.5s;*/
+/*    animation-delay: 0.05s;*/
+/*}*/
 
 /* Keyframes */
 @keyframes slideInButtons {
