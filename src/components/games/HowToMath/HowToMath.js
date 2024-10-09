@@ -53,13 +53,23 @@ function HowToMath() {
     const [imagesLoaded, setImagesLoaded] = useState(false); // New state variable
 
     const menuMusicRef = useRef(null);
+    const [volume, setVolume] = useState(0.5); // Initial volume set to 0.5
+
 
     // Initialize the audio object
     useEffect(() => {
         menuMusicRef.current = new Audio(lofiThing);
         menuMusicRef.current.loop = true;
-        menuMusicRef.current.volume = 0.75; // Set initial volume (0.0 to 1.0)
+        menuMusicRef.current.volume = volume; // Set initial volume (0.0 to 1.0)
     }, []);
+
+    // Update audio volume when volume state changes
+    useEffect(() => {
+        if (menuMusicRef.current) {
+            menuMusicRef.current.volume = volume;
+        }
+    }, [volume]);
+
 
     // Start or stop music based on currentScene
     useEffect(() => {
@@ -200,8 +210,10 @@ function HowToMath() {
                 );
             case 'menu':
                 return (
+
                     <Menu
                         onStart={() => setCurrentScene('levelSelect')}
+                        setVolume = {setVolume}
                         key={currentScene} // Force re-mounting the component
                     />
                 );

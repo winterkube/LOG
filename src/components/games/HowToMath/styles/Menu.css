@@ -9,6 +9,21 @@
     --yPosSettings: 80%;
 }
 
+.volume-slider {
+    top: 45%;
+    left:60%;
+
+    font-family: "Cabin Sketch", sans-serif;
+    font-size: 40px;
+    padding: 10px;
+
+    background: rgba(190, 239, 195, 0.85);
+    width: 230px;
+    height: 130px;
+    position: absolute;
+    z-index: 3;
+}
+
 .behind-bg {
 
 

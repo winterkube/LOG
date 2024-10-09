@@ -20,7 +20,7 @@ import classroomImage3 from "./assets/classroom3.png";
 import classroomImage4 from "./assets/classroom4.png";
 import blackboardImage from "./assets/blackboard.png";
 
-function Menu({ onStart }) {
+function Menu({ onStart }, {setVolume}) {
 
 
     const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -77,6 +77,7 @@ function Menu({ onStart }) {
     const [isPlayOpen, setIsPlayOpen] = useState(false);
     const [animateExit, setAnimateExit] = useState(false);
     const [flashExit, setFlashExit] = useState(false);
+    // const [openVolume, setOpenVolume] = useState(false);
 
     // New state variable to control initial animations
     const [animateEnter, setAnimateEnter] = useState(false);
@@ -127,6 +128,8 @@ function Menu({ onStart }) {
 
     const volumeFunc = () => {
         window.confirm('just lower your computer volume xd');
+        // setOpenVolume(true);
+
     };
 
     // if (!imagesLoaded) {
@@ -139,6 +142,11 @@ function Menu({ onStart }) {
     //             {/*)}*/}
     //         </>
     //     );
+    const handleVolumeChange = (event) => {
+        const newVolume = parseFloat(event.target.value);
+        setVolume(newVolume);
+    };
+
     // } else {
     {
         return (
@@ -173,13 +181,29 @@ function Menu({ onStart }) {
 
                     {isSettingsOpen && (
                         <>
-                            <img
-                                src={volumeButtonImage}
-                                alt="Volume Button"
-                                className={`volume-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
-                                onClick={volumeFunc}
-                                width="230"
-                            />
+                            {/*{openVolume && (*/}
+
+
+                                <label className="volume-slider">
+                                    Volume:
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="1"
+                                        step="0.01"
+                                        onChange={handleVolumeChange}
+                                        defaultValue="0.5"
+                                    />
+                                </label>
+
+
+                            {/*<img*/}
+                            {/*    src={volumeButtonImage}*/}
+                            {/*    alt="Volume Button"*/}
+                            {/*    className={`volume-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}*/}
+                            {/*    onClick={volumeFunc}*/}
+                            {/*    width="230"*/}
+                            {/*/>*/}
                             <img
                                 src={backButtonImage}
                                 alt="Back Button"

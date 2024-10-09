@@ -1,7 +1,6 @@
 // src/components/games/HowToMath/levels/1-introTrial.js
 
 export const introTrial = {
-    // song:
     levelNumber: 1,
     song: 'waterflame-glorious',
     questions: [
