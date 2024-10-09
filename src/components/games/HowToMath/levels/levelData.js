@@ -1,9 +1,9 @@
 // src/components/games/HowToMath/levels/levelData.js
 
-import { Level1Data } from './Level1Data';
+import { introTrial } from './1-introTrial';
 // Import other levels...
 
 export const Levels = {
-    1: Level1Data,
+    1: introTrial,
     // Add other levels...
 };

@@ -8,6 +8,7 @@ import Cutscene from './Cutscene';
 import Results from './Results';
 import { Levels } from './levels/levelData';
 
+import lofiThing from './assets/music/lofi thing.mp3';
 import './HowToMath.css';
 
 
@@ -29,6 +30,7 @@ import blackboardImage from './assets/blackboard.png';
 import startButton1 from './assets/startbtn1.png';
 import startButton2 from './assets/startbtn2.png';
 import {wait} from "@testing-library/user-event/dist/utils";
+import levelSelect from "./LevelSelect";
 
 
 
@@ -48,6 +50,51 @@ function HowToMath() {
     const [currentScene, setCurrentScene] = useState('loading');
     const [gameData, setGameData] = useState(null); // To pass data between scenes
     const [imagesLoaded, setImagesLoaded] = useState(false); // New state variable
+
+    const menuMusicRef = useRef(null);
+
+    // Initialize the audio object
+    useEffect(() => {
+        menuMusicRef.current = new Audio(lofiThing);
+        menuMusicRef.current.loop = true;
+        menuMusicRef.current.volume = 0.75; // Set initial volume (0.0 to 1.0)
+    }, []);
+
+    // Start or stop music based on currentScene
+    useEffect(() => {
+
+        if (currentScene === 'start') {
+            if (menuMusicRef.current) {
+                menuMusicRef.current.load();
+            }
+        }
+        else if ( (currentScene === 'menu' || currentScene === 'levelSelect')) {
+            // Start playing if not already playing
+            if (menuMusicRef.current && menuMusicRef.current.paused) {
+                menuMusicRef.current.play();
+            }
+        }
+        else if (currentScene === 'cutscene' || currentScene === 'gameplay') {
+            // Pause the music
+            if (menuMusicRef.current && !menuMusicRef.current.paused) {
+                menuMusicRef.current.pause();
+            }
+        }
+        // restart
+         else if (currentScene === 'results' ) {
+            // Pause the music
+            if (menuMusicRef.current) {
+                menuMusicRef.current.load();
+            }
+        }
+
+        // Clean up when component unmounts
+        return () => {
+            if (menuMusicRef.current) {
+                menuMusicRef.current.pause();
+            }
+        };
+    }, [currentScene]);
 
     // Preload images only once
     useEffect(() => {
@@ -192,7 +239,7 @@ function HowToMath() {
                     <Results
                         data={gameData.performanceData}
                         onContinue={() => setCurrentScene('levelSelect')}
-                        onRetry={() => setCurrentScene('cutscene')}
+                        onRetry={() => setCurrentScene('gameplay')}
                         onMenu={() => setCurrentScene('menu')}
                     />
                 );

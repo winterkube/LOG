@@ -25,52 +25,52 @@ function Menu({ onStart }) {
 
     const [imagesLoaded, setImagesLoaded] = useState(false);
 
-    function preloadMImages(imageArray, callback) {
-        let loadedMImages = 0;
-        const totalImages = imageArray.length;
-
-        imageArray.forEach((src) => {
-            const img = new Image();
-            img.src = src;
-            img.onload = () => {
-                loadedMImages++;
-                if (loadedMImages === totalImages) {
-                    callback();
-                }
-            };
-            img.onerror = () => {
-                loadedMImages++;
-                if (loadedMImages === totalImages) {
-                    callback();
-                }
-            };
-        });
-    }
-
-    useEffect(() => {
-        const imageSources = [
-            playButtonImage,
-            settingsButtonImage,
-            volumeButtonImage,
-            backButtonImage,
-            trialsButtonImage,
-            cheeba1Image,
-            cheeba2Image,
-            leyvi1Image,
-            leyvi2Image,
-            classroomImage,
-            classroomImage2,
-            classroomImage3,
-            classroomImage4,
-            blackboardImage,
-
-            // Add any other images used in your game
-        ];
-
-        preloadMImages(imageSources, () => {
-            setImagesLoaded(true);
-        });
-    }, []);
+    // function preloadMImages(imageArray, callback) {
+    //     let loadedMImages = 0;
+    //     const totalImages = imageArray.length;
+    //
+    //     imageArray.forEach((src) => {
+    //         const img = new Image();
+    //         img.src = src;
+    //         img.onload = () => {
+    //             loadedMImages++;
+    //             if (loadedMImages === totalImages) {
+    //                 callback();
+    //             }
+    //         };
+    //         img.onerror = () => {
+    //             loadedMImages++;
+    //             if (loadedMImages === totalImages) {
+    //                 callback();
+    //             }
+    //         };
+    //     });
+    // }
+    //
+    // useEffect(() => {
+    //     const imageSources = [
+    //         playButtonImage,
+    //         settingsButtonImage,
+    //         volumeButtonImage,
+    //         backButtonImage,
+    //         trialsButtonImage,
+    //         cheeba1Image,
+    //         cheeba2Image,
+    //         leyvi1Image,
+    //         leyvi2Image,
+    //         classroomImage,
+    //         classroomImage2,
+    //         classroomImage3,
+    //         classroomImage4,
+    //         blackboardImage,
+    //
+    //         // Add any other images used in your game
+    //     ];
+    //
+    //     preloadMImages(imageSources, () => {
+    //         setImagesLoaded(true);
+    //     });
+    // }, []);
 
 
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -83,9 +83,9 @@ function Menu({ onStart }) {
 
     useEffect(() => {
         // Trigger enter animations when the component mounts
-        if (imagesLoaded) {
+
         setAnimateEnter(true);
-        }
+
     }, []);
 
     const goToSettings = () => {
@@ -129,19 +129,20 @@ function Menu({ onStart }) {
         window.confirm('just lower your computer volume xd');
     };
 
-    if (!imagesLoaded) {
+    // if (!imagesLoaded) {
+    //     return (
+    //         <>
+    //             {/*{!imagesLoaded && (*/}
+    //             {/*    <div className="loading-screen">*/}
+    //             {/*        <p>Loading...</p>*/}
+    //             {/*    </div>*/}
+    //             {/*)}*/}
+    //         </>
+    //     );
+    // } else {
+    {
         return (
-            <>
-                {!imagesLoaded && (
-                    <div className="loading-screen">
-                        <p>Loading...</p>
-                    </div>
-                )}
-            </>
-        );
-    } else {
-        return (
-            <>
+            <div className="behind-bg">
 
                 <div className="bg">
 
@@ -210,7 +211,7 @@ function Menu({ onStart }) {
 
                     <div className={`flash ${flashExit ? 'exit' : ''}`}></div>
                 </div>
-            </>
+            </div>
         );
     }
 

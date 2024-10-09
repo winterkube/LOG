@@ -9,6 +9,16 @@
     --yPosSettings: 80%;
 }
 
+.behind-bg {
+
+
+    background-image: url("../assets/classroom2.png");
+    background-size: 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+
+}
+
 
 .bg {
 
