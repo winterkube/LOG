@@ -3,7 +3,7 @@
 export const introTrial = {
     // song:
     levelNumber: 1,
-    difficulty: 'Easy',
+    song: 'waterflame-glorious',
     questions: [
         { question: '1 + 1 = ?', answer: '2' },
         { question: '2 + 2 = ?', answer: '4' },

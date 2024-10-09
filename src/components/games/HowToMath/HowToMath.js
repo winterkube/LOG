@@ -9,6 +9,7 @@ import Results from './Results';
 import { Levels } from './levels/levelData';
 
 import lofiThing from './assets/music/lofi thing.mp3';
+import birds from './assets/music/birds.mp3';
 import './HowToMath.css';
 
 
