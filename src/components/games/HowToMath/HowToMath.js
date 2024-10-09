@@ -77,7 +77,7 @@ function HowToMath() {
                 function () {
                     setImagesLoaded(true);
                     setCurrentScene('start'); }
-                , 1000)
+                , 1500)
 
         });
     }, []);

@@ -4,7 +4,7 @@ import csTestImage1 from '../assets/cs test.png';
 import csTestImage2 from '../assets/cs test2.png';
 
 export const Cutscenes = {
-    1: [
+    1: [ // intro trial
         {
             type: 'image',
             dialogues: [' '],
