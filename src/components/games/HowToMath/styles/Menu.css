@@ -50,6 +50,7 @@
     z-index: 6;
 }
 
+
 .flash.exit {
     animation: fadeIn 1s;
 }

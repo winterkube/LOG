@@ -83,7 +83,9 @@ function Menu({ onStart }) {
 
     useEffect(() => {
         // Trigger enter animations when the component mounts
+        if (imagesLoaded) {
         setAnimateEnter(true);
+        }
     }, []);
 
     const goToSettings = () => {
@@ -127,85 +129,91 @@ function Menu({ onStart }) {
         window.confirm('just lower your computer volume xd');
     };
 
-    return (
-        <>
+    if (!imagesLoaded) {
+        return (
             <>
-            {!imagesLoaded && (
-                <div className="loading-screen">
-                    <p>Loading...</p>
-                </div>
-            )}
+                {!imagesLoaded && (
+                    <div className="loading-screen">
+                        <p>Loading...</p>
+                    </div>
+                )}
             </>
+        );
+    } else {
+        return (
+            <>
 
-            <div className="bg">
+                <div className="bg">
 
 
 
-                <div className="blackboard"></div>
-                <div className="leyvi"></div>
-                <div className="cheeba"></div>
+                    <div className="blackboard"></div>
+                    <div className="leyvi"></div>
+                    <div className="cheeba"></div>
 
-                {(!isSettingsOpen && !isPlayOpen) && (
-                    <>
-                        <img
-                            src={playButtonImage}
-                            alt="Play Button"
-                            className={`play-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
-                            onClick={goToPlay}
-                            width="230"
-                        />
-                        <img
-                            src={settingsButtonImage}
-                            alt="Settings Button"
-                            className={`settings-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
-                            onClick={goToSettings}
-                            width="230"
-                        />
-                    </>
-                )}
+                    {(!isSettingsOpen && !isPlayOpen) && (
+                        <>
+                            <img
+                                src={playButtonImage}
+                                alt="Play Button"
+                                className={`play-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
+                                onClick={goToPlay}
+                                width="230"
+                            />
+                            <img
+                                src={settingsButtonImage}
+                                alt="Settings Button"
+                                className={`settings-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
+                                onClick={goToSettings}
+                                width="230"
+                            />
+                        </>
+                    )}
 
-                {isSettingsOpen && (
-                    <>
-                        <img
-                            src={volumeButtonImage}
-                            alt="Volume Button"
-                            className={`volume-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
-                            onClick={volumeFunc}
-                            width="230"
-                        />
-                        <img
-                            src={backButtonImage}
-                            alt="Back Button"
-                            className={`back-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
-                            onClick={goBack}
-                            width="230"
-                        />
-                    </>
-                )}
+                    {isSettingsOpen && (
+                        <>
+                            <img
+                                src={volumeButtonImage}
+                                alt="Volume Button"
+                                className={`volume-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
+                                onClick={volumeFunc}
+                                width="230"
+                            />
+                            <img
+                                src={backButtonImage}
+                                alt="Back Button"
+                                className={`back-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
+                                onClick={goBack}
+                                width="230"
+                            />
+                        </>
+                    )}
 
-                {isPlayOpen && (
-                    <>
-                        <img
-                            src={trialsButtonImage}
-                            alt="Trials Button"
-                            className={`trials-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
-                            onClick={goToTrials}
-                            width="230"
-                        />
-                        <img
-                            src={backButtonImage}
-                            alt="Back Button"
-                            className={`back-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
-                            onClick={goBack}
-                            width="230"
-                        />
-                    </>
-                )}
+                    {isPlayOpen && (
+                        <>
+                            <img
+                                src={trialsButtonImage}
+                                alt="Trials Button"
+                                className={`trials-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
+                                onClick={goToTrials}
+                                width="230"
+                            />
+                            <img
+                                src={backButtonImage}
+                                alt="Back Button"
+                                className={`back-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
+                                onClick={goBack}
+                                width="230"
+                            />
+                        </>
+                    )}
 
-                <div className={`flash ${flashExit ? 'exit' : ''}`}></div>
-            </div>
-        </>
-    );
+                    <div className={`flash ${flashExit ? 'exit' : ''}`}></div>
+                </div>
+            </>
+        );
+    }
+
 }
 
 export default Menu;

@@ -73,8 +73,12 @@ function HowToMath() {
         ];
 
         preloadImages(imageSources, () => {
-            setImagesLoaded(true);
-            setCurrentScene('start');
+            setTimeout(
+                function () {
+                    setImagesLoaded(true);
+                    setCurrentScene('start'); }
+                , 1000)
+
         });
     }, []);
 

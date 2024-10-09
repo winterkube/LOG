@@ -140,9 +140,8 @@
     border-bottom: 3px solid white;
     border-top: 3px solid white;
     box-shadow:
-            inset 0px 11px 8px -8px #ffffff,
-            inset 0px -11px 8px -8px #ffffff;
-
+            inset 0px 11px 8px -8px #ecf2ff,
+            inset 0px -11px 8px -8px #ecf2ff;
     animation: slideInLevels 1s forwards ease-out;
 }
 
@@ -167,6 +166,7 @@
 
     text-shadow: 1px 1px 3px #373759;
 }
+
 
 @keyframes slideInLevels {
     from {
