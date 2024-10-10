@@ -101,7 +101,7 @@ function Cutscene({ onCutsceneEnd, level }) {
                         index++;
 
 
-                        typingIntervalRef.current = setTimeout(typeNextChar, 100); // Adjust typing speed here
+                        typingIntervalRef.current = setTimeout(typeNextChar, 30); // Adjust typing speed here
 
 
                     } else {

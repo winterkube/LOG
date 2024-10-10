@@ -5,12 +5,13 @@ import './styles/Gameplay.css';
 
 function Gameplay({ levelData, onGameEnd }) {
     // State for user input and component animations
-    const [userAnswer, setUserAnswer] = useState('');
+    // const [userAnswer, setUserAnswer] = useState('');
     const [isMounted, setIsMounted] = useState(false);
     const [isEnding, setIsEnding] = useState(false);
 
     // Function to handle the end of the game
     const handleGameEnd = (performanceData) => {
+        audioRef.current.pause();
         setIsEnding(true);
         setTimeout(() => {
             onGameEnd(performanceData);
@@ -23,9 +24,10 @@ function Gameplay({ levelData, onGameEnd }) {
         timeLeft,
         score,
         isReady,
-        userSubmitted,
-        handleSubmitAnswer,
-    } = useGameLogic(levelData.questions, handleGameEnd, 1.5); // Start delay of 3 seconds
+        userAnswer,
+        setUserAnswer,
+        feedbackMessage,
+    } = useGameLogic(levelData.questions, handleGameEnd, 1.5); // Start delay of 1.5 seconds
 
     // Mounting effect for animations
     useEffect(() => {
@@ -38,20 +40,19 @@ function Gameplay({ levelData, onGameEnd }) {
     useEffect(() => {
         audioRef.current = new Audio(levelData.song);
         audioRef.current.loop = false;
-        audioRef.current.volume = 0.5;
-        audioRef.current.play();
+        audioRef.current.volume = 0.4;
+        audioRef.current.load();
+        setTimeout(function() {
 
-        // return () => {
-        //     if (audioRef.current) {
-        //         audioRef.current.pause();
-        //         audioRef.current = null;
-        //     }
-        // };
+                audioRef.current.play();
+            }, 1500 - levelData.offset);
+
+
     }, [levelData.song]);
 
     return (
-        <div className={`game-play ${isMounted ? 'fade-in' : ''} ${isEnding ? 'fade-out' : ''}`}>
-            {isReady && currentQuestion ? (
+        <div className={`game-play ${isMounted ? 'lvl-fade-in' : ''} ${isEnding ? 'lvl-fade-out' : ''}`}>
+            {isReady ? (
                 <>
                     {/* Question Timer Bar */}
                     <div className="timer-bar">
@@ -63,21 +64,33 @@ function Gameplay({ levelData, onGameEnd }) {
                         ></div>
                     </div>
                     {/* Question and Answer Input */}
-                    <div className={`question-container ${isMounted ? 'slide-in' : ''}`}>
-                        <h2>{currentQuestion.question}</h2>
-                        <input
+                    <div className={`question-container ${isMounted ? 'lvl-slide-in' : ''}`}>
+                        {!isEnding ? (
+                            <h2>{currentQuestion.question}</h2>
+                        ) : (
+                            <h2> ... </h2>
+                        )}
+
+                        <input className="input"
                             type="text"
                             value={userAnswer}
-                            onChange={(e) => setUserAnswer(e.target.value)}
-                            onKeyPress={(e) => {
-                                if (e.key === 'Enter') {
-                                    handleSubmitAnswer(userAnswer);
-                                    // Don't clear the answer to allow the user to see what they submitted
-                                }
+                            maxLength="15"
+                            onChange={(e) => {
+                                setUserAnswer(e.target.value);
+
                             }}
-                            disabled={userSubmitted}
                         />
+                        {feedbackMessage && (
+                            <div className="feedback-message"
+                                 style={{
+                                     opacity: `${(timeLeft / currentQuestion.time) * 3}`,
+                                 }}
+                            >
+                                {feedbackMessage}
+                            </div>
+                        )}
                     </div>
+
                 </>
             ) : (
                 <>
@@ -91,6 +104,7 @@ function Gameplay({ levelData, onGameEnd }) {
                         ></div>
                     </div>
                     <div className="get-ready">Get Ready!</div>
+                    <script> isReady = true; </script>
                 </>
             )}
         </div>

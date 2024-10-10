@@ -53,7 +53,7 @@ function HowToMath() {
     const [imagesLoaded, setImagesLoaded] = useState(false); // New state variable
 
     const menuMusicRef = useRef(null);
-    const [volume, setVolume] = useState(0.5); // Initial volume set to 0.5
+    const [volume, setVolume] = useState(1); // Initial volume set to 0.5
 
 
     // Initialize the audio object
@@ -244,6 +244,7 @@ function HowToMath() {
                         onGameEnd={(performanceData) => {
                             setGameData({ ...gameData, performanceData });
                             setCurrentScene('results');
+
                         }}
                     />
                 );

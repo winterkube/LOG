@@ -1,3 +1,5 @@
+
+
 import { useState, useEffect, useRef } from 'react';
 
 export function useGameLogic(questions, onGameEnd, startDelay) {
@@ -6,21 +8,32 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
     const [timeLeft, setTimeLeft] = useState(startDelay);
     const [score, setScore] = useState(0);
     const [isReady, setIsReady] = useState(false);
-    const [userSubmitted, setUserSubmitted] = useState(false);
-    const [userAnswer, setUserAnswer] = useState('');
+    const [feedbackMessage, setFeedbackMessage] = useState('');
 
-    const timerRef = useRef(null);
+    const scoreRef = useRef(0);
+    const timerRef = useRef(4);
+    const userAnswerRef = useRef('');
+    const [_userAnswer, _setUserAnswer] = useState('');
+    const setUserAnswer = (answer) => {
+        _setUserAnswer(answer);
+        userAnswerRef.current = answer;
+    };
+
+
+    useEffect(() => {
+        // Start initial timer
+        setIsReady(false);
+        setUserAnswer('');
+        setTimeLeft(startDelay);
+
+
+    }, []);
 
     useEffect(() => {
         // Generate the current question
         let questionData = questions[currentQuestionIndex];
         setCurrentQuestion(questionData);
-        setUserSubmitted(false);
-        setUserAnswer('');
 
-        // Start initial timer
-        setIsReady(false);
-        setTimeLeft(startDelay);
 
         timerRef.current = setInterval(() => {
             setTimeLeft((prevTime) => {
@@ -37,10 +50,27 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
         return () => {
             clearInterval(timerRef.current);
         };
+
     }, [currentQuestionIndex]);
 
+    // useEffect(() => {
+    //     if (currentQuestionIndex >= 0 && currentQuestionIndex < questions.length) {
+    //         let questionData = questions[currentQuestionIndex];
+    //         setCurrentQuestion(questionData);
+    //         _setUserAnswer('');
+    //         userAnswerRef.current = '';
+    //         setFeedbackMessage('');
+    //         startQuestionTimer(questionData);
+    //     }
+    // }, [currentQuestionIndex]);
+
+
+
     const startQuestionTimer = (questionData) => {
-        const questionTime = questionData.time || 4; // default to 4 seconds
+
+        let qTime = questionData.time;
+
+        const questionTime = qTime ||  4; // default to 4 seconds
         setTimeLeft(questionTime);
         timerRef.current = setInterval(() => {
             setTimeLeft((prevTime) => {
@@ -51,36 +81,48 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
                 }
                 return prevTime - 0.1;
             });
-        }, 100);
-    };
-
-    const handleSubmitAnswer = (answer) => {
-        if (!userSubmitted) {
-            setUserAnswer(answer);
-            setUserSubmitted(true);
-        }
-        // Do not proceed to next question until timer runs out
+        }, 90);
     };
 
     const evaluateAnswer = (questionData) => {
-        const isCorrect = userAnswer.trim() === questionData.answer;
+        console.log('Evaluating answer for question:', currentQuestionIndex);
+        const isCorrect = userAnswerRef.current.trim() === questionData.answer;
         if (isCorrect) {
-            setScore((prevScore) => prevScore + 1);
-        }
-        if (currentQuestionIndex + 1 < questions.length) {
-            setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+            scoreRef.current += 1;
+            setFeedbackMessage('Correct!');
         } else {
-            const finalScore = isCorrect ? score + 1 : score;
-            onGameEnd({ score: finalScore, total: questions.length });
+            setFeedbackMessage(
+                `Incorrect! (Answer: ${questionData.answer}), you answered ${userAnswerRef.current}`
+            );
         }
+
+
+            if (currentQuestionIndex + 1 < questions.length) {
+                setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+            } else {
+
+
+                if (isCorrect) {
+                    scoreRef.current += 1;
+                    setFeedbackMessage('Correct!');
+                } else {
+                    setFeedbackMessage(
+                        `Incorrect! (Answer: ${questionData.answer}), you answered ${userAnswerRef.current}`
+                    );
+                }
+
+                onGameEnd({ score: scoreRef.current, total: questions.length });
+            }
+
     };
 
     return {
         currentQuestion,
         timeLeft,
-        score,
+        score: scoreRef.current,
         isReady,
-        userSubmitted,
-        handleSubmitAnswer,
+        userAnswer: _userAnswer,
+        setUserAnswer,
+        feedbackMessage,
     };
 }
