@@ -1,53 +1,86 @@
-// src/components/games/HowToMath/hooks/useGameLogic.js
-
 import { useState, useEffect, useRef } from 'react';
 
-export function useGameLogic(questions, onGameEnd) {
+export function useGameLogic(questions, onGameEnd, startDelay) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [timeLeft, setTimeLeft] = useState(50);
+    const [currentQuestion, setCurrentQuestion] = useState(null);
+    const [timeLeft, setTimeLeft] = useState(startDelay);
     const [score, setScore] = useState(0);
+    const [isReady, setIsReady] = useState(false);
+    const [userSubmitted, setUserSubmitted] = useState(false);
+    const [userAnswer, setUserAnswer] = useState('');
+
     const timerRef = useRef(null);
 
     useEffect(() => {
-        startTimer();
+        // Generate the current question
+        let questionData = questions[currentQuestionIndex];
+        setCurrentQuestion(questionData);
+        setUserSubmitted(false);
+        setUserAnswer('');
+
+        // Start initial timer
+        setIsReady(false);
+        setTimeLeft(startDelay);
+
+        timerRef.current = setInterval(() => {
+            setTimeLeft((prevTime) => {
+                if (prevTime <= 0.1) {
+                    clearInterval(timerRef.current);
+                    setIsReady(true);
+                    startQuestionTimer(questionData); // Pass questionData here
+                    return 0;
+                }
+                return prevTime - 0.1;
+            });
+        }, 100);
 
         return () => {
             clearInterval(timerRef.current);
         };
     }, [currentQuestionIndex]);
 
-    const startTimer = () => {
-        setTimeLeft(50);
+    const startQuestionTimer = (questionData) => {
+        const questionTime = questionData.time || 4; // default to 4 seconds
+        setTimeLeft(questionTime);
         timerRef.current = setInterval(() => {
             setTimeLeft((prevTime) => {
-                if (prevTime <= 1) {
+                if (prevTime <= 0.1) {
                     clearInterval(timerRef.current);
-                    handleSubmitAnswer('');
+                    evaluateAnswer(questionData); // Pass questionData here
                     return 0;
                 }
-                return prevTime - 1;
+                return prevTime - 0.1;
             });
-        }, 1000);
+        }, 100);
     };
 
-    const handleSubmitAnswer = (userAnswer) => {
-        const currentQuestion = questions[currentQuestionIndex];
-        if (userAnswer.trim() === currentQuestion.answer) {
+    const handleSubmitAnswer = (answer) => {
+        if (!userSubmitted) {
+            setUserAnswer(answer);
+            setUserSubmitted(true);
+        }
+        // Do not proceed to next question until timer runs out
+    };
+
+    const evaluateAnswer = (questionData) => {
+        const isCorrect = userAnswer.trim() === questionData.answer;
+        if (isCorrect) {
             setScore((prevScore) => prevScore + 1);
         }
-        clearInterval(timerRef.current);
-
         if (currentQuestionIndex + 1 < questions.length) {
             setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
         } else {
-            onGameEnd({ score, total: questions.length });
+            const finalScore = isCorrect ? score + 1 : score;
+            onGameEnd({ score: finalScore, total: questions.length });
         }
     };
 
     return {
-        currentQuestion: questions[currentQuestionIndex],
+        currentQuestion,
         timeLeft,
         score,
+        isReady,
+        userSubmitted,
         handleSubmitAnswer,
     };
 }

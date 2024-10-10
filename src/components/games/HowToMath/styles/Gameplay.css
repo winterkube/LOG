@@ -1,11 +1,78 @@
-
 .game-play {
-    background: white;
-
-    background-size: 660px 500px;
-
-    position: absolute;
+    position: relative;
     width: 660px;
     height: 500px;
+    opacity: 0;
 
+    background-image: url("../assets/tempbg.png");
+    background-position: center;
+}
+
+.game-play.fade-in {
+    animation: lvlfadeIn 1s forwards;
+}
+
+.question-container {
+    position: relative;
+    transform: translateY(100%);
+    border: 2px black solid;
+}
+
+.question-container.slide-in {
+    animation: lvlslideIn 1s forwards;
+}
+
+@keyframes lvlfadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes lvlslideIn {
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Question Timer Bar */
+.timer-bar {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #ccc;
+    margin-top: 10px;
+    border: 2px black solid;
+}
+
+.timer-progress {
+    position: absolute;
+    height: 100%;
+    background-color: #76c7c0;
+    transition: width 0.1s linear;
+}
+
+/* Pre-Level Timer Bar */
+.initial-timer-bar {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #ccc;
+    margin-top: 10px;
+}
+
+.initial-timer-progress {
+    position: absolute;
+    height: 100%;
+    background-color: #f5a623;
+    transition: width 0.1s linear;
+}
+
+.game-play.fade-out {
+    animation: lvlfadeOut 1s forwards;
+}
+
+@keyframes lvlfadeOut {
+    to {
+        opacity: 0;
+    }
 }
