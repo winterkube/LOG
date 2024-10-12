@@ -186,7 +186,7 @@ function HowToMath() {
 
 
     function startGame() {
-        setCurrentScene('menu');
+        setCurrentScene('levelSelect');
     }
 
     const renderScene = () => {
@@ -242,6 +242,7 @@ function HowToMath() {
                     <Gameplay
                         levelData={Levels[gameData.levelNumber]}
                         onGameEnd={(performanceData) => {
+
                             setGameData({ ...gameData, performanceData });
                             setCurrentScene('results');
 

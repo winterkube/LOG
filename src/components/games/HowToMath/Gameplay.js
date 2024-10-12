@@ -11,11 +11,12 @@ function Gameplay({ levelData, onGameEnd }) {
 
     // Function to handle the end of the game
     const handleGameEnd = (performanceData) => {
-        audioRef.current.pause();
+
         setIsEnding(true);
         setTimeout(() => {
+            audioRef.current.pause();
             onGameEnd(performanceData);
-        }, 1000); // Duration of fade-out animation
+        }, 2000); // Duration of fade-out animation
     };
 
     // Destructure variables returned by useGameLogic
@@ -27,7 +28,7 @@ function Gameplay({ levelData, onGameEnd }) {
         userAnswer,
         setUserAnswer,
         feedbackMessage,
-    } = useGameLogic(levelData.questions, handleGameEnd, 1.5); // Start delay of 1.5 seconds
+    } = useGameLogic(levelData.questions, handleGameEnd, 1); // Start delay of 1.5 seconds
 
     // Mounting effect for animations
     useEffect(() => {
@@ -45,13 +46,16 @@ function Gameplay({ levelData, onGameEnd }) {
         setTimeout(function() {
 
                 audioRef.current.play();
-            }, 1500 - levelData.offset);
+            }, 1000 - levelData.offset);
 
 
     }, [levelData.song]);
 
+
     return (
+
         <div className={`game-play ${isMounted ? 'lvl-fade-in' : ''} ${isEnding ? 'lvl-fade-out' : ''}`}>
+
             {isReady ? (
                 <>
                     {/* Question Timer Bar */}
@@ -64,36 +68,45 @@ function Gameplay({ levelData, onGameEnd }) {
                         ></div>
                     </div>
                     {/* Question and Answer Input */}
-                    <div className={`question-container ${isMounted ? 'lvl-slide-in' : ''}`}>
+                    <div className={`question-container`}>
                         {!isEnding ? (
-                            <h2>{currentQuestion.question}</h2>
+                            <h2>{currentQuestion.question}
+                                {/*timeLeft = {Math.ceil(timeLeft * 10) / 10}*/}
+                            </h2>
                         ) : (
                             <h2> ... </h2>
                         )}
 
-                        <input className="input"
-                            type="text"
-                            value={userAnswer}
-                            maxLength="15"
-                            onChange={(e) => {
-                                setUserAnswer(e.target.value);
+                        <input autoFocus={true} className="input"
+                               type="text"
+                               value={userAnswer}
+                               maxLength="15"
+                               onChange={(e) => {
+                                   setUserAnswer(e.target.value);
 
-                            }}
+                               }}
                         />
                         {feedbackMessage && (
                             <div className="feedback-message"
                                  style={{
-                                     opacity: `${(timeLeft / currentQuestion.time) * 3}`,
+                                     opacity: `${(timeLeft / currentQuestion.time) * 3 - 0.5}`,
                                  }}
                             >
                                 {feedbackMessage}
                             </div>
                         )}
+                        <p>
+                            score: {score} <br/>
+                            time: {Math.ceil(timeLeft * 100) / 100}
+                        </p>
+
+
                     </div>
 
                 </>
             ) : (
                 <>
+
                     {/* Pre-Level Timer Fill-Up */}
                     <div className="initial-timer-bar">
                         <div
@@ -103,10 +116,33 @@ function Gameplay({ levelData, onGameEnd }) {
                             }}
                         ></div>
                     </div>
-                    <div className="get-ready">Get Ready!</div>
-                    <script> isReady = true; </script>
+
+                    <div className={`question-container ${isMounted ? 'lvl-slide-in' : ''}`}>
+                        {!isEnding ? (
+                            <h2>{currentQuestion.question}</h2>
+                        ) : (
+                            <h2> ... </h2>
+                        )}
+
+                        <input autoFocus={true} className="input"
+                               type="text"
+                               value={userAnswer}
+                               maxLength="15"
+                        />
+                        <p>
+                            score: {score} <br/>
+                            time: {Math.ceil(timeLeft * 100) / 100}
+                        </p>
+
+                    </div>
+                    <div className="get-ready">GET READY...</div>
+
+                    <script> isReady = true;</script>
                 </>
+
             )}
+            <div className="song-title"> Song: {levelData.songTitle}</div>
+
         </div>
     );
 }

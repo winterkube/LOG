@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export function useGameLogic(questions, onGameEnd, startDelay) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [currentQuestion, setCurrentQuestion] = useState(null);
+    const [currentQuestion, setCurrentQuestion] = useState('...');
     const [timeLeft, setTimeLeft] = useState(startDelay);
     const [score, setScore] = useState(0);
     const [isReady, setIsReady] = useState(false);
@@ -29,27 +29,34 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
 
     }, []);
 
+
     useEffect(() => {
         // Generate the current question
         let questionData = questions[currentQuestionIndex];
         setCurrentQuestion(questionData);
+        setUserAnswer('');
 
 
         timerRef.current = setInterval(() => {
+
             setTimeLeft((prevTime) => {
-                if (prevTime <= 0.1) {
+                if (prevTime <= 0.01) {
                     clearInterval(timerRef.current);
+
                     setIsReady(true);
                     startQuestionTimer(questionData); // Pass questionData here
                     return 0;
                 }
-                return prevTime - 0.1;
+                return prevTime - 0.01;
             });
-        }, 100);
+
+        }, 10); // affects get ready timer
+
 
         return () => {
             clearInterval(timerRef.current);
         };
+
 
     }, [currentQuestionIndex]);
 
@@ -67,28 +74,32 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
 
 
     const startQuestionTimer = (questionData) => {
-
         let qTime = questionData.time;
 
         const questionTime = qTime ||  4; // default to 4 seconds
         setTimeLeft(questionTime);
         timerRef.current = setInterval(() => {
             setTimeLeft((prevTime) => {
-                if (prevTime <= 0.1) {
+                if (prevTime <= 0.01) {
+
                     clearInterval(timerRef.current);
                     evaluateAnswer(questionData); // Pass questionData here
                     return 0;
                 }
-                return prevTime - 0.1;
+                return prevTime - 0.01;
             });
-        }, 90);
-    };
+        }, 10); // affects speed
+    }
 
     const evaluateAnswer = (questionData) => {
         console.log('Evaluating answer for question:', currentQuestionIndex);
         const isCorrect = userAnswerRef.current.trim() === questionData.answer;
+
         if (isCorrect) {
-            scoreRef.current += 1;
+            if (currentQuestionIndex + 1 < questions.length) {
+                scoreRef.current += 0.5;
+            }
+
             setFeedbackMessage('Correct!');
         } else {
             setFeedbackMessage(
@@ -97,21 +108,14 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
         }
 
 
-            if (currentQuestionIndex + 1 < questions.length) {
+            if (currentQuestionIndex + 2 < questions.length) {
                 setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
             } else {
+                setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+                setTimeout(() => {
+                    onGameEnd({ score: scoreRef.current, total: questions.length - 1});
+                }, 1000)
 
-
-                if (isCorrect) {
-                    scoreRef.current += 1;
-                    setFeedbackMessage('Correct!');
-                } else {
-                    setFeedbackMessage(
-                        `Incorrect! (Answer: ${questionData.answer}), you answered ${userAnswerRef.current}`
-                    );
-                }
-
-                onGameEnd({ score: scoreRef.current, total: questions.length });
             }
 
     };
