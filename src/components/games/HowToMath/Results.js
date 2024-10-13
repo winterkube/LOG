@@ -18,7 +18,7 @@ function Results({ data, onContinue, onRetry, onMenu }) {
             if (0.8 <= percent && percent < 0.9) return 'A';
             if (0.9 <= percent && percent < 1) return 'A+';
             if (percent === 1 && (data.score !== data.total))  return 'FLAWLESS (but not really)';
-            if (percent === 1 && (data.score === data.total))  return 'FLAWLESS (but not really)';
+            if (percent === 1 && (data.score === data.total))  return 'FLAWLESS';
             return '???'
     }
 

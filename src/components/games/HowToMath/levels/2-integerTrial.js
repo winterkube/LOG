@@ -2,16 +2,24 @@
 
 import songFbHarmony from '../assets/music/fb-harmony.mp3';
 
+const bpm = 68;
 
-
-export const integerTrial = {
+export const decimalTrial = {
     levelNumber: 2,
     song: songFbHarmony,
-    bpm: 65,
+    songTitle: 'ForeverBound - Harmony of the Heart',
     length: 78, // 78 seconds
+    offset: 1000,
     questions: [
-        { question: '1 + 1 = ?', answer: '2', time: 4 },
-        { question: '2 + 2 = ?', answer: '4', time: 6 }
+        { question: '1 / 1 = ?', answer: '1', time: 4 },
+        { question: '2 / 2 = ?', answer: '1', time: 4 },
+        { question: '1 / 2 = ?', answer: '0.5', time: 4 },
+        { question: '2 / 4 = ?', answer: '0.5', time: 4 },
+        {
+            question: '...',
+            answer: '.',
+            time: 999,
+        },
         // generateQuestion: () => {
         //     const num1 = Math.floor(Math.random() * 10);
         //     const num2 = Math.floor(Math.random() * 10);

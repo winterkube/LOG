@@ -1,12 +1,12 @@
 // src/components/games/HowToMath/levels/levelData.js
 
 import { introTrial } from './1-introTrial';
-import {integerTrial} from "./2-integerTrial";
+import {decimalTrial} from "./2-integerTrial";
 // Import other levels...
 
 export const Levels = {
     1: introTrial, // song = waterflame-glorious, bpm = 76
-    2: integerTrial, // song = fb-harmony, bpm = 65
+    2: decimalTrial, // song = fb-harmony, bpm = 65
     // 3: speedTrialI, // song = bgc-chipzeal
     // 4: algebraTrial, // song = bgc-vindicateme
     // 5: exponentTrial, // song = creo-shine, bpm = 90

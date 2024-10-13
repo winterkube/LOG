@@ -64,12 +64,12 @@ function LevelSelect({ onLevelSelect }) {
         }, 500);
     };
 
-    const goLv1 = () => {
+    const goToLvl = (x) =>  {
         setFlash2Exit(true);
         setTimeout(() => {
-            onLevelSelect(1);
+            onLevelSelect(x);
         }, 500);
-    };
+    }
 
     if (!imagesLoaded) {
         return (
@@ -167,8 +167,8 @@ function LevelSelect({ onLevelSelect }) {
 
                 {/* Wrap level buttons in a scrollable container */}
                 <div className="level-buttons-container">
-                    <button onClick={goLv1}>Intro Trial</button>
-                    <button onClick={() => onLevelSelect(2)}>Integer Trial</button>
+                    <button onClick={() => goToLvl(1)}>Intro Trial</button>
+                    <button onClick={() => goToLvl(2)}>Decimal Trial</button>
                     <button onClick={() => onLevelSelect(3)}>Speed Trial I</button>
                     <button onClick={() => onLevelSelect(4)}>Algebra Trial</button>
                     <button onClick={() => onLevelSelect(5)}>Exponent Trial</button>

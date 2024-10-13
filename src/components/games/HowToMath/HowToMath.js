@@ -186,7 +186,7 @@ function HowToMath() {
 
 
     function startGame() {
-        setCurrentScene('levelSelect');
+        setCurrentScene('menu');
     }
 
     const renderScene = () => {

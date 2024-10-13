@@ -104,7 +104,7 @@ function Gameplay({ levelData, onGameEnd }) {
                         )}
                         <p>
                             score: {score} <br/>
-                            time: {Math.ceil(timeLeft * 100) / 100}
+                            time: {Math.ceil(timeLeft * 10) / 10}
                         </p>
 
 
@@ -138,7 +138,7 @@ function Gameplay({ levelData, onGameEnd }) {
                         />
                         <p>
                             score: {score} <br/>
-                            time: {Math.ceil(timeLeft * 100) / 100}
+                            time: {Math.ceil(timeLeft * 10) / 10}
                         </p>
 
                     </div>
