@@ -28,7 +28,8 @@ function Gameplay({ levelData, onGameEnd }) {
         userAnswer,
         setUserAnswer,
         feedbackMessage,
-    } = useGameLogic(levelData.questions, handleGameEnd, 1); // Start delay of 1.5 seconds
+        wait,
+    } = useGameLogic(levelData.questions, handleGameEnd, 2.3); // Start delay of 1.5 seconds
 
     // Mounting effect for animations
     useEffect(() => {
@@ -46,7 +47,7 @@ function Gameplay({ levelData, onGameEnd }) {
         setTimeout(function() {
 
                 audioRef.current.play();
-            }, 1000 - levelData.offset);
+            }, 2300 - levelData.offset);
 
 
     }, [levelData.song]);
@@ -77,15 +78,21 @@ function Gameplay({ levelData, onGameEnd }) {
                             <h2> ... </h2>
                         )}
 
-                        <input autoFocus={true} className="input"
-                               type="text"
-                               value={userAnswer}
-                               maxLength="15"
-                               onChange={(e) => {
-                                   setUserAnswer(e.target.value);
+                        {wait ? (
+                            <input autoFocus={true} className="input"
+                                   type="text"
+                                   value={userAnswer}
+                                   maxLength="15"
+                                   onChange={(e) => {
+                                       setUserAnswer(e.target.value);
 
-                               }}
-                        />
+                                   }}
+                            />
+                        ) : (
+                            <input
+                            />
+                        )}
+
                         {feedbackMessage && (
                             <div className="feedback-message"
                                  style={{

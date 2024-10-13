@@ -27,7 +27,7 @@ function Results({ data, onContinue, onRetry, onMenu }) {
         <div className="results">
             <h2>Results</h2>
             <p>
-                You scored {data.score} out of {data.total}, or {percent * 100}%.
+                You scored {data.score} out of {data.total}, or {Math.round(percent * 1000)/10}%.
 
             </p>
 

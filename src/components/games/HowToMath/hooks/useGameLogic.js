@@ -14,6 +14,7 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
     const timerRef = useRef(4);
     const userAnswerRef = useRef('');
     const [_userAnswer, _setUserAnswer] = useState('');
+    let wait = true;
     const setUserAnswer = (answer) => {
         _setUserAnswer(answer);
         userAnswerRef.current = answer;
@@ -33,6 +34,9 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
     useEffect(() => {
         // Generate the current question
         let questionData = questions[currentQuestionIndex];
+
+
+
         setCurrentQuestion(questionData);
         setUserAnswer('');
 
@@ -76,6 +80,11 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
     const startQuestionTimer = (questionData) => {
         let qTime = questionData.time;
 
+        wait = false;
+        setTimeout(()=>{
+            wait = true;
+        }, 100);
+
         const questionTime = qTime ||  4; // default to 4 seconds
         setTimeLeft(questionTime);
         timerRef.current = setInterval(() => {
@@ -93,7 +102,14 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
 
     const evaluateAnswer = (questionData) => {
         console.log('Evaluating answer for question:', currentQuestionIndex);
-        const isCorrect = userAnswerRef.current.trim() === questionData.answer;
+
+        let answer = questionData.answer;
+
+        if (questionData.answer === 'idk') {
+            answer = eval(questionData.question).toString();
+        }
+
+        const isCorrect = userAnswerRef.current.trim() === answer;
 
         if (isCorrect) {
             if (currentQuestionIndex + 1 < questions.length) {
@@ -103,7 +119,7 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
             setFeedbackMessage('Correct!');
         } else {
             setFeedbackMessage(
-                `Incorrect! (Answer: ${questionData.answer}), you answered ${userAnswerRef.current}`
+                `Incorrect! (Answer: ${answer}), you answered ${userAnswerRef.current}`
             );
         }
 
@@ -128,5 +144,6 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
         userAnswer: _userAnswer,
         setUserAnswer,
         feedbackMessage,
+        wait,
     };
 }

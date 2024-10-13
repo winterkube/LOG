@@ -30,7 +30,7 @@
     z-index: 0;
     position: relative;
     transform: translateY(0%);
-
+    opacity: 1;
 }
 
 .question-container.lvl-slide-in {
@@ -49,9 +49,11 @@
 @keyframes lvlslideIn {
     from {
         transform: translateY(-100%);
+        opacity: 0;
     }
     to {
         transform: translateY(0);
+        opacity: 1;
     }
 }
 
@@ -111,7 +113,7 @@
     font-family: 'Courier New', serif;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 150%);
+    transform: translate(-50%, 200%);
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
     padding: 20px;
