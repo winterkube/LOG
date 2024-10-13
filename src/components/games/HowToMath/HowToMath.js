@@ -186,7 +186,11 @@ function HowToMath() {
 
 
     function startGame() {
-        setCurrentScene('levelSelect');
+        setCurrentScene('menu');
+    }
+
+    function isInGame() {
+        return currentScene === 'gameplay';
     }
 
     const renderScene = () => {
@@ -247,6 +251,7 @@ function HowToMath() {
                             setCurrentScene('results');
 
                         }}
+                        inGame={isInGame}
                     />
                 );
             case 'results':

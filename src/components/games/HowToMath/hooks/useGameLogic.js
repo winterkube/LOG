@@ -40,7 +40,6 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
         setCurrentQuestion(questionData);
         setUserAnswer('');
 
-
         timerRef.current = setInterval(() => {
 
             setTimeLeft((prevTime) => {
@@ -88,6 +87,8 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
         const questionTime = qTime ||  4; // default to 4 seconds
         setTimeLeft(questionTime);
         timerRef.current = setInterval(() => {
+
+
             setTimeLeft((prevTime) => {
                 if (prevTime <= 0.01) {
 
@@ -130,7 +131,7 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
                 setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
                 setTimeout(() => {
                     onGameEnd({ score: scoreRef.current, total: questions.length - 1});
-                }, 1000)
+                }, 2000)
 
             }
 
