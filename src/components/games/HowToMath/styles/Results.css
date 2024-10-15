@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Short+Stack&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chilanka&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 
 .results {
     background: white;
@@ -8,4 +11,10 @@
     width: 660px;
     height: 500px;
 
+}
+
+.results p {
+    font-family: 'Yomogi', serif;
+    font-size: 20px;
+    font-weight: bold;
 }

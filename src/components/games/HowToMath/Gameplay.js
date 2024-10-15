@@ -145,6 +145,7 @@ function Gameplay({ levelData, onGameEnd, inGame }) {
                         )}
 
                         <input autoFocus={true} className="input"
+                               placeholder="GET READY..."
                                type="text"
                                value={userAnswer}
                                maxLength="15"
@@ -155,7 +156,7 @@ function Gameplay({ levelData, onGameEnd, inGame }) {
                         </p>
 
                     </div>
-                    <div className="get-ready">GET READY...</div>
+                    {/*<div className="get-ready">GET READY...</div>*/}
 
                     <script> isReady = true;</script>
                 </>

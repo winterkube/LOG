@@ -107,10 +107,10 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
         let answer = questionData.answer;
 
         if (questionData.answer === 'idk') {
-            answer = eval(questionData.question.replace(" = ?", "")).toString();
+            answer = (Math.round(eval(questionData.question.replace(" = ?", "")) * 1000) / 1000).toString();
         }
 
-        const isCorrect = userAnswerRef.current.trim() === answer;
+        const isCorrect = userAnswerRef.current.trim() <= answer + 0.001 && userAnswerRef.current.trim() >= answer - 0.001;
 
         if (isCorrect) {
             if (currentQuestionIndex + 1 < questions.length) {

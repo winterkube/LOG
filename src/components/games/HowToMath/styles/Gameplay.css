@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Short+Stack&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chilanka&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 
 .game-play {
     position: relative;
@@ -13,7 +16,7 @@
 
 .game-play h2 {
     font-size: 30px;
-    font-family: 'Courier New', Courier, monospace, serif;
+    font-family: 'Yomogi', serif;
     color: white;
     text-align: center;
     padding: 20px;
@@ -110,7 +113,7 @@
 
 .feedback-message {
     position: absolute;
-    font-family: 'Courier New', serif;
+    font-family: 'Yomogi', serif;
     top: 50%;
     left: 50%;
     transform: translate(-50%, 200%);
@@ -139,10 +142,10 @@
 
 .input {
     width: 350px;
-    height: 50px;
+    height: 70px;
 
     font-size: 30px;
-    font-family: 'Courier New', serif;
+    font-family: 'Yomogi', serif;
     font-weight: bold;
     text-align: center;
 }
@@ -151,7 +154,7 @@
     position: absolute;
     width: 300px;
     font-size: 20px;
-    font-family: 'Courier New', Courier, monospace, serif;
+    font-family: 'Yomogi', serif;
     color: white;
     text-align: center;
     padding: 20px;
@@ -164,7 +167,7 @@
 .get-ready {
     position: absolute;
     font-size: 30px;
-    font-family: 'Cabin Sketch', serif;
+    font-family: 'Short stack', serif;
     align-content: center;
     text-align: center;
     font-weight: 500;
@@ -174,15 +177,15 @@
 
 @keyframes songTitleAnim {
     0% {
-        transform: translate(-100%, 70%);
+        transform: translate(-100%, 50%);
     }
     35% {
-        transform: translate(10%, 70%);
+        transform: translate(10%, 50%);
     }
     75% {
-        transform: translate(10%, 70%);
+        transform: translate(10%, 50%);
     }
     100% {
-        transform: translate(-100%, 70%);
+        transform: translate(-100%, 50%);
     }
 }
