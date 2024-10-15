@@ -1,20 +1,20 @@
-// src/components/games/HowToMath/levels/1-introTrial.js
 
-import songFbHarmony from '../assets/music/fb-harmony.mp3';
 
-const bpm = 68;
+import songChipZeal from '../assets/music/bgc-chipzeal.mp3';
 
-export const decimalTrial = {
-    levelNumber: 2,
-    song: songFbHarmony,
-    songTitle: 'ForeverBound - Harmony of the Heart',
-    length: 78, // 78 seconds
+const bpm = 170;
+
+export const speedTrialI = {
+    levelNumber: 3,
+    song: songChipZeal,
+    songTitle: 'BigGiantCircles - Chip Zeal',
+    length: 99,
     offset: 1000,
     questions: [
-        { question: '1 / 1 = ?', answer: '1', time: 4 },
-        { question: '2 / 2 = ?', answer: '1', time: 4 },
-        { question: '1 / 2 = ?', answer: '0.5', time: 4 },
-        { question: '2 / 4 = ?', answer: '0.5', time: 4 },
+        { question: '1 + 1 = ?', answer: '2', time: (60 / bpm) * 4 },
+        { question: '10 + 10 = ?', answer: '20', time: (60 / bpm) * 4 },
+        { question: '1 + 10 + 1 = ?', answer: '12', time: (60 / bpm) * 4 },
+        { question: '10 + 1 + 10 = ?', answer: '21', time: (60 / bpm) * 4 },
         {
             question: '...',
             answer: '.',

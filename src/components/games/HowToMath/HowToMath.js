@@ -189,6 +189,14 @@ function HowToMath() {
         setCurrentScene('menu');
     }
 
+    function isInGame() {
+        return currentScene === 'gameplay';
+    }
+
+    // In HowToMath.js or a central location
+    const highestUnlockedLevel = parseInt(localStorage.getItem('highestUnlockedLevel')) || 1;
+
+
     const renderScene = () => {
         if (!imagesLoaded) {
             return <LoadingScreen />;
@@ -247,6 +255,7 @@ function HowToMath() {
                             setCurrentScene('results');
 
                         }}
+                        inGame={isInGame}
                     />
                 );
             case 'results':

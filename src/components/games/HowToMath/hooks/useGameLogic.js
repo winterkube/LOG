@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-export function useGameLogic(questions, onGameEnd, startDelay) {
+export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState('...');
     const [timeLeft, setTimeLeft] = useState(startDelay);
@@ -39,7 +39,6 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
 
         setCurrentQuestion(questionData);
         setUserAnswer('');
-
 
         timerRef.current = setInterval(() => {
 
@@ -88,6 +87,8 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
         const questionTime = qTime ||  4; // default to 4 seconds
         setTimeLeft(questionTime);
         timerRef.current = setInterval(() => {
+
+
             setTimeLeft((prevTime) => {
                 if (prevTime <= 0.01) {
 
@@ -106,7 +107,7 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
         let answer = questionData.answer;
 
         if (questionData.answer === 'idk') {
-            answer = eval(questionData.question).toString();
+            answer = eval(questionData.question.replace(" = ?", "")).toString();
         }
 
         const isCorrect = userAnswerRef.current.trim() === answer;
@@ -129,8 +130,8 @@ export function useGameLogic(questions, onGameEnd, startDelay) {
             } else {
                 setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
                 setTimeout(() => {
-                    onGameEnd({ score: scoreRef.current, total: questions.length - 1});
-                }, 1000)
+                    onGameEnd({ score: scoreRef.current, total: questions.length - 1, levelNumber: levelData.levelNumber });
+                }, 2000)
 
             }
 

@@ -71,7 +71,7 @@
     position: absolute;
     height: 100%;
     background-color: #76c7c0;
-    transition: width 0.1s linear;
+    transition: width 0.01s linear;
 }
 
 /* Pre-Level Timer Bar */
@@ -88,12 +88,12 @@
     position: absolute;
     height: 100%;
     background-color: #f5a623;
-    transition: width 0.1s linear;
+    transition: width 0.05s linear;
     z-index: 2;
 }
 
 .game-play.lvl-fade-out {
-    animation: lvlfadeOut 2s forwards;
+    animation: lvlfadeOut 3s forwards;
 }
 
 @keyframes lvlfadeOut {
@@ -118,7 +118,7 @@
     color: white;
     padding: 20px;
     border-radius: 10px;
-    transition: opacity 0.1s linear;
+    transition: opacity 0.05s linear;
 }
 
 .feedback-message.show {

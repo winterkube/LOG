@@ -11,7 +11,11 @@ import crumpledPaper from "./assets/crumpled paper.png";
 
 function LevelSelect({ onLevelSelect }) {
 
-
+    const [highestUnlockedLevel, setHighestUnlockedLevel] = useState(1);
+    useEffect(() => {
+        const unlockedLevel = parseInt(localStorage.getItem('highestUnlockedLevel')) || 1;
+        setHighestUnlockedLevel(unlockedLevel);
+    }, []);
 
     const [imagesLoaded, setImagesLoaded] = useState(false);
 
@@ -55,7 +59,14 @@ function LevelSelect({ onLevelSelect }) {
     const [animateEnter, setAnimateEnter] = useState(false);
     const [flash2Exit, setFlash2Exit] = useState(false);
 
-
+    const levels = [
+        { levelNumber: 1, name: 'Intro Trial' },
+        { levelNumber: 2, name: 'Decimal Trial' },
+        { levelNumber: 3, name: 'Speed Trial I'},
+        { levelNumber: 4, name: 'Algebra Trial'},
+        { levelNumber: 5, name: 'Exponent Trial'},
+        // Add more levels...
+    ];
 
     const goBack = () => {
         setFlash2Exit(true);
@@ -70,6 +81,12 @@ function LevelSelect({ onLevelSelect }) {
             onLevelSelect(x);
         }, 500);
     }
+
+    const handleLevelClick = (levelNumber) => {
+        if (levelNumber <= highestUnlockedLevel) {
+            goToLvl(levelNumber);
+        }
+    };
 
     if (!imagesLoaded) {
         return (
@@ -165,13 +182,27 @@ function LevelSelect({ onLevelSelect }) {
                     BACK
                 </button>
 
+
+
                 {/* Wrap level buttons in a scrollable container */}
                 <div className="level-buttons-container">
-                    <button onClick={() => goToLvl(1)}>Intro Trial</button>
-                    <button onClick={() => goToLvl(2)}>Decimal Trial</button>
-                    <button onClick={() => onLevelSelect(3)}>Speed Trial I</button>
-                    <button onClick={() => onLevelSelect(4)}>Algebra Trial</button>
-                    <button onClick={() => onLevelSelect(5)}>Exponent Trial</button>
+
+                        {levels.map((level) => (
+                            <button
+                                key={level.levelNumber}
+                                className={`level-button ${level.levelNumber <= highestUnlockedLevel ? '' : 'locked'}`}
+                                onClick={() => handleLevelClick(level.levelNumber)}
+                                disabled={level.levelNumber > highestUnlockedLevel}
+                            >
+                                {level.name}
+                            </button>
+                        ))}
+
+                    {/*<button onClick={() => goToLvl(1)}>Intro Trial</button>*/}
+                    {/*<button onClick={() => goToLvl(2)}>Decimal Trial</button>*/}
+                    {/*<button onClick={() => onLevelSelect(3)}>Speed Trial I</button>*/}
+                    {/*<button onClick={() => onLevelSelect(4)}>Algebra Trial</button>*/}
+                    {/*<button onClick={() => onLevelSelect(5)}>Exponent Trial</button>*/}
                     {/* Uncomment and add more levels as needed */}
                 </div>
 

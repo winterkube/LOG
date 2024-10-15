@@ -3,7 +3,7 @@ import { useGameLogic } from './hooks/useGameLogic';
 import './HowToMath.css';
 import './styles/Gameplay.css';
 
-function Gameplay({ levelData, onGameEnd }) {
+function Gameplay({ levelData, onGameEnd, inGame }) {
     // State for user input and component animations
     // const [userAnswer, setUserAnswer] = useState('');
     const [isMounted, setIsMounted] = useState(false);
@@ -15,8 +15,8 @@ function Gameplay({ levelData, onGameEnd }) {
         setIsEnding(true);
         setTimeout(() => {
             audioRef.current.pause();
-            onGameEnd(performanceData);
-        }, 2000); // Duration of fade-out animation
+            onGameEnd({...performanceData, levelNumber: levelData.levelNumber });
+        }, 3000); // Duration of fade-out animation
     };
 
     // Destructure variables returned by useGameLogic
@@ -29,7 +29,7 @@ function Gameplay({ levelData, onGameEnd }) {
         setUserAnswer,
         feedbackMessage,
         wait,
-    } = useGameLogic(levelData.questions, handleGameEnd, 2.3); // Start delay of 1.5 seconds
+    } = useGameLogic(levelData, levelData.questions, handleGameEnd, 2); // Start delay of 1.5 seconds
 
     // Mounting effect for animations
     useEffect(() => {
@@ -41,14 +41,26 @@ function Gameplay({ levelData, onGameEnd }) {
 
     useEffect(() => {
         audioRef.current = new Audio(levelData.song);
-        audioRef.current.loop = false;
-        audioRef.current.volume = 0.4;
-        audioRef.current.load();
-        setTimeout(function() {
+
+        if (inGame) {
+
+            audioRef.current.loop = false;
+            audioRef.current.volume = 0.4;
+            audioRef.current.load();
+            setTimeout(function() {
 
                 audioRef.current.play();
-            }, 2300 - levelData.offset);
+            }, 2000 - levelData.offset);
 
+        } else {
+            audioRef.current.pause();
+        }
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current = null;
+            }
+        };
 
     }, [levelData.song]);
 
@@ -104,7 +116,8 @@ function Gameplay({ levelData, onGameEnd }) {
                         )}
                         <p>
                             score: {score} <br/>
-                            time: {Math.ceil(timeLeft * 10) / 10}
+                            time: {Math.ceil(timeLeft * 10) / 10} <br/>
+
                         </p>
 
 
