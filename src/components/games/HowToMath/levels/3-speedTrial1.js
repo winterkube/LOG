@@ -15,6 +15,10 @@ export const speedTrialI = {
         { question: '10 + 10 = ?', answer: '20', time: (60 / bpm) * 4 },
         { question: '1 + 10 + 1 = ?', answer: '12', time: (60 / bpm) * 4 },
         { question: '10 + 1 + 10 = ?', answer: '21', time: (60 / bpm) * 4 },
+        { question: '1 * 1 = ?', answer: '1', time: (60 / bpm) * 4 },
+        { question: '1 * 1 + 1 = ?', answer: '2', time: (60 / bpm) * 4 },
+        { question: '1 + 1 * 1 + 1 = ?', answer: '3', time: (60 / bpm) * 4 },
+        { question: '1 + 1 * 10 + 10 = ?', answer: '21', time: (60 / bpm) * 4 },
         {
             question: '...',
             answer: '.',
