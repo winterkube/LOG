@@ -9,7 +9,7 @@ export const speedTrialI = {
     song: songChipZeal,
     songTitle: 'BigGiantCircles - Chip Zeal',
     length: 99,
-    offset: 1000,
+    offset: 1100,
     questions: [
         { question: '1 + 1 = ?', answer: '2', time: (60 / bpm) * 4 },
         { question: '10 + 10 = ?', answer: '20', time: (60 / bpm) * 4 },

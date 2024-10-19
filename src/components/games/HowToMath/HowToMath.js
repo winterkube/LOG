@@ -32,6 +32,7 @@ import startButton1 from './assets/startbtn1.png';
 import startButton2 from './assets/startbtn2.png';
 import {wait} from "@testing-library/user-event/dist/utils";
 import levelSelect from "./LevelSelect";
+import {Cutscenes} from "./cutscenes/cutsceneData";
 
 
 
@@ -242,7 +243,14 @@ function HowToMath() {
                 return (
                     <Cutscene
                         onCutsceneEnd={() => setCurrentScene('gameplay')}
-                        level={gameData.levelNumber}
+                        cutsceneSteps={Cutscenes[gameData.levelNumber]?.pre}
+                    />
+                );
+            case 'postCutscene':
+                return (
+                    <Cutscene
+                        onCutsceneEnd={() => setCurrentScene('levelSelect')}
+                        cutsceneSteps={Cutscenes[gameData.levelNumber]?.post}
                     />
                 );
             case 'gameplay':
@@ -262,7 +270,14 @@ function HowToMath() {
                 return (
                     <Results
                         data={gameData.performanceData}
-                        onContinue={() => setCurrentScene('levelSelect')}
+                        onContinue={() => {
+                            const hasPostCutscene = Cutscenes[gameData.levelNumber]?.post;
+                            if (hasPostCutscene) {
+                                setCurrentScene('postCutscene');
+                            } else {
+                                setCurrentScene('levelSelect');
+                            }
+                        }}
                         onRetry={() => setCurrentScene('gameplay')}
                         onMenu={() => setCurrentScene('menu')}
                     />

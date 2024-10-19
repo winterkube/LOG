@@ -3,8 +3,8 @@
 import React, {useEffect, useState} from 'react';
 import './HowToMath.css';
 import './styles/LevelSelect.css';
-import csTest from "./assets/cs test.png";
-import csTest2 from "./assets/cs test2.png";
+import csTest from "./cutscenes/1-assets/cs test.png";
+import csTest2 from "./cutscenes/1-assets/cs test2.png";
 import trialBox from "./assets/trial box.png";
 import crumpledPaper from "./assets/crumpled paper.png";
 

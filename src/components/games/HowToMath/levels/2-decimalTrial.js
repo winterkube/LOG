@@ -1,8 +1,9 @@
 
 
 import songFbHarmony from '../assets/music/fb-harmony.mp3';
+import {randomNum1} from './1-introTrial';
 
-const bpm = 65.5;
+const bpm = 65.78;
 
 export const decimalTrial = {
     levelNumber: 2,
@@ -28,18 +29,21 @@ export const decimalTrial = {
 
 
 
-        { question: ((Math.floor(Math.random() * 10))/10).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
-        { question: ((Math.floor(Math.random() * 10))/10).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
-        { question: ((Math.floor(Math.random() * 10))/10).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
-        { question: ((Math.floor(Math.random() * 10))/10).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: randomNum1(4).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: randomNum1(4).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: randomNum1(4).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: randomNum1(4).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
 
-        { question: '2' + ' * ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
-        { question: '3' + ' * ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
-        { question: '1' + ' * ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: '2' + ' * ' + ((Math.floor((Math.random()+0.5) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
+        { question: '3' + ' * ' + ((Math.floor((Math.random()+1) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
+        { question: '1' + ' * ' + ((Math.floor((Math.random()+2) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
 
-        { question: ((Math.floor(Math.random() * 10))/10).toString() + ' / ' + '2' + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
-        { question: ((Math.floor(Math.random() * 10))/10).toString() + ' / ' + '4' + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
-        { question: ((Math.floor(Math.random() * 10))/10).toString() + ' / ' + '10' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: ((Math.floor((Math.random()+2.5) * 10))/10).toString() + ' / ' + '2' + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
+        { question: ((Math.floor((Math.random()+5) * 10))/10).toString() + ' / ' + '4' + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
+        { question: ((Math.floor((Math.random()+10) * 10))/10).toString() + ' / ' + '10' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+
+        { question: randomNum1(3).toString() + ' + ' + randomNum1(3).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 8,},
+        { question: randomNum1(3).toString() + ' * ' + randomNum1(4).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 8,},
 
 
         {

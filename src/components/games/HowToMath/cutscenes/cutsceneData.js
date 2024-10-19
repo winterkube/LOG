@@ -1,27 +1,22 @@
 // src/components/games/HowToMath/cutscenes/cutsceneData.js
 
-import csTestImage1 from '../assets/cs test.png';
-import csTestImage2 from '../assets/cs test2.png';
+import { introPreCutscene, introPostCutscene } from './1-introCS';
+import {decimalPostCutscene, decimalPreCutscene} from "./2-decimalCS";
+import {speed1PostCutscene, speed1PreCutscene} from "./3-speed1CS";
+
 
 export const Cutscenes = {
-    1: [ // intro trial
-        {
-            type: 'image',
-            dialogues: [' '],
-            src: csTestImage1,
-
+        1: {
+            pre: introPreCutscene,
+            post: introPostCutscene, // We'll define post-level cutscenes later
         },
-        {
-            type: 'image',
-            dialogues: ['test 123'],
-            src: csTestImage1,
-
+        2: {
+            pre: decimalPreCutscene,
+            post: decimalPostCutscene,
         },
-        {
-            type: 'image',
-            dialogues: ['test 456'],
-            src: csTestImage2,
-
+        3: {
+            pre: speed1PreCutscene,
+            post: speed1PostCutscene,
         },
-    ],
+
 };
