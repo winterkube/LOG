@@ -4,7 +4,6 @@ import songWaterflameGlorious from '../assets/music/waterflame-glorious.mp3';
 
 const bpm = 76.8;
 
-
 export const randomNum1 = (what) => {
     if (what === '') {
         return Math.floor(Math.random() * 10); // num between 0-9

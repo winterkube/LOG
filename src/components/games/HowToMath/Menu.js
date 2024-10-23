@@ -25,58 +25,11 @@ function Menu({ onStart }, {setVolume}) {
 
     const [imagesLoaded, setImagesLoaded] = useState(false);
 
-    // function preloadMImages(imageArray, callback) {
-    //     let loadedMImages = 0;
-    //     const totalImages = imageArray.length;
-    //
-    //     imageArray.forEach((src) => {
-    //         const img = new Image();
-    //         img.src = src;
-    //         img.onload = () => {
-    //             loadedMImages++;
-    //             if (loadedMImages === totalImages) {
-    //                 callback();
-    //             }
-    //         };
-    //         img.onerror = () => {
-    //             loadedMImages++;
-    //             if (loadedMImages === totalImages) {
-    //                 callback();
-    //             }
-    //         };
-    //     });
-    // }
-    //
-    // useEffect(() => {
-    //     const imageSources = [
-    //         playButtonImage,
-    //         settingsButtonImage,
-    //         volumeButtonImage,
-    //         backButtonImage,
-    //         trialsButtonImage,
-    //         cheeba1Image,
-    //         cheeba2Image,
-    //         leyvi1Image,
-    //         leyvi2Image,
-    //         classroomImage,
-    //         classroomImage2,
-    //         classroomImage3,
-    //         classroomImage4,
-    //         blackboardImage,
-    //
-    //         // Add any other images used in your game
-    //     ];
-    //
-    //     preloadMImages(imageSources, () => {
-    //         setImagesLoaded(true);
-    //     });
-    // }, []);
-
-
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isPlayOpen, setIsPlayOpen] = useState(false);
     const [animateExit, setAnimateExit] = useState(false);
     const [flashExit, setFlashExit] = useState(false);
+
     // const [openVolume, setOpenVolume] = useState(false);
 
     // New state variable to control initial animations

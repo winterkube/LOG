@@ -110,7 +110,7 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
             answer = (Math.round(eval(questionData.question.replace(" = ?", "")) * 1000) / 1000).toString();
         }
 
-        const isCorrect = userAnswerRef.current.trim() <= answer + 0.001 && userAnswerRef.current.trim() >= answer - 0.001;
+        const isCorrect = (userAnswerRef.current.trim() <= answer + 0.0001 && userAnswerRef.current.trim() >= answer - 0.0001) && userAnswerRef.current.trim() !== '';
 
         if (isCorrect) {
             if (currentQuestionIndex + 1 < questions.length) {

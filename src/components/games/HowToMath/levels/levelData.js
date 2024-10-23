@@ -13,7 +13,7 @@ export const Levels = {
     // 5: exponentTrial, // song = creo-shine, bpm = 90
     // 6: trigonometryTrial, // song = schtiffles-33
     // 7: enduranceTrialI, // song = falsenoise-shiver, bpm = 95
-    // 8: speedTrialII, // song = cysmix-peergynt
+    // 8: speedTrialII, // song = f777-wormhole
     // 9: quadraticTrial, // song = creo-deepdive
     // 10: variablesTrial, // song = lockyn-vapor, bpm = 77.5
     // 11: logarithmTrial, // song = siximpala-city

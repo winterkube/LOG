@@ -149,7 +149,7 @@
 /* Level Buttons */
 .level-buttons-container button {
     width: 100%;
-    max-width: 330px; /* Adjust as needed */
+    max-width: 300px; /* Adjust as needed */
     height: 200px; /* Adjust as needed */
     margin: 2px 0;
     font-family: 'Cabin Sketch', serif;

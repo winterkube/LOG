@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './HowToMath.css';
 import './styles/Results.css';
 function Results({ data, onContinue, onRetry, onMenu }) {
+
+    const [flash2Exit, setFlash2Exit] = useState(false);
 
     // const rawPercent = data.score / data.total;
     // const rank = '???';
@@ -32,12 +34,29 @@ function Results({ data, onContinue, onRetry, onMenu }) {
             return '???'
     }
 
+    const resultsButton = (x) =>  {
+        setFlash2Exit(true);
+        setTimeout(() => {
+            if (x === 0){
+                onContinue();
+            }
+            if (x === 1) {
+                onRetry();
+            }
+        }, 500);
+    }
+
     return (
 
         <div className="results">
-            <h2>Results</h2>
+
+
+            <h2>RESULTS</h2>
+            <div className={`flash2 ${flash2Exit ? 'exit' : ''}`}></div>
+
+
             <p>
-                You scored {data.score} out of {data.total}, or {Math.round(percent * 1000)/10}%.
+                You scored {data.score} out of {data.total}, or {Math.round(percent * 1000) / 10}%.
 
             </p>
 
@@ -48,9 +67,8 @@ function Results({ data, onContinue, onRetry, onMenu }) {
             )}
             <p> Rank = {getRank(percent)}</p>
 
-            <button onClick={onContinue}>Continue</button>
-            <button onClick={onRetry}>Retry</button>
-            <button onClick={onMenu}>Menu</button>
+            <button className="continue-btn" onClick={() => resultsButton(0)}>CONTINUE</button>
+            <button className="retry-btn" onClick={() => resultsButton(1)}>RETRY</button>
         </div>
     );
 }

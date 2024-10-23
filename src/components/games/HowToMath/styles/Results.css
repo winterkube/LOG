@@ -2,19 +2,135 @@
 @import url("https://fonts.googleapis.com/css2?family=Chilanka&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 
+:root {
+    --xPosFlash: 0%;
+    --yPosFlash1: -1000%;
+    --yPosFlash2: -32.5%;
+
+}
+
 .results {
-    background: white;
+    left: -10px;
+    background: white url("../assets/lined paper.png");
 
     background-size: 660px 500px;
 
     position: absolute;
+    align-items: center;
     width: 660px;
     height: 500px;
 
 }
 
+.results h2 {
+    position: relative;
+    font-family: "Londrina Sketch", serif;
+    font-size: 60px;
+    font-weight: bold;
+    color: #f57070;
+
+    text-shadow: 3px 3px 1px #e7a5a5;
+
+    background: rgba(255, 255, 255, 0.25);
+
+}
+
+
 .results p {
+    position: relative;
+    top: -10px;
     font-family: 'Yomogi', serif;
     font-size: 20px;
     font-weight: bold;
+    padding: 0px;
+}
+
+.results button {
+    width: 100%;
+    max-width: 260px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    font-family: 'Cabin Sketch', serif;
+    font-size: 30px;
+    font-weight: normal;
+    color: white;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    background-image: url("../assets/results box.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+    text-shadow: 1px 1px 3px #593737;
+}
+
+.continue-btn {
+    margin-right: 10px;
+    transform: translate(0%, 300%);
+    animation: slideUp1 0.8s forwards ease-out 0.0s
+}
+
+.retry-btn {
+    transform: translate(0%, 300%);
+    animation: slideUp1 0.8s forwards ease-out 0.1s
+}
+
+@keyframes slideUp1 {
+    from {
+        transform: translate(0%, 300%);
+    }
+    to {
+        transform: translate(0%, 20%);
+    }
+}
+
+
+
+.flash2 {
+    top: 32%;
+    position: absolute;
+    background: rgb(0, 0, 0,0);
+    background-size: 100%;
+    width: 700px;
+    height: 500px;
+    transform: translate(var(--xPosFlash), var(--yPosFlash1)); /* Adjusted transform */
+    animation: fadeOutB 1s;
+    z-index: 5;
+}
+
+.flash2.exit {
+    animation: fadeInB 1s;
+}
+
+@keyframes fadeOutB {
+    0% {
+        background: rgb(0, 0, 0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    50% {
+        background: rgba(0,0,0,0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    75% {
+        background: rgba(0,0,0,0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    100% {
+        transform: translate(var(--xPosFlash), var(--yPosFlash1));
+    }
+}
+
+@keyframes fadeInB {
+    0% {
+        background: rgb(0, 0, 0,0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    65% {
+        background: rgba(0,0,0);
+        transform: translate(var(--xPosFlash), var(--yPosFlash2));
+    }
+    100% {
+        transform: translate(var(--xPosFlash), var(--yPosFlash1));
+    }
 }
