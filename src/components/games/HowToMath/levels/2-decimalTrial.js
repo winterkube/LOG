@@ -36,7 +36,7 @@ export const decimalTrial = {
 
         { question: '2' + ' * ' + ((Math.floor((Math.random()+0.5) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
         { question: '3' + ' * ' + ((Math.floor((Math.random()+1) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
-        { question: '1' + ' * ' + ((Math.floor((Math.random()+2) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: '2' + ' * ' + ((Math.floor((Math.random()+2) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
 
         { question: ((Math.floor((Math.random()+2.5) * 10))/10).toString() + ' / ' + '2' + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
         { question: ((Math.floor((Math.random()+5) * 10))/10).toString() + ' / ' + '4' + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},

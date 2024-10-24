@@ -104,11 +104,11 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
     const evaluateAnswer = (questionData) => {
         console.log('Evaluating answer for question:', currentQuestionIndex);
 
-        let answer = questionData.answer;
+        // let answer = questionData.answer;
 
-        if (questionData.answer === 'idk') {
-            answer = (Math.round(eval(questionData.question.replace(" = ?", "")) * 1000) / 1000).toString();
-        }
+        // if (questionData.answer === 'idk') {
+        let answer = (Math.round(eval(questionData.question.replace(" = ?", "")) * 1000) / 1000).toString();
+        // }
 
         const isCorrect = (userAnswerRef.current.trim() <= answer + 0.0001 && userAnswerRef.current.trim() >= answer - 0.0001) && userAnswerRef.current.trim() !== '';
 
