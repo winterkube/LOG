@@ -12,6 +12,8 @@ function Cutscene({ onCutsceneEnd, cutsceneSteps }) {
 
     const typingIntervalRef = useRef(null);
 
+
+
     useEffect(() => {
         setImageLoaded(false);
         setDisplayedText('');
