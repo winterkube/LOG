@@ -2,7 +2,7 @@
 
 import { introPreCutscene, introPostCutscene } from './1-introCS';
 import {decimalPostCutscene, decimalPreCutscene} from "./2-decimalCS";
-import {speed1PostCutscene, speed1PreCutscene} from "./3-speed1CS";
+import {speed1PreCutscene} from "./3-speed1CS";
 
 
 export const Cutscenes = {
@@ -16,7 +16,7 @@ export const Cutscenes = {
         },
         3: {
             pre: speed1PreCutscene,
-            post: speed1PostCutscene,
+
         },
 
 };

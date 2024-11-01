@@ -168,6 +168,10 @@
     text-shadow: 1px 1px 3px #373759;
 }
 
+.level-buttons-container button:hover {
+    background-image: url("../assets/trial box hover.png");
+}
+
 .level-button.locked {
     pointer-events: none;
     cursor: default;

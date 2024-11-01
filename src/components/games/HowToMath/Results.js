@@ -13,7 +13,15 @@ import cheebaHead3 from './assets/cheebaHead3.png';
 import cheebaHead4 from './assets/cheebaHead4.png';
 
 import rankPaper from './assets/rankPaper.png'
-import rankA from './assets/rankA.png';
+import rankSSImage from './assets/rankSS.png';
+import rankSImage from './assets/rankS.png';
+import rankAImage from './assets/rankA.png';
+import rankBImage from './assets/rankB.png';
+import rankCImage from './assets/rankC.png';
+import rankDImage from './assets/rankD.png';
+import rankEImage from './assets/rankE.png';
+import rankFImage from './assets/rankF.png';
+import rankIdkImage from './assets/rankIdk.png'
 
 function Results({ data, onContinue, onRetry, onMenu }) {
 
@@ -59,6 +67,19 @@ function Results({ data, onContinue, onRetry, onMenu }) {
         });
     }
 
+    const rankImages = {
+        SS: rankSSImage,
+        S: rankSImage,
+        A: rankAImage,
+        B: rankBImage,
+        C: rankCImage,
+        D: rankDImage,
+        E: rankEImage,
+        F: rankFImage,
+        Idk: rankIdkImage,
+    };
+
+
     useEffect(() => {
         const imageSources = [
             leviHead1,
@@ -70,7 +91,15 @@ function Results({ data, onContinue, onRetry, onMenu }) {
             cheebaHead3,
             cheebaHead4,
             rankPaper,
-            rankA,
+            rankSSImage,
+            rankSImage,
+            rankAImage,
+            rankBImage,
+            rankCImage,
+            rankDImage,
+            rankEImage,
+            rankFImage,
+            rankIdkImage,
 
             // Add any other images used in your game
         ];
@@ -81,16 +110,20 @@ function Results({ data, onContinue, onRetry, onMenu }) {
     }, []);
 
     function getRank(percent) {
-            if (percent === 0) return 'SS (Severe Stupidity)';
-            if (0 < percent && percent < 0.5) return 'S (Squirrelbrain)';
-            if (0.5 <= percent && percent< 0.6) return 'A (Awful)';
-            if (0.6 <= percent && percent< 0.7) return 'B (Bad)';
-            if (0.7 <= percent && percent< 0.8) return 'C (Competent)';
-            if (0.8 <= percent && percent < 0.9) return 'D (Dazzling)';
-            if (0.9 <= percent && percent < 1) return 'E (Exceptional)';
-            if (percent === 1 && (data.score !== data.total))  return 'F (FLAWLESS (but not really))';
-            if (percent === 1 && (data.score === data.total))  return 'F (FLAWLESS)';
-            return '???'
+        if (percent === 1 && (data.score !== data.total)) {
+            percent = 0.99;
+        }
+
+        if (percent === 0) return 'SS';
+        if (percent > 0 && percent < 0.5) return 'S';
+        if (percent >= 0.5 && percent < 0.6) return 'A';
+        if (percent >= 0.6 && percent < 0.7) return 'B';
+        if (percent >= 0.7 && percent < 0.8) return 'C';
+        if (percent >= 0.8 && percent < 0.9) return 'D';
+        if (percent >= 0.9 && percent < 1) return 'E';
+        if (percent === 1) return 'F';
+
+        return 'Idk'
     }
 
     const resultsButton = (x) =>  {
@@ -107,6 +140,9 @@ function Results({ data, onContinue, onRetry, onMenu }) {
             }
         }, 500);
     }
+
+    const rank = getRank(percent);
+    const rankImage = rankImages[rank] || rankIdkImage;
 
     if (!imagesLoaded) {
         return (
@@ -195,9 +231,8 @@ function Results({ data, onContinue, onRetry, onMenu }) {
                 <div className="p1"> YOUR RANK:
                     {/*{getRank(percent)}*/}
                     <div className="rank-paper"></div>
-                    <div className="rank">
-                        {/*{getRank(percent)}*/}
-                    </div>
+                    <div className={`rank rank${rank}`}></div>
+
 
                 </div>
 

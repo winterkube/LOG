@@ -97,25 +97,54 @@
     opacity: 1;
 }
 
-.rank{
-
-    background-image: url("../assets/rankC.png");
+.rank {
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    align-content: center;
-
     position: absolute;
-    font-family: 'Yomogi', serif;
-    font-size: 20px;
     width: 140px;
     height: 140px;
-
     left: 39.4%;
     top: 80px;
     opacity: 1;
     z-index: 2;
-    animation: rankMove ease-in 1.5s;
+    animation: rankMove ease-in 1s;
+}
+
+.rankSS {
+    background-image: url("../assets/rankSS.png");
+}
+
+.rankS {
+    background-image: url("../assets/rankS.png");
+}
+
+.rankA {
+    background-image: url("../assets/rankA.png");
+}
+
+.rankB {
+    background-image: url("../assets/rankB.png");
+}
+
+.rankC {
+    background-image: url("../assets/rankC.png");
+}
+
+.rankD {
+    background-image: url("../assets/rankD.png");
+}
+
+.rankE {
+    background-image: url("../assets/rankE.png");
+}
+
+.rankF {
+    background-image: url("../assets/rankF.png");
+}
+
+.rankIdk {
+    background-image: url("../assets/rankIdk.png");
 }
 
 @keyframes rankMove {
