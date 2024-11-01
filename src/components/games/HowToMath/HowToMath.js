@@ -279,7 +279,7 @@ function HowToMath() {
                             }
                         }}
                         onRetry={() => setCurrentScene('gameplay')}
-                        onMenu={() => setCurrentScene('menu')}
+                        onMenu={() => setCurrentScene('levelSelect')}
                     />
                 );
             default:

@@ -6,6 +6,8 @@ import './styles/LevelSelect.css';
 import csTest from "./cutscenes/1-assets/cs test.png";
 import csTest2 from "./cutscenes/1-assets/cs test2.png";
 import trialBox from "./assets/trial box.png";
+import trialBoxHover from "./assets/trial box hover.png";
+import trialBoxLocked from "./assets/trial box locked.png";
 import crumpledPaper from "./assets/crumpled paper.png";
 
 
@@ -44,6 +46,8 @@ function LevelSelect({ onLevelSelect }) {
     useEffect(() => {
         const imageSources = [
             trialBox,
+            trialBoxLocked,
+            trialBoxHover,
             crumpledPaper,
 
             // Add any other images used in your game

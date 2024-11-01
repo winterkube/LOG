@@ -8,39 +8,89 @@ function Cutscene({ onCutsceneEnd, cutsceneSteps }) {
     const [currentDialogueIndex, setCurrentDialogueIndex] = useState(0);
     const [displayedText, setDisplayedText] = useState('');
     const [isTyping, setIsTyping] = useState(false);
-    const [imageLoaded, setImageLoaded] = useState(false);
+    const [assetsLoaded, setAssetsLoaded] = useState(false);
 
     const typingIntervalRef = useRef(null);
+    const preloadedImagesRef = useRef({});
+
+    // Preload images when the component mounts
+    useEffect(() => {
+        preloadAssets();
+    }, []);
+
+    const preloadAssets = () => {
+        const imageSources = cutsceneSteps
+            .filter((step) => step.type === 'image')
+            .map((step) => step.src);
+
+        let loadedImagesCount = 0;
+        const totalImages = imageSources.length;
+
+        if (totalImages === 0) {
+            setAssetsLoaded(true);
+            return;
+        }
+
+        imageSources.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+                preloadedImagesRef.current[src] = img;
+                loadedImagesCount++;
+                if (loadedImagesCount === totalImages) {
+                    setAssetsLoaded(true);
+                }
+            };
+            img.onerror = () => {
+                console.error(`Failed to load image: ${src}`);
+                loadedImagesCount++;
+                if (loadedImagesCount === totalImages) {
+                    setAssetsLoaded(true);
+                }
+            };
+        });
+    };
 
 
 
     useEffect(() => {
-        setImageLoaded(false);
-        setDisplayedText('');
-        startTyping();
-    }, [currentStepIndex, currentDialogueIndex]);
+        if (assetsLoaded) {
+            startTyping();
+        }
+    }, [assetsLoaded, currentStepIndex, currentDialogueIndex]);
 
     const startTyping = () => {
         const currentStep = cutsceneSteps[currentStepIndex];
-        const dialogue =
-            currentStep.dialogues && currentStep.dialogues[currentDialogueIndex]
-                ? currentStep.dialogues[currentDialogueIndex]
-                : '';
-        let currentCharIndex = 0;
+        let dialogue = '';
+
+        if (
+            currentStep.dialogues &&
+            currentDialogueIndex < currentStep.dialogues.length
+        ) {
+            dialogue = currentStep.dialogues[currentDialogueIndex];
+        }
+
+        // If dialogue is undefined or null, set it to an empty string
+        if (!dialogue) {
+            dialogue = '';
+        }
+
+        let currentCharIndex = -1;
         setIsTyping(true);
+        setDisplayedText('');
 
         if (typingIntervalRef.current) {
             clearTimeout(typingIntervalRef.current);
         }
 
         const typeNextChar = () => {
-            if (currentCharIndex < dialogue.length) {
+            if (currentCharIndex < dialogue.length - 1) {
                 setDisplayedText((prevText) => prevText + dialogue[currentCharIndex]);
                 currentCharIndex++;
-                typingIntervalRef.current = setTimeout(typeNextChar, 30); // Adjust typing speed here
+                typingIntervalRef.current = setTimeout(typeNextChar, 50); // Adjust typing speed here
             } else {
                 setIsTyping(false);
-                typingIntervalRef.current = null;
+                typingIntervalRef.current = false;
             }
         };
 
@@ -68,12 +118,26 @@ function Cutscene({ onCutsceneEnd, cutsceneSteps }) {
     };
 
     const handleClick = () => {
+        if (!assetsLoaded) {
+            // Do nothing while assets are loading
+            return;
+        }
+
         if (isTyping) {
             const currentStep = cutsceneSteps[currentStepIndex];
-            const dialogue =
-                currentStep.dialogues && currentStep.dialogues[currentDialogueIndex]
-                    ? currentStep.dialogues[currentDialogueIndex]
-                    : '';
+            let dialogue = '';
+
+            if (
+                currentStep.dialogues &&
+                currentDialogueIndex < currentStep.dialogues.length
+            ) {
+                dialogue = currentStep.dialogues[currentDialogueIndex];
+            }
+
+            if (!dialogue) {
+                dialogue = '';
+            }
+
             setDisplayedText(dialogue);
             setIsTyping(false);
             if (typingIntervalRef.current) {
@@ -90,6 +154,14 @@ function Cutscene({ onCutsceneEnd, cutsceneSteps }) {
         return null;
     }
 
+    if (!assetsLoaded) {
+        return (
+            <div className="loading">
+                <p>Loading...</p>
+            </div>
+        );
+    }
+
     const currentStep = cutsceneSteps[currentStepIndex];
 
     return (
@@ -100,13 +172,7 @@ function Cutscene({ onCutsceneEnd, cutsceneSteps }) {
                         src={currentStep.src}
                         alt="Cutscene"
                         className="cutscene-image"
-                        onLoad={() => setImageLoaded(true)}
                     />
-                    {!imageLoaded && (
-                        <div className="loading-screen">
-                            <p>Loading...</p>
-                        </div>
-                    )}
                 </>
             )}
             {currentStep.type === 'video' && (

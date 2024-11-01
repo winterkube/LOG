@@ -13,12 +13,12 @@ export const speed1PreCutscene = [
     // ... more steps
 ];
 
-export const speed1PostCutscene = [
-    {
-        type: 'image',
-        dialogues: [' bonk '],
-        src: black,
-    },
-    // ... more steps
-];
+// export const speed1PostCutscene = [
+//     {
+//         type: 'image',
+//         dialogues: [' bonk '],
+//         src: black,
+//     },
+//     // ... more steps
+// ];
 
