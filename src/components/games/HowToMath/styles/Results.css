@@ -46,7 +46,8 @@
 
 .results p {
     position: relative;
-    top: 5px;
+    top: -55px;
+    left: 140px;
     font-family: "Edu AU VIC WA NT Guides", serif;
     font-size: 20px;
     font-weight: 500;
@@ -57,8 +58,8 @@
 
 .p1 {
     position: relative;
-    top: -55px;
-    left: -125px;
+    top: -85px;
+    left: -140px;
     font-family: "Londrina Sketch", serif;
     font-size: 35px;
     font-weight: bold;
@@ -71,7 +72,8 @@
 
 .p2{
     position: relative;
-    top: 15px;
+    left: 140px;
+    top: -65px;
     font-family: "Caveat", serif;
     font-size: 30px;
     font-weight: bold;
@@ -80,7 +82,62 @@
     z-index: 2;
 }
 
+.rank-paper{
+    background-image: url("../assets/rankPaper.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 210px;
+    height: 210px;
+    z-index: 1;
 
+    position: absolute;
+    align-items: center;
+    left: 34%;
+    top: 48px;
+    opacity: 1;
+}
+
+.rank{
+
+    background-image: url("../assets/rankC.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    align-content: center;
+
+    position: absolute;
+    font-family: 'Yomogi', serif;
+    font-size: 20px;
+    width: 140px;
+    height: 140px;
+
+    left: 39.4%;
+    top: 80px;
+    opacity: 1;
+    z-index: 2;
+    animation: rankMove ease-in 1.5s;
+}
+
+@keyframes rankMove {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        transform: scaleX(200%) scaleY(200%);
+        opacity: 0;
+    }
+    84% {
+        transform: scaleX(100%) scaleY(100%);
+        opacity: 1;
+    }
+    85% { transform: translate(-3px, -3px) rotate(1deg); }
+    87.5% { transform: translate(2px, 2px) rotate(0deg); }
+    90% { transform: translate(-5px, 3px) rotate(0deg); }
+    92.5% { transform: translate(4px, 3px) rotate(-1deg); }
+    95% { transform: translate(-3px, -3px) rotate(1deg); }
+    97.5% { transform: translate(2px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -1px) rotate(-1deg); }
+}
 
 
 .results button {
