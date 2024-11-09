@@ -2,21 +2,23 @@
 
 import songWaterflameGlorious from '../assets/music/waterflame-glorious.mp3';
 
-const bpm = 76.8;
+const bpm = 76.5;
 
 export const randomNum1 = (what) => {
     if (what === '') {
-        return Math.floor(Math.random() * 10); // num between 0-9
+        return Math.round(Math.random() * 8 + 0.5); // num between 1-9
     } else if (what === 1) {
-        return Math.floor(Math.random() * 10) + 5; // num between 5-14
+        return Math.round(Math.random() * 10) + 5; // num between 5-14
     } else if (what === 2) {
-        return Math.floor(Math.random() * 10) + 2; // num between 2-11
+        return Math.round(Math.random() * 7) + 2; // num between 2-8
     } else if (what === 3) {
         return Math.round((Math.random()+0.10)*100)/100; // num between 0.10-1.00
     } else if (what === 4) {
         return Math.round((Math.random() + 0.10) * 10) / 10; // num between 0.1-1.0
+    } else if (what === 5) {
+        return Math.round((Math.random()) * 3) + 6; // num between 6-9
     }
-    return Math.floor(Math.random() * 10);
+    return Math.round(Math.random() * 8 + 0.5);
 }
 
 export const introTrial = {

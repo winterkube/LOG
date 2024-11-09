@@ -71,7 +71,7 @@
     width: 640px;
     height: 480px;
     transform: translate(-1000%, -1161.7%); /* Adjusted transform */
-    animation: fadeOut 1.25s;
+    animation: fadeOut 2s;
     z-index: 6;
 }
 

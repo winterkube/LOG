@@ -156,7 +156,7 @@ function Cutscene({ onCutsceneEnd, cutsceneSteps }) {
 
     if (!assetsLoaded) {
         return (
-            <div className="loading">
+            <div className="loading-screen">
                 <p>Loading...</p>
             </div>
         );

@@ -175,7 +175,7 @@
     height: 100px; /* Adjust as needed */
     font-family: 'Cabin Sketch', serif;
     font-size: 30px;
-    font-weight: normal;
+    font-weight: bold;
     color: white;
     padding: 10px;
     border: none;
@@ -190,6 +190,10 @@
     text-shadow: 1px 1px 3px #593737;
 
     z-index: 2;
+}
+
+.results button:hover{
+    background-image: url("../assets/results box hover.png");
 }
 
 .continue-btn {

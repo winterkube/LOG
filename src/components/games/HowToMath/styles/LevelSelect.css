@@ -112,7 +112,7 @@
     left: 20px;
     text-shadow: 1px 1px 3px #333349;
     font-family: 'Cabin Sketch', serif;
-    font-weight: 300;
+    font-weight: 700;
     font-size: 30px;
     background-color: #a09afc;
     color: white;
@@ -123,21 +123,24 @@
     border-radius: 2px;
     box-shadow: 2px 2px 3px black;
 }
+.back-button2:hover{
+    background-color: #b8b3ff;
+}
 /* Level Buttons Container */
 .level-buttons-container{
     position: absolute;
-    top: 150px;
-    left: 55%;
+    top: 135px;
+    left: 65%;
     transform: translateX(-50%);
-    width: 55%;
-    height: calc(100% - 200px); /* Adjust height as needed */
+    width: 60%;
+    height: calc(100% - 170px); /* Adjust height as needed */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 2;
     padding-top: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 3px solid white;
     border-top: 3px solid white;
     box-shadow:
@@ -150,17 +153,18 @@
 .level-buttons-container button {
     width: 100%;
     max-width: 300px; /* Adjust as needed */
+
     height: 200px; /* Adjust as needed */
     margin: 2px 0;
     font-family: 'Cabin Sketch', serif;
     font-size: 30px;
-    font-weight: normal;
+    font-weight: bold;
     color: white;
     padding: 32px;
     border: none;
     background-color: transparent;
     background-image: url("../assets/trial box.png");
-    background-size: contain;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
@@ -172,6 +176,19 @@
     background-image: url("../assets/trial box hover.png");
 }
 
+
+
+.lvl-info {
+    left: 7%;
+    top: 40%;
+    position: absolute;
+    font-family: 'Cabin Sketch', serif;
+    font-size: 25px;
+    color: #000;
+    opacity: 1;
+}
+
+
 .level-button.locked {
     pointer-events: none;
     cursor: default;
@@ -179,12 +196,18 @@
     /* Additional styles for locked buttons */
 }
 
+.level-button.long {
+    font-size: 25px;
+
+    padding: 35px;
+}
+
 
 @keyframes slideInLevels {
-    from {
-        transform: translate(-50%, 180%);
+    0% {
+        transform: translate(150%, 0%);
     }
-    to {
+    100% {
         transform: translate(-50%, 0%);
     }
 }

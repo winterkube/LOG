@@ -50,7 +50,10 @@ function LoadingScreen() {
 function HowToMath() {
     const canvasRef = useRef(null);
     const [currentScene, setCurrentScene] = useState('loading');
-    const [gameData, setGameData] = useState(null); // To pass data between scenes
+    const [gameData, setGameData] = useState({
+        levelNumber: null,
+        performanceData: null,
+    });
     const [imagesLoaded, setImagesLoaded] = useState(false); // New state variable
 
     const menuMusicRef = useRef(null);
@@ -77,6 +80,7 @@ function HowToMath() {
 
         if (currentScene === 'start') {
             if (menuMusicRef.current) {
+                menuMusicRef.current.pause();
                 menuMusicRef.current.load();
             }
         }
@@ -96,6 +100,7 @@ function HowToMath() {
          else if (currentScene === 'results' ) {
             // Pause the music
             if (menuMusicRef.current) {
+                menuMusicRef.current.pause();
                 menuMusicRef.current.load();
             }
         }
@@ -138,7 +143,7 @@ function HowToMath() {
                     setCurrentScene('start'); }
                 , 1500)
 
-        });
+            });
     }, []);
 
     // Handle window resize
@@ -155,6 +160,27 @@ function HowToMath() {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    const handleGameEnd = (data) => {
+        if (data.action === 'retry') {
+            // Restart the gameplay without precutscene
+
+            setCurrentScene('loading');
+            setTimeout(
+                function () {
+
+                    setCurrentScene('gameplay'); }
+                , 150)
+
+        } else if (data.action === 'menu') {
+            // Go back to level select
+            setCurrentScene('levelSelect');
+        } else {
+            // Regular game end with results
+            setGameData({ ...gameData, performanceData: data });
+            setCurrentScene('results');
+        }
+    };
 
     function resizeCanvas(canvas) {
         const { width, height } = canvas.getBoundingClientRect();
@@ -232,7 +258,12 @@ function HowToMath() {
                         onLevelSelect={(levelNumber) => {
                             if (levelNumber > 0) {
                                 setGameData({ levelNumber });
-                                setCurrentScene('cutscene');
+                                const hasPreCutscene = Cutscenes[levelNumber]?.pre;
+                                if (hasPreCutscene) {
+                                    setCurrentScene('cutscene');
+                                } else {
+                                    setCurrentScene('gameplay');
+                                }
                             } else {
                                 setCurrentScene('menu');
                             }
@@ -257,12 +288,7 @@ function HowToMath() {
                 return (
                     <Gameplay
                         levelData={Levels[gameData.levelNumber]}
-                        onGameEnd={(performanceData) => {
-
-                            setGameData({ ...gameData, performanceData });
-                            setCurrentScene('results');
-
-                        }}
+                        onGameEnd={handleGameEnd}
                         inGame={isInGame}
                     />
                 );

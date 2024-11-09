@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './HowToMath.css';
 import './styles/Results.css';
 
+import resultsBox from './assets/results box.png';
+import resultsBoxHover from './assets/results box hover.png';
 import leviHead1 from './assets/dog_head1.png';
 import leviHead2 from './assets/dog_head2.png';
 import leviHead3 from './assets/dog_head3.png';
@@ -100,6 +102,8 @@ function Results({ data, onContinue, onRetry, onMenu }) {
             rankEImage,
             rankFImage,
             rankIdkImage,
+            resultsBox,
+            resultsBoxHover,
 
             // Add any other images used in your game
         ];
@@ -111,7 +115,7 @@ function Results({ data, onContinue, onRetry, onMenu }) {
 
     function getRank(percent) {
         if (percent === 1 && (data.score !== data.total)) {
-            percent = 0.99;
+            percent = 0.999;
         }
 
         if (percent === 0) return 'SS';

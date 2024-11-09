@@ -45,7 +45,6 @@ export const decimalTrial = {
         { question: randomNum1(3).toString() + ' + ' + randomNum1(3).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 8,},
         { question: randomNum1(3).toString() + ' * ' + randomNum1(4).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 8,},
 
-
         {
             question: '...',
             answer: '.',

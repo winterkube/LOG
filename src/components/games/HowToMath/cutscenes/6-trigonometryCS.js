@@ -3,10 +3,10 @@
 import black from './3-assets/black.jpg';
 // ... import other assets
 
-export const speed1PreCutscene = [
+export const trigPreCutscene = [
     {
         type: 'image',
-        dialogues: ['this is speed trial 1'],
+        dialogues: ['this is the trig trial'],
         src: black,
     },
 
