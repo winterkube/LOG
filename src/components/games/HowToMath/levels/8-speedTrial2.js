@@ -3,7 +3,7 @@
 import songWormhole from '../assets/music/f777-wormhole.mp3';
 import {randomNum1} from "./1-introTrial";
 
-const bpm = 84.35;
+const bpm = 84;
 
 export const speedTrialII = {
     levelNumber: 6,
@@ -12,8 +12,8 @@ export const speedTrialII = {
     length: 99,
     offset: 330,
     questions: [
-        { question: '2 + 2 + 22 + 22 = ?', answer: '48', time: (60 / bpm) * 8 },
-        { question: '2^2 + 2^2 + 22^2 + 22^2 = ?', answer: 'asdf', time: (60 / bpm) * 8 },
+        { question: '2 + 22 + 2 = ?', answer: '26', time: (60 / bpm) * 8 },
+        { question: '2^2 + 22^2 + 2^2 = ?', answer: 'asdf', time: (60 / bpm) * 8 },
 
         { question: '2^x = 2', answer: '1', time: (60 / bpm) * 1 },
         { question: '2^x = 4', answer: '2', time: (60 / bpm) * 1 },

@@ -4,10 +4,15 @@ import React, { useState, useEffect } from 'react';
 import './HowToMath.css';
 import './styles/Menu.css';
 import playButtonImage from './assets/play button.png';
+import playButtonImageHover from './assets/play button hover.png';
 import settingsButtonImage from './assets/settings button.png';
+import settingsButtonImageHover from './assets/settings button hover.png';
 import volumeButtonImage from './assets/volume button.png';
+import volumeButtonImageHover from './assets/volume button hover.png';
 import backButtonImage from './assets/back button.png';
+import backButtonImageHover from './assets/back button hover.png';
 import trialsButtonImage from './assets/trials button.png';
+import trialsButtonImageHover from './assets/trials button hover.png';
 import trialBox from "./assets/trial box.png";
 import crumpledPaper from "./assets/crumpled paper.png";
 import cheeba1Image from "./assets/cheeba1.png";
@@ -100,6 +105,12 @@ function Menu({ onStart }, {setVolume}) {
         setVolume(newVolume);
     };
 
+    const [over, setOver] = useState(false);
+    const [over2, setOver2] = useState(false);
+    const [over3, setOver3] = useState(false);
+    const [over4, setOver4] = useState(false);
+    const [over5, setOver5] = useState(false);
+
     // } else {
     {
         return (
@@ -115,15 +126,22 @@ function Menu({ onStart }, {setVolume}) {
 
                     {(!isSettingsOpen && !isPlayOpen) && (
                         <>
+                            <div>
+                                <img
+                                    onMouseOver={() => setOver(true)}
+                                    onMouseOut={() => setOver(false)}
+                                    src={over ? playButtonImageHover : playButtonImage}
+                                    alt="Play Button"
+                                    className={`play-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
+                                    onClick={goToPlay}
+                                    width="230"
+                                />
+                            </div>
+
                             <img
-                                src={playButtonImage}
-                                alt="Play Button"
-                                className={`play-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
-                                onClick={goToPlay}
-                                width="230"
-                            />
-                            <img
-                                src={settingsButtonImage}
+                                onMouseOver={() => setOver2(true)}
+                                onMouseOut={() => setOver2(false)}
+                                src={over2 ? settingsButtonImageHover : settingsButtonImage}
                                 alt="Settings Button"
                                 className={`settings-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                                 onClick={goToSettings}
@@ -137,29 +155,32 @@ function Menu({ onStart }, {setVolume}) {
                             {/*{openVolume && (*/}
 
 
-                                <label className="volume-slider">
-                                    Volume:
-                                    <input
-                                        type="range"
-                                        min="0"
-                                        max="1"
-                                        step="0.01"
-                                        onChange={handleVolumeChange}
-                                        defaultValue="0.5"
-                                    />
-                                </label>
+                                {/*<label className="volume-slider">*/}
+                                {/*    Volume:*/}
+                                {/*    <input*/}
+                                {/*        type="range"*/}
+                                {/*        min="0"*/}
+                                {/*        max="1"*/}
+                                {/*        step="0.01"*/}
+                                {/*        onChange={handleVolumeChange}*/}
+                                {/*        defaultValue="0.5"*/}
+                                {/*    />*/}
+                                {/*</label>*/}
 
 
-                            {/*<img*/}
-                            {/*    src={volumeButtonImage}*/}
-                            {/*    alt="Volume Button"*/}
-                            {/*    className={`volume-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}*/}
-                            {/*    onClick={volumeFunc}*/}
-                            {/*    width="230"*/}
-                            {/*/>*/}
                             <img
-                                src={backButtonImage}
-                                alt="Back Button"
+                                onMouseOver={() => setOver3(true)}
+                                onMouseOut={() => setOver3(false)}
+                                src={over3 ? volumeButtonImageHover : volumeButtonImage}
+                                alt="Volume Button"
+                                className={`volume-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
+                                onClick={volumeFunc}
+                                width="230"
+                            />
+                            <img
+                                onMouseOver={() => setOver4(true)}
+                                onMouseOut={() => setOver4(false)}
+                                src={over4 ? backButtonImageHover : backButtonImage}
                                 className={`back-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                                 onClick={goBack}
                                 width="230"
@@ -170,14 +191,18 @@ function Menu({ onStart }, {setVolume}) {
                     {isPlayOpen && (
                         <>
                             <img
-                                src={trialsButtonImage}
+                                onMouseOver={() => setOver5(true)}
+                                onMouseOut={() => setOver5(false)}
+                                src={over5 ? trialsButtonImageHover : trialsButtonImage}
                                 alt="Trials Button"
                                 className={`trials-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                                 onClick={goToTrials}
                                 width="230"
                             />
                             <img
-                                src={backButtonImage}
+                                onMouseOver={() => setOver4(true)}
+                                onMouseOut={() => setOver4(false)}
+                                src={over4 ? backButtonImageHover : backButtonImage}
                                 alt="Back Button"
                                 className={`back-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                                 onClick={goBack}

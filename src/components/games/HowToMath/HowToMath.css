@@ -9,6 +9,8 @@
     max-width: 940px; /* Adjust as needed */
     margin: 40px auto;
     text-align: center;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .how-to-math h1 {
@@ -16,9 +18,27 @@
 }
 
 .how-to-math h2 {
+    user-select: none;
+    -webkit-user-drag: none;
     font-family: "Lexend", serif;
     font-size: 30px;
     color: #916c51;
+}
+
+.how-to-math p {
+    user-select: none;
+}
+
+.how-to-math h3 {
+    user-select: none;
+}
+
+.how-to-math img {
+    user-select: none;
+}
+
+.how-to-math input {
+    user-select: none;
 }
 
 .startButton {

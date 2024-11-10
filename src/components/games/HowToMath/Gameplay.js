@@ -32,6 +32,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
         wait,
         isPaused,
         setIsPaused,
+        currentVar,
     } = useGameLogic(levelData, levelData.questions, handleGameEnd, 2); // Start delay of 1.5 seconds
 
     // Mounting effect for animations
@@ -131,6 +132,15 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
         onGameEnd({ action: 'menu' }); // Pass an action to go back to level select
     };
 
+    const varPlaceholder = () => {
+        if (!currentQuestion.question.includes('?') && currentQuestion.question !== '...') {
+            return `${currentVar} = ?`
+        }
+        if (currentQuestion.question === '...') {
+            return "Grading..."
+        }
+    }
+
 
     return (
 
@@ -179,6 +189,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                             {wait ? (
                                 <input autoFocus={true} className="input"
                                        type="text"
+                                       placeholder={varPlaceholder()}
                                        value={userAnswer}
                                        maxLength="15"
                                        onChange={(e) => {

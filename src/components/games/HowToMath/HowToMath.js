@@ -15,10 +15,15 @@ import './HowToMath.css';
 
 // Import all images used in your game
 import playButtonImage from './assets/play button.png';
+import playButtonImageHover from './assets/play button hover.png';
 import settingsButtonImage from './assets/settings button.png';
+import settingsButtonImageHover from './assets/settings button hover.png';
 import volumeButtonImage from './assets/volume button.png';
+import volumeButtonImageHover from './assets/volume button hover.png';
 import backButtonImage from './assets/back button.png';
+import backButtonImageHover from './assets/back button hover.png';
 import trialsButtonImage from './assets/trials button.png';
+import trialsButtonImageHover from './assets/trials button hover.png';
 import cheeba1Image from './assets/cheeba1.png';
 import cheeba2Image from './assets/cheeba2.png';
 import leyvi1Image from './assets/leyvi1.png';
@@ -94,6 +99,7 @@ function HowToMath() {
             // Pause the music
             if (menuMusicRef.current && !menuMusicRef.current.paused) {
                 menuMusicRef.current.pause();
+                menuMusicRef.current.load();
             }
         }
         // restart
@@ -108,7 +114,7 @@ function HowToMath() {
         // Clean up when component unmounts
         return () => {
             if (menuMusicRef.current) {
-                menuMusicRef.current.pause();
+
             }
         };
     }, [currentScene]);
@@ -117,7 +123,9 @@ function HowToMath() {
     useEffect(() => {
         const imageSources = [
             playButtonImage,
+            playButtonImageHover,
             settingsButtonImage,
+            settingsButtonImageHover,
             volumeButtonImage,
             backButtonImage,
             trialsButtonImage,
