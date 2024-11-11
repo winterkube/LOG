@@ -3,7 +3,7 @@
 import songChipZeal from '../assets/music/bgc-chipzeal.mp3';
 import {randomNum1} from "./1-introTrial";
 
-const bpm = 172.6;
+const bpm = 171;
 
 function randomNum2(what) {
     if (what === 0) {
@@ -23,7 +23,8 @@ export const speedTrialI = {
     song: songChipZeal,
     songTitle: 'BigGiantCircles - Chip Zeal',
     length: 99,
-    offset: 1100,
+    offset: 1000,
+    volume: 0.8,
     questions: [
         { question: randomNum1() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },

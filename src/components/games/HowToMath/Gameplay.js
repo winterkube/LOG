@@ -43,6 +43,10 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
     useEffect(() => {
         if (audioRef.current) {
             if (isPaused) {
+                if (!isReady) {
+                    audioRef.current.pause();
+                    audioRef.current.load();
+                }
                 audioRef.current.pause();
             } else {
                 audioRef.current.play();
@@ -59,10 +63,9 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
         if (inGame) {
 
             audioRef.current.loop = false;
-            audioRef.current.volume = 0.6;
+            audioRef.current.volume = levelData.volume;
             audioRef.current.load();
             setTimeout(function() {
-
                 audioRef.current.play();
             }, 2000 - levelData.offset);
 
@@ -78,10 +81,20 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
 
     }, [levelData.song]);
 
+
     function renderQuestion(question) {
         const elements = [];
         let i = 0;
         let len = question.length;
+
+        if (levelData.levelNumber === 4 && currentQuestion.question === '3 + x = 7') {
+            elements.push('‎');
+            elements.push(<h4>3 + ‎ ‎‎ ‎ = </h4>);
+            elements.push(<h5>?</h5>);
+            elements.push(<h6>7</h6>);
+            elements.push(<h7>x</h7>);
+            return elements;
+        }
 
         while (i < len) {
             if (question[i] === '^') {
@@ -142,19 +155,21 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
     }
 
 
+
     return (
 
         <div className={`game-play ${isMounted ? 'lvl-fade-in' : ''} ${isEnding ? 'lvl-fade-out' : ''}`}>
-
-            <div className={`gp-background ${isPaused ? 'paused' : ''}`}> </div>
 
             {isReady && currentQuestion ? (
                 <>
 
 
-                    <button className="pause-button" onClick={() => setIsPaused(true)}>
-                        | |
-                    </button>
+                    { currentQuestion.question !== '...' && (
+                        <button className="pause-button" onClick={() => setIsPaused(true)}>
+                            | |
+                        </button>
+                    )}
+
 
                     {/* Pause Modal */}
                     {isPaused && (
@@ -168,8 +183,11 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                         </div>
                     )}
 
-                    <div className={`not-pause ${isPaused ? 'paused' : ''}`}>
-                        {/* Question Timer Bar */}
+                    <div
+                        className={`not-pause ${isPaused ? 'paused' : ''} ${currentQuestion.question === '3 + x = 7' ? 'inverse' : ''}`}>
+
+                        <div className={`gp-background`}></div>
+
                         <div className={`timer-bar`}>
                             <div
                                 className="timer-progress"
@@ -228,14 +246,16 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                     </div>
 
 
-
                 </>
-            ) : (
+            ) : ( // NOT READY
                 <>
 
-                    {!isEnding && (
+                {!isEnding && (
                         <>
-                            <button className="pause-button" onClick={() => setIsPaused(true)}>
+                            <button className="pause-button" onClick={() => {
+                                setIsPaused(true);
+                                audioRef.current.volume = 0;
+                            }}>
                                 | |
                             </button>
 
@@ -244,11 +264,6 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                                 <div className="pause-modal">
                                     <div className="pause-modal-content">
                                         <h3>Paused</h3>
-                                        <button onClick={() =>
-                                            setIsPaused(false)
-
-                                        }>Resume
-                                        </button>
                                         <button onClick={handleRetry}>Retry</button>
                                         <button onClick={handleMenu}>Menu</button>
                                     </div>
@@ -258,37 +273,39 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                     )}
 
                     <div className={`not-pause ${isPaused ? 'paused' : ''}`}>
-                    {/* Pre-Level Timer Fill-Up */}
-                    <div className={`initial-timer-bar`}>
-                        <div
-                            className="initial-timer-progress"
-                            style={{
-                                width: `${((1.5 - timeLeft) / 1.5) * 100}%`,
-                            }}
-                        ></div>
-                    </div>
 
-                    <div className={`question-container ${isMounted ? 'lvl-slide-in' : ''}`}>
-                        {!isEnding ? (
-                            <h2><sup></sup>{currentQuestion.question}</h2>
+                        <div className={`gp-background`}></div>
+                        {/* Pre-Level Timer Fill-Up */}
+                        <div className={`initial-timer-bar`}>
+                            <div
+                                className="initial-timer-progress"
+                                style={{
+                                    width: `${((1.5 - timeLeft) / 1.5) * 100}%`,
+                                }}
+                            ></div>
+                        </div>
 
-                        ) : (
-                            <h2><sup></sup> ... <sup></sup></h2>
-                        )}
+                        <div className={`question-container ${isMounted ? 'lvl-slide-in' : ''}`}>
+                            {!isEnding ? (
+                                <h2><sup></sup>{renderQuestion(levelData.questions[0].question)}</h2>
 
-                        <input autoFocus={true} className="input"
-                               placeholder="GET READY..."
-                               type="text"
-                               value={userAnswer}
-                               maxLength="15"
-                        />
-                        <p>
-                            score: {score} <br/>
-                            time: {Math.ceil(timeLeft * 10) / 10}
-                        </p>
+                            ) : (
+                                <h2><sup></sup> ... <sup></sup></h2>
+                            )}
 
-                    </div>
-                    {/*<div className="get-ready">GET READY...</div>*/}
+                            <input autoFocus={true} className="input"
+                                   placeholder="GET READY..."
+                                   type="text"
+                                   value={userAnswer}
+                                   maxLength="15"
+                            />
+                            <p>
+                                score: {score} <br/>
+                                time: {Math.ceil(timeLeft * 10) / 10}
+                            </p>
+
+                        </div>
+                        {/*<div className="get-ready">GET READY...</div>*/}
                     </div>
 
                     <script> isReady = true;</script>

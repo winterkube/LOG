@@ -10,6 +10,7 @@ export const trigonometryTrial = {
     songTitle: 'Schtiffles - 33',
     length: 99,
     offset: 1100,
+    volume: 0.6,
     questions: [
         { question: '1 + 1 = ?', answer: '2', time: (60 / bpm) * 4 },
         {

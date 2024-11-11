@@ -38,14 +38,8 @@ function Menu({ onStart }, {setVolume}) {
     // const [openVolume, setOpenVolume] = useState(false);
 
     // New state variable to control initial animations
-    const [animateEnter, setAnimateEnter] = useState(false);
+    const [animateEnter, setAnimateEnter] = useState(true);
 
-    useEffect(() => {
-        // Trigger enter animations when the component mounts
-
-        setAnimateEnter(true);
-
-    }, []);
 
     const goToSettings = () => {
         setAnimateExit(true);

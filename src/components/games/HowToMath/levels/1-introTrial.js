@@ -2,7 +2,7 @@
 
 import songWaterflameGlorious from '../assets/music/waterflame-glorious.mp3';
 
-const bpm = 76.5;
+const bpm = 76.25;
 
 export const randomNum1 = (what) => {
     if (what === '') {
@@ -31,6 +31,7 @@ export const introTrial = {
     songTitle: 'Waterflame - Glorious Morning',
     length: 112, // in seconds
     offset: 1000, // how long until the song actually starts in the mp3, in milliseconds
+    volume: 0.6,
     questions: [
 
         { question: '1 + 1 = ?', answer: '2', time: (60 / bpm) * 3.4,},

@@ -3,14 +3,15 @@
 import songWormhole from '../assets/music/f777-wormhole.mp3';
 import {randomNum1} from "./1-introTrial";
 
-const bpm = 84;
+const bpm = 83;
 
 export const speedTrialII = {
-    levelNumber: 6,
+    levelNumber: 8,
     song: songWormhole,
     songTitle: 'F-777 - Wormhole To Somewhere',
     length: 99,
-    offset: 330,
+    offset: 30,
+    volume: 0.55,
     questions: [
         { question: '2 + 22 + 2 = ?', answer: '26', time: (60 / bpm) * 8 },
         { question: '2^2 + 22^2 + 2^2 = ?', answer: 'asdf', time: (60 / bpm) * 8 },

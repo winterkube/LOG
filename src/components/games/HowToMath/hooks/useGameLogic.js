@@ -82,22 +82,27 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
             setCurrentQuestion(questionData);
             setUserAnswer('');
 
+            if (!isPausedRef.current) {
+                setTimeLeft(startDelay);
+            }
+
             timerRef.current = setInterval(() => {
+                if (!isPausedRef.current) {
+                    setTimeLeft((prevTime) => {
 
-                setTimeLeft((prevTime) => {
+                        if (prevTime <= 0) {
+                            clearInterval(timerRef.current);
 
-                    if (prevTime <= 0) {
-                        clearInterval(timerRef.current);
+                            setIsReady(true);
+                            startQuestionTimer(questionData); // Pass questionData here
 
-                        setIsReady(true);
-                        startQuestionTimer(questionData); // Pass questionData here
+                            return 0;
+                        } else {
+                            return prevTime - 0.01;
+                        }
 
-                        return 0;
-                    } else {
-                        return prevTime - 0.01;
-                    }
-
-                });
+                    });
+                }
 
             }, 10); // affects get ready timer
         } else {
@@ -190,6 +195,9 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
             // Take the first solution (you can handle multiple solutions if needed)
             const answerValue = Algebrite.run(`float(${solutions[0]})`);
             answer = (Math.round(parseFloat(answerValue) * 1000) / 1000).toString();
+            if (answer === 'NaN') {
+                answer = questionData.answer;
+            }
         } else {
             answer = (Math.round(evaluate(questionData.question.replace(" = ?", "")) * 1000) / 1000).toString();
 
