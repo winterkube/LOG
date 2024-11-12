@@ -6,6 +6,7 @@ import {evaluate} from 'mathjs';
 import 'algebra.js';
 import {Equation} from "algebra.js";
 import Fraction from 'fraction.js';
+import cloneDeep from 'lodash/cloneDeep';
 
 let Algebrite = require('algebrite')
 
@@ -19,6 +20,14 @@ Algebrite = require('algebrite')
 // Algebrite.factor('10!').toString() // => "2^8 3^4 5^2 7"
 //
 // Algebrite.eval('integral(x^2)').toString() // => "1/3 x^3"
+
+let randomNumCounter = 0;
+
+export const randomNum1 = (what) => {
+    randomNumCounter += 1;
+    return `__RANDOM_NUM1_${what || 'default'}_${randomNumCounter}__`;
+};
+
 export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -36,7 +45,6 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
     const isPausedRef = useRef(false);
     const [_isPaused, _setIsPaused] = useState(false);
 
-    const [randomNum, setRandomNum] = useState(0);
 
     let wait = true;
     const setUserAnswer = (answer) => {
@@ -48,6 +56,86 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
         _setIsPaused(paused);
         isPausedRef.current = paused;
     };
+
+    const [processedQuestions, setProcessedQuestions] = useState([]);
+    const [levelRestartCount, setLevelRestartCount] = useState(0);
+
+    // Function to restart the level
+    const restartLevel = () => {
+        // Reset necessary state variables
+        setCurrentQuestionIndex(0);
+        scoreRef.current = 0;
+        setFeedbackMessage('');
+        // Increment level restart count to trigger re-randomization
+        setLevelRestartCount((prevCount) => prevCount + 1);
+    };
+
+    useEffect(() => {
+        // Reset randomNumCounter before processing
+        randomNumCounter = 0;
+
+        // Clone the questions to avoid mutating the original data
+        const clonedQuestions = cloneDeep(questions);
+
+        // Process each question to replace placeholders with random numbers
+        const newQuestions = clonedQuestions.map((questionData) => {
+            const newQuestionData = { ...questionData };
+            newQuestionData.question = replacePlaceholdersWithRandomNumbers(questionData.question);
+            return newQuestionData;
+        });
+
+        setProcessedQuestions(newQuestions);
+    }, [levelRestartCount]);
+
+    function replacePlaceholdersWithRandomNumbers(questionString) {
+        // Replace placeholders for 'what' === '' (default)
+        questionString = questionString.replace(/__RANDOM_NUM1_default_\d+__/g, () => {
+            return Math.round(Math.random() * 8 + 0.5).toString(); // num between 1-9
+        });
+
+        // Replace placeholders for 'what' === 1
+        questionString = questionString.replace(/__RANDOM_NUM1_1_\d+__/g, () => {
+            return (Math.round(Math.random() * 10) + 5).toString(); // num between 5-14
+        });
+
+        // Replace placeholders for 'what' === 2
+        questionString = questionString.replace(/__RANDOM_NUM1_2_\d+__/g, () => {
+            return (Math.round(Math.random() * 7) + 2).toString(); // num between 2-8
+        });
+
+        // Replace placeholders for 'what' === 3
+        questionString = questionString.replace(/__RANDOM_NUM1_3_\d+__/g, () => {
+            return (Math.round((Math.random() + 0.10) * 100) / 100).toString(); // num between 0.10-1.00
+        });
+
+        // Replace placeholders for 'what' === 4
+        questionString = questionString.replace(/__RANDOM_NUM1_4_\d+__/g, () => {
+            return (Math.round((Math.random() + 0.10) * 10) / 10).toString(); // num between 0.1-1.0
+        });
+
+        // Replace placeholders for 'what' === 5
+        questionString = questionString.replace(/__RANDOM_NUM1_5_\d+__/g, () => {
+            return (Math.round(Math.random() * 2) + 7).toString(); // num between 7-9
+        });
+
+        // Replace placeholders for 'what' === 6
+        questionString = questionString.replace(/__RANDOM_NUM1_6_\d+__/g, () => {
+            return ((Math.round(Math.random() * 5) + 1) * 2 + 1).toString(); // odd num between 3-11
+        });
+
+        // Replace placeholders for 'what' === 7
+        questionString = questionString.replace(/__RANDOM_NUM1_7_\d+__/g, () => {
+            return ((Math.round(Math.random() * 5) + 1) * 2).toString(); // even num between 2-10
+        });
+
+        // Handle any remaining default placeholders
+        questionString = questionString.replace(/__RANDOM_NUM1_\d+__/g, () => {
+            return Math.round(Math.random() * 8 + 0.5).toString(); // num between 1-9
+        });
+
+        return questionString;
+    }
+
 
     useEffect(() => {
         if (isPausedRef.current) {
@@ -64,8 +152,10 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
         }
     }, [isPausedRef.current]);
 
-
+    // const [randomNum, setRandomNum] = useState(0);
     useEffect(() => {
+
+
         // Start initial timer
         setIsReady(false);
         setUserAnswer('');
@@ -75,10 +165,17 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
 
 
     useEffect(() => {
-        // Generate the current question
         let questionData = questions[currentQuestionIndex];
+        if (processedQuestions.length === 0) {
+            // processedQuestions is not yet populated, wait until it is
+            return;
+        } else {
+            questionData = processedQuestions[currentQuestionIndex];
+        }
+        // Generate the current question
 
         if (!isReady) {
+
             setCurrentQuestion(questionData);
             setUserAnswer('');
 
@@ -109,7 +206,7 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
             if (currentQuestionIndex >= 0 && currentQuestionIndex < questions.length) {
 
 
-                let questionData = questions[currentQuestionIndex];
+                let questionData = processedQuestions[currentQuestionIndex];
                 setCurrentQuestion(questionData);
                 _setUserAnswer('');
                 userAnswerRef.current = '';
@@ -128,7 +225,7 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
         };
 
 
-    }, [currentQuestionIndex]);
+    }, [currentQuestionIndex, processedQuestions]);
 
     const startQuestionTimer = (questionData, resume = false) => {
 
@@ -289,5 +386,6 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
         isPaused: _isPaused,
         setIsPaused,
         currentVar,
+        restartLevel,
     };
 }

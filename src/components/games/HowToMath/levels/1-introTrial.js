@@ -1,29 +1,34 @@
 // src/components/games/HowToMath/levels/1-introTrial.js
 
 import songWaterflameGlorious from '../assets/music/waterflame-glorious.mp3';
+import {useState} from "react";
+import {randomNum1} from "../hooks/useGameLogic";
 
 const bpm = 76.25;
 
-export const randomNum1 = (what) => {
-    if (what === '') {
-        return Math.round(Math.random() * 8 + 0.5); // num between 1-9
-    } else if (what === 1) {
-        return Math.round(Math.random() * 10) + 5; // num between 5-14
-    } else if (what === 2) {
-        return Math.round(Math.random() * 7) + 2; // num between 2-8
-    } else if (what === 3) {
-        return Math.round((Math.random()+0.10)*100)/100; // num between 0.10-1.00
-    } else if (what === 4) {
-        return Math.round((Math.random() + 0.10) * 10) / 10; // num between 0.1-1.0
-    } else if (what === 5) {
-        return Math.round((Math.random()) * 2) + 7; // num between 7-9
-    } else if (what === 6) {
-        return (Math.round(Math.random() * 5) + 1) * 2 + 1; // odd num between 3-11
-    } else if (what === 7) {
-        return (Math.round(Math.random() * 5) + 1) * 2; // even num between 2-10
-    }
-    return Math.round(Math.random() * 8 + 0.5);
-}
+// export const randomNum1 = (what) => {
+//
+//     if (what === '') {
+//         return Math.round(Math.random() * 8 + 0.5); // num between 1-9
+//     } else if (what === 1) {
+//         return Math.round(Math.random() * 10) + 5; // num between 5-14
+//     } else if (what === 2) {
+//         return Math.round(Math.random() * 7) + 2; // num between 2-8
+//     } else if (what === 3) {
+//         return Math.round((Math.random()+0.10)*100)/100; // num between 0.10-1.00
+//     } else if (what === 4) {
+//         return Math.round((Math.random() + 0.10) * 10) / 10; // num between 0.1-1.0
+//     } else if (what === 5) {
+//         return Math.round((Math.random()) * 2) + 7; // num between 7-9
+//     } else if (what === 6) {
+//         return (Math.round(Math.random() * 5) + 1) * 2 + 1; // odd num between 3-11
+//     } else if (what === 7) {
+//         return (Math.round(Math.random() * 5) + 1) * 2; // even num between 2-10
+//     }
+//     return (Math.round(Math.random() * 8 + 0.5));
+// }
+
+
 
 export const introTrial = {
     levelNumber: 1,
@@ -57,19 +62,19 @@ export const introTrial = {
         { question: '1 + 1 - 1 - 1 = ?', answer: '0', time: (60 / bpm) * 2},
         { question: '2 + 1 - 1 + 2 = ?', answer: '4', time: (60 / bpm) * 2},
 
-        { question: (Math.floor(Math.random() * 10)).toString() + ' + ' + Math.floor(Math.random() * 10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
-        { question: (Math.floor(Math.random() * 10)).toString() + ' + ' + Math.floor(Math.random() * 10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
-        { question: '5' + ' - ' + (Math.floor(Math.random() * 10)+5).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
-        { question: '7' + ' - ' + (Math.floor(Math.random() * 10)+9).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
-        { question: (Math.floor(Math.random() * 10)).toString() + ' * ' + '1' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
-        { question: (Math.floor(Math.random() * 10)).toString() + ' * ' + '2' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
-        { question: (Math.floor(Math.random() * 10)).toString() + ' * ' + '3' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
-        { question: (Math.floor(Math.random() * 10)).toString() + ' * ' + '4' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
-        { question: '5' + ' * ' + (Math.floor(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
-        { question: '6' + ' * ' + (Math.floor(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
-        { question: '7' + ' * ' + (Math.floor(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
-        { question: '1' + ' * ' + (Math.floor(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 1,},
-        { question: '1' + ' * ' + (Math.floor(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 1,},
+        { question: (randomNum1()).toString() + ' + ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: (randomNum1()).toString() + ' + ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: '5' + ' - ' + (randomNum1(1)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: '7' + ' - ' + (randomNum1(1)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: (randomNum1()).toString() + ' * ' + '1' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: (randomNum1()).toString() + ' * ' + '2' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: (randomNum1()).toString() + ' * ' + '3' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: (randomNum1()).toString() + ' * ' + '4' + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: '5' + ' * ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: '6' + ' * ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: '7' + ' * ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: '1' + ' * ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 1,},
+        { question: '1' + ' * ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 1,},
 
         { question: '1 + ' + (randomNum1(2)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
         { question: '1 + 1 + ' + (randomNum1(2)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},

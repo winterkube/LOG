@@ -1,7 +1,7 @@
 
 
 import songVindicateMe from '../assets/music/bgc-vindicateme.mp3';
-import {randomNum1} from "./1-introTrial";
+import {randomNum1} from "../hooks/useGameLogic";
 
 const bpm = 101.025;
 
@@ -103,8 +103,7 @@ export const algebraTrial = {
     offset: 1170,
     volume: 0.72,
     questions: [
-        { question: randomNum1().toString() + ' + ' + randomNum1().toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
-        // { question: randomEq1(1), variable: 'x', answer: 'idk', time: (60 / bpm) * 4 },
+        { question: (Math.round(Math.random() * 10)).toString() + ' + ' + (Math.round(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1().toString() + ' + ' +  randomNum1().toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1(1).toString() + ' + ' + randomNum1(2).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: '3 + 7 = ?', answer: '10', time: (60 / bpm) * 3 },
@@ -138,7 +137,7 @@ export const algebraTrial = {
         { question: randomEq1(1,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomEq1(1,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomEq1(2,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 7 },
-        { question: randomEq1(2,'y') , variable: 'y', answer: 'idk', time: (60 / bpm) * 8 },
+        { question: '5y - y = 2' , variable: 'y', answer: 'idk', time: (60 / bpm) * 8 },
         { question: randomEq1(2,'z'), variable: 'z', answer: 'idk', time: (60 / bpm) * 9 },
 
         { question: randomEq1(2,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 6 },

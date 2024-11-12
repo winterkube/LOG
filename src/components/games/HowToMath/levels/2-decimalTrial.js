@@ -1,7 +1,7 @@
 
 
 import songFbHarmony from '../assets/music/fb-harmony.mp3';
-import {randomNum1} from './1-introTrial';
+import {randomNum1} from "../hooks/useGameLogic";
 
 const bpm = 65.1;
 

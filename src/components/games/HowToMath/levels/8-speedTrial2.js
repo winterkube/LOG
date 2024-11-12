@@ -1,7 +1,7 @@
 
 
 import songWormhole from '../assets/music/f777-wormhole.mp3';
-import {randomNum1} from "./1-introTrial";
+import {randomNum1} from "../hooks/useGameLogic";
 
 const bpm = 83.2;
 

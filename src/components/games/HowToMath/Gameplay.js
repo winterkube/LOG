@@ -33,6 +33,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
         isPaused,
         setIsPaused,
         currentVar,
+        restartLevel,
     } = useGameLogic(levelData, levelData.questions, handleGameEnd, 2); // Start delay of 1.5 seconds
 
     // Mounting effect for animations
@@ -99,6 +100,15 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
             elements.push(<h7>x</h7>);
             return elements;
         }
+
+        // if (levelData.levelNumber === 4 && currentQuestion.question === levelData.questions[27].question) {
+        //     // elements.push('‎');
+        //     elements.push('5y - y = 2');
+        //     elements.push(<h4>5</h4>);
+        //     elements.push(<h4>5</h4>);
+        //
+        //     return elements;
+        // }
 
         while (i < len) {
             if (question[i] === '^') {
@@ -180,6 +190,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
     }
 
     const handleRetry = () => {
+        restartLevel();
         setIsPaused(false);
         onGameEnd({ action: 'retry' }); // Pass an action to restart the level
     };

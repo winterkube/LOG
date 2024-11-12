@@ -1,7 +1,7 @@
 
 
 import songChipZeal from '../assets/music/bgc-chipzeal.mp3';
-import {randomNum1} from "./1-introTrial";
+import {randomNum1} from "../hooks/useGameLogic";
 
 const bpm = 171;
 
@@ -26,7 +26,7 @@ export const speedTrialI = {
     offset: 1000,
     volume: 0.8,
     questions: [
-        { question: randomNum1() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
+        { question: '1' + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
