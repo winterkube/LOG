@@ -12,6 +12,7 @@ export const exponentTrial = {
     offset: 150,
     volume: 0.6,
     questions: [
+
         { question: '2^2 = ?', answer: '4', time: (60 / bpm) * 4 },
         { question: '3^2 = ?', answer: '9', time: (60 / bpm) * 4 },
         { question: '1^1 + 2^1 + 3^1 = ?', answer: 'idk', time: (60 / bpm) * 4 },
@@ -19,6 +20,12 @@ export const exponentTrial = {
         { question: '1^2 + 1^20 = ?', answer: '2', time: (60 / bpm) * 4 },
         { question: '2^2 + 1^20 = ?', answer: '5', time: (60 / bpm) * 4 },
         { question: '3^2 + 4^2 + 5^2 = ?', answer: 'idk', time: (60 / bpm) * 8 },
+
+        { question: 'x^2 = 4', answer: '2', time: (60 / bpm) * 4 },
+        { question: 'x^3 = 27', answer: '3', time: (60 / bpm) * 4 },
+        { question: 'sqrt(16) = ?', answer: '4', time: (60 / bpm) * 4 },
+        { question: '-sqrt(36) = ?', answer: '-6', time: (60 / bpm) * 4 },
+
 
         {
             question: '...',

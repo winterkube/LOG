@@ -126,9 +126,25 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                     elements.push('^');
                     i++;
                 }
+            } else if (question[i] === 's' && question[i+1] === 'q') {
+                //sqrt detected
+
+                    const base = elements.pop();
+                    i+=4; // Move past 'sqrt'
+                    let sqrt = '';
+
+                        // Collect consecutive alphanumeric characters
+                        while (i < len && /\w/.test(question[i]) || question[i] === '-') {
+                            sqrt += question[i];
+                            i++;
+                        }
+
+                    elements.push(base);
+                    elements.push( '√' + sqrt );
+
             } else {
-                elements.push(question[i]);
-                i++;
+                    elements.push(question[i]);
+                    i++;
             }
         }
         return elements;

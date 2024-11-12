@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "algebra": "^1.0.1",
     "algebra.js": "^0.2.6",
     "algebrite": "^1.4.0",
     "axios": "^1.7.7",
