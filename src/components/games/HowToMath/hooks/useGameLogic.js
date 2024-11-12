@@ -177,6 +177,8 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
 
         if (!questionData.question.includes('?') && questionData.question.includes('^')) { // e.g. 2^x = 2
            answer = questionData.answer;
+        } else if (questionData.question.includes('log')) {
+            answer = questionData.answer;
         } else if (!questionData.question.includes('?') && !questionData.question.includes('^')) {
 
             setCurrentVar(questionData.variable);

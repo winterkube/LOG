@@ -142,9 +142,34 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                     elements.push(base);
                     elements.push( '√' + sqrt );
 
-            } else {
-                    elements.push(question[i]);
+            }
+            else if (question[i] === 'l' && question[i+1] === 'o') {
+                // log detected
+
+                let base = '';
+                i+=3; // Move past 'log'
+                let log = '';
+
+                // Collect consecutive alphanumeric characters
+                while ((i < len && /\w/.test(question[i]) || question[i] === '-') && question[i] !== '(') {
+                    base += question[i];
                     i++;
+                }
+                i++; // move past (
+                while ((i < len && /\w/.test(question[i]) || question[i] === '-') && question[i] !== ')') {
+                    log += question[i];
+                    i++;
+                }
+                i++;
+
+                elements.push('log');
+                elements.push(<sub key={i}> {base} </sub>);
+                elements.push(log);
+
+            }
+        else {
+                elements.push(question[i]);
+                i++;
             }
         }
         return elements;
@@ -215,7 +240,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                         {/* Question and Answer Input */}
                         <div className={`question-container`}>
                             {!isEnding ? (
-                                <h2><sup></sup> {renderQuestion(currentQuestion.question)}</h2>
+                                <h2><sup></sup>{renderQuestion(currentQuestion.question)}</h2>
                             ) : (
                                 <h2><sup></sup> ... <sup></sup></h2>
                             )}
