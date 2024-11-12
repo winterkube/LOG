@@ -16,7 +16,7 @@ export const randomNum1 = (what) => {
     } else if (what === 4) {
         return Math.round((Math.random() + 0.10) * 10) / 10; // num between 0.1-1.0
     } else if (what === 5) {
-        return Math.round((Math.random()) * 3) + 6; // num between 6-9
+        return Math.round((Math.random()) * 2) + 7; // num between 7-9
     } else if (what === 6) {
         return (Math.round(Math.random() * 5) + 1) * 2 + 1; // odd num between 3-11
     } else if (what === 7) {

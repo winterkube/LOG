@@ -2,7 +2,7 @@
 
 import songShine from '../assets/music/creo-shine.mp3';
 
-const bpm = 90;
+const bpm = 90.2;
 
 function logN(base, val) {
     return Math.log(val) / Math.log(base);
@@ -32,11 +32,34 @@ export const exponentTrial = {
         { question: '-sqrt(36) = ?', answer: '-6', time: (60 / bpm) * 4 },
         { question: 'x^0.5 = 4', answer: '16', variable: 'x', time: (60 / bpm) * 4 },
         { question: 'x^-1 = 4', answer: '0.25', variable: 'x', time: (60 / bpm) * 4 },
-        { question: 'x^-1 = 4', answer: '0.25', variable: 'x', time: (60 / bpm) * 4 },
         { question: 'log10(100) = ?', answer: '2', time: (60 / bpm) * 4 },
         { question: 'log100(100) = ?', answer: '1', time: (60 / bpm) * 4 },
 
-        { question: '123^0 = ?', answer: '2', time: (60 / bpm) * 4 },
+
+        { question: '123^x = 122 + 123^0 ', answer: '1', variable: 'x', time: (60 / bpm) * 6 },
+        { question: '3x^2 = 48', answer: '4', variable: 'x', time: (60 / bpm) * 6 },
+        { question: 'x^2 * x^3 = 32', answer: '2', variable: 'x', time: (60 / bpm) * 6 },
+        { question: 'x^2 / x^3 = 32', answer: '1/32', variable: 'x', time: (60 / bpm) * 6 },
+
+        { question: 'x * x * x^-1 = 4', answer: '4', variable: 'x', time: (60 / bpm) * 6 },
+        { question: 'x^2 + (x+1)^2 = 5^2', answer: '3', variable: 'x', time: (60 / bpm) * 6 },
+        { question: '(x^2)^2 = 16', answer: '2', variable: 'x', time: (60 / bpm) * 3 },
+        { question: '(x^3)^-1 = 1/27' , answer: '3', variable: 'x', time: (60 / bpm) * 3 },
+        { question: 'sqrt(x) = 81', answer: '9', variable: 'x', time: (60 / bpm) * 3 },
+        { question: '0^2 = ?', answer: '0', time: (60 / bpm) * 3 },
+
+        { question: '8^2 - log2(64) + 9^0.5 = ?', answer: '61', time: (60 / bpm) * 12 },
+        { question: '(3^2)^2 + (2^2)^3 = ?', answer: 'idk', time: (60 / bpm) * 12 },
+        { question: 'log5(125) - x = 10^2', answer: '-97', variable: 'x', time: (60 / bpm) * 12 },
+        { question: '5^x + x = 2^7', answer: '3', variable: 'x', time: (60 / bpm) * 12 },
+
+        { question: '1 = ?', answer: 'idk', time: (60 / bpm) * 3 },
+        { question: '0.5^2 = ?', answer: '0.25', time: (60 / bpm) * 6 },
+        { question: '1.5^2 = ?', answer: '2.25', time: (60 / bpm) * 6 },
+        { question: 'sqrt(0.49) = ?', answer: '0.7', time: (60 / bpm) * 6 },
+        { question: 'sqrt(-1) = ?', answer: 'i', time: (60 / bpm) * 6 },
+
+
 
 
         {

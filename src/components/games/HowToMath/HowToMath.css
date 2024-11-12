@@ -12,6 +12,10 @@
     user-select: none;
     -webkit-user-drag: none;
 }
+.how-to-math img {
+    user-select: none;
+    -webkit-user-drag: none;
+}
 
 .how-to-math h1 {
     font-size: 50px;

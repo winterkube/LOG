@@ -8,7 +8,10 @@
     --xPosSettings: 43%;
     --yPosSettings: 80%;
 }
-
+.menu {
+    user-select: none;
+    -webkit-user-drag: none;
+}
 .volume-slider {
     top: 45%;
     left:60%;

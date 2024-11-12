@@ -128,6 +128,7 @@ function Menu({ onStart }, {setVolume}) {
                                     alt="Play Button"
                                     className={`play-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                                     onClick={goToPlay}
+                                    draggable={false}
                                     width="230"
                                 />
                             </div>

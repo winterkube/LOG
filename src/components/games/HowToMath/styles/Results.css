@@ -270,12 +270,12 @@
 
 .dog-heads {
     position: absolute;
-    top: -10%;
+    top: -15%;
     background-position: center;
     background-repeat: no-repeat;
     padding: 10px;
 
-    width: 800px;
+    width: 1000px;
     height: 800px;
 
 
@@ -286,8 +286,8 @@
 /* Carousel container */
 .carousel-container {
     position: relative;
-    width: 100%;
-    overflow: hidden;
+    width: 110%;
+    /*overflow: hidden;*/
     z-index: 1;
 }
 
@@ -295,20 +295,20 @@
 .carousel-row {
     display: flex;
     align-items: center;
-    overflow: hidden;
+    /*overflow: hidden;*/
     height: 200px; /* Adjust based on image height */
-    margin-bottom: -80px;
+    margin-bottom: 0px;
 }
 
 /* Adjust vertical positioning */
 .carousel-row + .carousel-row {
-    margin-top: -80px; /* Adjust to overlap rows if needed */
+    margin-top: -65px; /* Adjust to overlap rows if needed */
 }
 
 /* Carousel moving right */
 .move-right .carousel {
     display: flex;
-    animation: scroll-right 20s linear infinite;
+    animation: scroll-right 30s linear infinite;
 }
 
 .move-right.offset .carousel {
@@ -318,7 +318,7 @@
 /* Carousel moving left */
 .move-left .carousel {
     display: flex;
-    animation: scroll-left 20s linear infinite;
+    animation: scroll-left 30s linear infinite;
 }
 
 .move-left.offset .carousel {
@@ -359,23 +359,23 @@
 
 /* Styling the images */
 .carousel img {
-    width: 150px; /* Adjust based on image size */
+    width: 175px; /* Adjust based on image size */
     flex-shrink: 0;
     opacity: 0.5; /* Adjust opacity if desired */
 }
 
 /* Remove spacing between images */
 .carousel img + img {
-    margin-left: 0;
+    margin-left: 5px;
 }
 
 /* Faster movement for specific rows */
 .carousel-row.move-right .carousel {
-    animation-duration: 15s;
+    animation-duration: 25s;
 }
 
 .carousel-row.move-left .carousel {
-    animation-duration: 20s;
+    animation-duration: 30s;
 }
 
 .move-right.offset .carousel {

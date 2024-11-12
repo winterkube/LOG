@@ -113,6 +113,11 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
                 setCurrentQuestion(questionData);
                 _setUserAnswer('');
                 userAnswerRef.current = '';
+
+                if (!questionData.question.includes('?')) {
+                    setCurrentVar(questionData.variable);
+                }
+
                 startQuestionTimer(questionData);
             }
         }
@@ -175,13 +180,14 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
 
         let answer;
 
+
         if (!questionData.question.includes('?') && questionData.question.includes('^')) { // e.g. 2^x = 2
            answer = questionData.answer;
         } else if (questionData.question.includes('log')) {
             answer = questionData.answer;
         } else if (!questionData.question.includes('?') && !questionData.question.includes('^')) {
 
-            setCurrentVar(questionData.variable);
+
 
             // Solve the algebraic equation
             const equationStrWithFractions = convertDecimalsToFractions(questionData.question);
@@ -206,7 +212,9 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
         }
 
          // convert the string to an equation the eval() function can understand, and solve (then round to nearest 0.01)
-
+        if (answer === 'NaN') {
+            answer = questionData.answer;
+        }
 
         const userAnswer = userAnswerRef.current.trim();
         const isCorrect =

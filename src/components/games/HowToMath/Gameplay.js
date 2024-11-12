@@ -81,14 +81,18 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
 
     }, [levelData.song]);
 
+    function notLong (name) {
+        return (name.length <= 30);
+    }
 
     function renderQuestion(question) {
         const elements = [];
         let i = 0;
         let len = question.length;
 
-        if (levelData.levelNumber === 4 && currentQuestion.question === '3 + x = 7') {
+        if (levelData.levelNumber === 4 && currentQuestion.question === levelData.questions[4].question) {
             elements.push('‎');
+            // elements.push('3 + x = 7');
             elements.push(<h4>3 + ‎ ‎‎ ‎ = </h4>);
             elements.push(<h5>?</h5>);
             elements.push(<h6>7</h6>);
@@ -114,7 +118,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                         i++; // Skip '}'
                     } else {
                         // Collect consecutive alphanumeric characters
-                        while (i < len && /\w/.test(question[i]) || question[i] === '-') {
+                        while (i < len && /\w/.test(question[i]) || question[i] === '-' || question[i] === '.') {
                             exponent += question[i];
                             i++;
                         }
@@ -134,7 +138,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                     let sqrt = '';
 
                         // Collect consecutive alphanumeric characters
-                        while (i < len && /\w/.test(question[i]) || question[i] === '-') {
+                        while (i < len && /\w/.test(question[i]) || question[i] === '-' || question[i] === '.') {
                             sqrt += question[i];
                             i++;
                         }
@@ -151,12 +155,12 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                 let log = '';
 
                 // Collect consecutive alphanumeric characters
-                while ((i < len && /\w/.test(question[i]) || question[i] === '-') && question[i] !== '(') {
+                while ((i < len && /\w/.test(question[i]) || question[i] === '-' || question[i] === '.') && question[i] !== '(') {
                     base += question[i];
                     i++;
                 }
                 i++; // move past (
-                while ((i < len && /\w/.test(question[i]) || question[i] === '-') && question[i] !== ')') {
+                while ((i < len && /\w/.test(question[i]) || question[i] === '-' || question[i] === '.') && question[i] !== ')') {
                     log += question[i];
                     i++;
                 }
@@ -238,13 +242,16 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                             ></div>
                         </div>
                         {/* Question and Answer Input */}
-                        <div className={`question-container`}>
-                            {!isEnding ? (
-                                <h2><sup></sup>{renderQuestion(currentQuestion.question)}</h2>
+                        <div className={`question-container `}>
+                            <div className="question-bg">
+                            {!isEnding ? (   // first
+
+                                    <h2 className={`ques ${notLong(currentQuestion.question) ? '' : 'long'}`}><sup></sup>{renderQuestion(currentQuestion.question)}</h2>
+
                             ) : (
                                 <h2><sup></sup> ... <sup></sup></h2>
                             )}
-
+                            </div>
                             {wait ? (
                                 <input autoFocus={true} className="input"
                                        type="text"
@@ -327,13 +334,13 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                         </div>
 
                         <div className={`question-container ${isMounted ? 'lvl-slide-in' : ''}`}>
-                            {!isEnding ? (
-                                <h2><sup></sup>{renderQuestion(levelData.questions[0].question)}</h2>
-
+                            <div className="question-bg">
+                            {!isEnding ? ( // second
+                                    <h2><sup></sup>{renderQuestion(levelData.questions[0].question)}</h2>
                             ) : (
                                 <h2><sup></sup> ... <sup></sup></h2>
                             )}
-
+                            </div>
                             <input autoFocus={true} className="input"
                                    placeholder="GET READY..."
                                    type="text"

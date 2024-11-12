@@ -3,7 +3,7 @@
 import songFbHarmony from '../assets/music/fb-harmony.mp3';
 import {randomNum1} from './1-introTrial';
 
-const bpm = 65;
+const bpm = 65.1;
 
 export const decimalTrial = {
     levelNumber: 2,
@@ -35,7 +35,7 @@ export const decimalTrial = {
         { question: randomNum1(4).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
         { question: randomNum1(4).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
 
-        { question: '2' + ' * ' + ((Math.floor((Math.random()+0.5) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
+        { question: '2' + ' * ' + ((Math.floor((Math.random()+1) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
         { question: '3' + ' * ' + ((Math.floor((Math.random()+1) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 3,},
         { question: '2' + ' * ' + ((Math.floor((Math.random()+2) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
 

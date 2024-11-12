@@ -2,17 +2,20 @@
 
 import songThirtyThree from '../assets/music/schtiffles-33.mp3';
 
-const bpm = 80;
+const bpm = 88;
 
 export const trigonometryTrial = {
     levelNumber: 6,
     song: songThirtyThree,
     songTitle: 'Schtiffles - 33',
     length: 99,
-    offset: 1100,
+    offset: 100,
     volume: 0.6,
     questions: [
-        { question: '1 + 1 = ?', answer: '2', time: (60 / bpm) * 4 },
+        { question: '2x = 1', answer: 'e', variable: 'x', time: (60 / bpm) * 4 },
+        { question: '2y = 1', answer: 'e', variable: 'y', time: (60 / bpm) * 4 },
+        { question: '2z = 1', answer: 'e', variable: 'z', time: (60 / bpm) * 4 },
+        { question: '2y = 1', answer: 'e', variable: 'y', time: (60 / bpm) * 4 },
         {
             question: '...',
             answer: '.',
