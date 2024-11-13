@@ -240,7 +240,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                     )}
 
                     <div
-                        className={`not-pause ${isPaused ? 'paused' : ''} ${currentQuestion.question === '3 + x = 7' ? 'inverse' : ''}`}>
+                        className={`not-pause ${isPaused ? 'paused' : ''} ${ (levelData.levelNumber === 4 && currentQuestion.question === levelData.questions[4].question) ? 'inverse' : ''}`}>
 
                         <div className={`gp-background`}></div>
 
@@ -296,7 +296,10 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                             )}
                             <p>
                                 score: {Math.round(score * 100) / 100} <br/>
-                                time: {Math.round(timeLeft * 10) / 10} <br/>
+                                <div className="time">
+                                    {Math.round(timeLeft * 10) / 10} <br/>
+                                </div>
+
 
                             </p>
 

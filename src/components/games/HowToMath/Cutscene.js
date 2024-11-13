@@ -166,6 +166,9 @@ function Cutscene({ onCutsceneEnd, cutsceneSteps }) {
 
     return (
         <div className="cutscene" onClick={handleClick}>
+
+            <button onClick={onCutsceneEnd}> Skip Cutscene </button>
+
             {currentStep.type === 'image' && (
                 <>
                     <img
@@ -184,7 +187,7 @@ function Cutscene({ onCutsceneEnd, cutsceneSteps }) {
                 </div>
             )}
             {!isTyping && (
-                <div className="click-to-continue">Click anywhere to continue</div>
+                <div className="click-to-continue">(Click anywhere to continue)</div>
             )}
         </div>
     );

@@ -2,7 +2,7 @@
 
 import songShine from '../assets/music/creo-shine.mp3';
 
-const bpm = 90.2;
+const bpm = 90.27;
 
 function logN(base, val) {
     return Math.log(val) / Math.log(base);
@@ -13,15 +13,14 @@ export const exponentTrial = {
     song: songShine,
     songTitle: 'Creo - Shine',
     length: 99,
-    offset: 150,
+    offset: 350,
     volume: 0.6,
     questions: [
 
         // { question: 'log100(100) = ?', answer: '1', time: (60 / bpm) * 4 },
         { question: '2^2 = ?', answer: '4', time: (60 / bpm) * 4 },
         { question: '3^2 = ?', answer: '9', time: (60 / bpm) * 4 },
-        { question: '1^1 + 2^1 + 3^1 = ?', answer: 'idk', time: (60 / bpm) * 4 },
-        { question: '1^2 + 2^2 + 3^2 = ?', answer: 'idk', time: (60 / bpm) * 4 },
+        { question: '1^2 + 2^2 + 3^2 = ?', answer: 'idk', time: (60 / bpm) * 8 },
         { question: '1^2 + 1^20 = ?', answer: '2', time: (60 / bpm) * 4 },
         { question: '2^2 + 1^20 = ?', answer: '5', time: (60 / bpm) * 4 },
         { question: '3^2 + 4^2 + 5^2 = ?', answer: 'idk', time: (60 / bpm) * 8 },
@@ -39,14 +38,14 @@ export const exponentTrial = {
         { question: '123^x = 122 + 123^0 ', answer: '1', variable: 'x', time: (60 / bpm) * 6 },
         { question: '3x^2 = 48', answer: '4', variable: 'x', time: (60 / bpm) * 6 },
         { question: 'x^2 * x^3 = 32', answer: '2', variable: 'x', time: (60 / bpm) * 6 },
-        { question: 'x^2 / x^3 = 32', answer: '1/32', variable: 'x', time: (60 / bpm) * 6 },
+        { question: 'x^2 / x^3 = 5', answer: '0.2', variable: 'x', time: (60 / bpm) * 6 },
 
         { question: 'x * x * x^-1 = 4', answer: '4', variable: 'x', time: (60 / bpm) * 6 },
         { question: 'x^2 + (x+1)^2 = 5^2', answer: '3', variable: 'x', time: (60 / bpm) * 6 },
         { question: '(x^2)^2 = 16', answer: '2', variable: 'x', time: (60 / bpm) * 3 },
         { question: '(x^3)^-1 = 1/27' , answer: '3', variable: 'x', time: (60 / bpm) * 3 },
-        { question: 'sqrt(x) = 81', answer: '9', variable: 'x', time: (60 / bpm) * 3 },
-        { question: '0^2 = ?', answer: '0', time: (60 / bpm) * 3 },
+        { question: 'sqrt(x) = 81', answer: '9', variable: 'x', time: (60 / bpm) * 4.5 },
+        { question: '0^2 = ?', answer: '0', time: (60 / bpm) * 1.5 },
 
         { question: '8^2 - log2(64) + 9^0.5 = ?', answer: '61', time: (60 / bpm) * 12 },
         { question: '(3^2)^2 + (2^2)^3 = ?', answer: 'idk', time: (60 / bpm) * 12 },
