@@ -37,6 +37,10 @@ export const introTrial = {
     length: 112, // in seconds
     offset: 1000, // how long until the song actually starts in the mp3, in milliseconds
     volume: 0.6,
+    video: {
+        url: require('../assets/vids/introTrialVid.mp4'),
+        offset: 1050, // Offset in milliseconds (e.g., 1000ms = 1s)
+    },
     questions: [
 
         { question: '1 + 1 = ?', answer: '2', time: (60 / bpm) * 3.4,},

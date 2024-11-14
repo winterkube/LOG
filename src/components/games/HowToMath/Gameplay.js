@@ -2,12 +2,102 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useGameLogic } from './hooks/useGameLogic';
 import './HowToMath.css';
 import './styles/Gameplay.css';
+import ReactPlayer from 'react-player'
+import trialBox from "./assets/trial box.png";
+import trialBoxLocked from "./assets/trial box locked.png";
+import trialBoxHover from "./assets/trial box hover.png";
+import crumpledPaper from "./assets/crumpled paper.png";
+
+import introTrialVideo from "./assets/vids/introTrialVid.mp4"
 
 function Gameplay({ levelData, onGameEnd, inGame}) {
     // State for user input and component animations
     // const [userAnswer, setUserAnswer] = useState('');
     const [isMounted, setIsMounted] = useState(false);
     const [isEnding, setIsEnding] = useState(false);
+    const [videoPlaying, setVideoPlaying] = useState(false);
+    const [assetsLoaded, setAssetsLoaded] = useState(false);
+
+    const [videoLoaded, setVideoLoaded] = useState(false);
+    const videoPlayerRef = useRef(null);
+
+
+    function preloadVideos(videoArray, onProgress, onComplete) {
+        let loadedVideos = 0;
+        const totalVideos = videoArray.length;
+
+        videoArray.forEach((src) => {
+            const video = document.createElement('video');
+            video.src = src;
+            video.preload = 'auto';
+            video.muted = true; // Mute the video to allow autoplay in some browsers
+
+            // Event listener for when the video can play through
+            const handleCanPlayThrough = () => {
+                loadedVideos++;
+                onProgress && onProgress(loadedVideos / totalVideos);
+
+                if (loadedVideos === totalVideos) {
+                    onComplete && onComplete();
+                }
+
+                // Clean up event listeners
+                video.removeEventListener('canplaythrough', handleCanPlayThrough);
+                video.removeEventListener('error', handleError);
+            };
+
+            const handleError = (e) => {
+                console.error(`Failed to preload video: ${src}`, e);
+                loadedVideos++;
+                onProgress && onProgress(loadedVideos / totalVideos);
+
+                if (loadedVideos === totalVideos) {
+                    onComplete && onComplete();
+                }
+
+                // Clean up event listeners
+                video.removeEventListener('canplaythrough', handleCanPlayThrough);
+                video.removeEventListener('error', handleError);
+            };
+
+            video.addEventListener('canplaythrough', handleCanPlayThrough);
+            video.addEventListener('error', handleError);
+
+            // Start loading the video
+            video.load();
+        });
+    }
+    const [videoLoadingProgress, setVideoLoadingProgress] = useState(0);
+    const [videoPreloaded, setVideoPreloaded] = useState(false);
+
+    useEffect(() => {
+        if (levelData.video) {
+            preloadVideos(
+                [levelData.video.url],
+                (progress) => {
+                    setVideoLoadingProgress(progress);
+                },
+                () => {
+                    setVideoPreloaded(true);
+                    console.log('Video is preloaded');
+                }
+            );
+        } else {
+            // No video to preload
+            setVideoPreloaded(true);
+        }
+    }, [levelData.video]);
+
+
+
+    useEffect(() => {
+        if (levelData.video) {
+            if (videoPreloaded) {
+                setAssetsLoaded(true);
+            }
+        }
+    }, [videoPreloaded,  levelData.video]);
+
 
 
     // Function to handle the end of the game
@@ -16,7 +106,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
         setIsEnding(true);
         setTimeout(() => {
             audioRef.current.pause();
-            onGameEnd({...performanceData, levelNumber: levelData.levelNumber });
+            onGameEnd({...performanceData, levelNumber: levelData.levelNumber});
         }, 3000); // Duration of fade-out animation
     };
 
@@ -49,8 +139,12 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                     audioRef.current.load();
                 }
                 audioRef.current.pause();
+                setVideoPlaying(false);
             } else {
                 audioRef.current.play();
+                if (levelData.video) {
+                    setVideoPlaying(true);
+                }
             }
         }
     }, [isPaused]);
@@ -66,9 +160,17 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
             audioRef.current.loop = false;
             audioRef.current.volume = levelData.volume;
             audioRef.current.load();
-            setTimeout(function() {
+            setTimeout(function () {
                 audioRef.current.play();
             }, 2000 - levelData.offset);
+
+            if (levelData.video) {
+                const videoStartTime = levelData.video.offset;
+
+                setTimeout(() => {
+                    setVideoPlaying(true);
+                }, videoStartTime);
+            }
 
         } else {
             audioRef.current.pause();
@@ -78,11 +180,13 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                 audioRef.current.pause();
                 audioRef.current = null;
             }
+            setVideoPlaying(false);
         };
+
 
     }, [levelData.song]);
 
-    function notLong (name) {
+    function notLong(name) {
         return (name.length <= 30);
     }
 
@@ -140,28 +244,27 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                     elements.push('^');
                     i++;
                 }
-            } else if (question[i] === 's' && question[i+1] === 'q') {
+            } else if (question[i] === 's' && question[i + 1] === 'q') {
                 //sqrt detected
 
-                    const base = elements.pop();
-                    i+=4; // Move past 'sqrt'
-                    let sqrt = '';
+                const base = elements.pop();
+                i += 4; // Move past 'sqrt'
+                let sqrt = '';
 
-                        // Collect consecutive alphanumeric characters
-                        while (i < len && /\w/.test(question[i]) || question[i] === '-' || question[i] === '.') {
-                            sqrt += question[i];
-                            i++;
-                        }
+                // Collect consecutive alphanumeric characters
+                while (i < len && /\w/.test(question[i]) || question[i] === '-' || question[i] === '.') {
+                    sqrt += question[i];
+                    i++;
+                }
 
-                    elements.push(base);
-                    elements.push( '√' + sqrt );
+                elements.push(base);
+                elements.push('√' + sqrt);
 
-            }
-            else if (question[i] === 'l' && question[i+1] === 'o') {
+            } else if (question[i] === 'l' && question[i + 1] === 'o') {
                 // log detected
 
                 let base = '';
-                i+=3; // Move past 'log'
+                i += 3; // Move past 'log'
                 let log = '';
 
                 // Collect consecutive alphanumeric characters
@@ -180,8 +283,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                 elements.push(<sub key={i}> {base} </sub>);
                 elements.push(log);
 
-            }
-        else {
+            } else {
                 elements.push(question[i]);
                 i++;
             }
@@ -192,13 +294,13 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
     const handleRetry = () => {
         restartLevel();
         setIsPaused(false);
-        onGameEnd({ action: 'retry' }); // Pass an action to restart the level
+        onGameEnd({action: 'retry'}); // Pass an action to restart the level
     };
 
     // Function to handle 'Menu' action
     const handleMenu = () => {
         setIsPaused(false);
-        onGameEnd({ action: 'menu' }); // Pass an action to go back to level select
+        onGameEnd({action: 'menu'}); // Pass an action to go back to level select
     };
 
     const varPlaceholder = () => {
@@ -211,173 +313,208 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
     }
 
 
-
-    return (
-
-        <div className={`game-play ${isMounted ? 'lvl-fade-in' : ''} ${isEnding ? 'lvl-fade-out' : ''}`}>
-
-            {isReady && currentQuestion ? (
-                <>
-
-
-                    { currentQuestion.question !== '...' && (
-                        <button className="pause-button" onClick={() => setIsPaused(true)}>
-                            | |
-                        </button>
-                    )}
-
-
-                    {/* Pause Modal */}
-                    {isPaused && (
-                        <div className="pause-modal">
-                            <div className="pause-modal-content">
-                                <h3>Paused</h3>
-                                <button onClick={() => setIsPaused(false)}>Resume</button>
-                                <button onClick={handleRetry}>Retry</button>
-                                <button onClick={handleMenu}>Menu</button>
-                            </div>
-                        </div>
-                    )}
-
-                    <div
-                        className={`not-pause ${isPaused ? 'paused' : ''} ${ (levelData.levelNumber === 4 && currentQuestion.question === levelData.questions[4].question) ? 'inverse' : ''}`}>
-
-                        <div className={`gp-background`}></div>
-
-                        <div className={`timer-bar`}>
-                            <div
-                                className="timer-progress"
-                                style={{
-                                    width: `${(timeLeft / currentQuestion.time) * 100}%`,
-                                }}
-                            ></div>
-                        </div>
-                        {/* Question and Answer Input */}
-                        <div className={`question-container `}>
-                            <div className="question-bg">
-                            {!isEnding ? (   // first
-
-                                    <h2 className={`ques ${notLong(currentQuestion.question) ? '' : 'long'}`}><sup></sup>{renderQuestion(currentQuestion.question)}</h2>
-
-                            ) : (
-                                <h2><sup></sup> ... <sup></sup></h2>
-                            )}
-                            </div>
-                            {wait ? (
-                                <input autoFocus={true} className="input"
-                                       type="text"
-                                       placeholder={varPlaceholder()}
-                                       value={userAnswer}
-                                       maxLength="15"
-                                       onChange={(e) => {
-                                           setUserAnswer(e.target.value);
-
-                                       }}
-                                       onKeyDown={(e) => {
-                                           if (e.repeat) {
-                                               e.preventDefault();
-                                           }
-                                       }}
-                                       disabled={isPaused}
-                                />
-                            ) : (
-                                <input
-                                />
-                            )}
-
-                            {feedbackMessage && (
-                                <div className="feedback-message"
-                                     style={{
-                                         opacity: `${(timeLeft / currentQuestion.time) * 3 - 0.5}`,
-                                     }}
-                                >
-                                    {feedbackMessage}
-                                </div>
-                            )}
-                            <p>
-                                score: {Math.round(score * 100) / 100} <br/>
-                                <div className="time">
-                                    {Math.round(timeLeft * 10) / 10} <br/>
-                                </div>
-
-
-                            </p>
-
-
-                        </div>
+    if (!assetsLoaded) {
+        return (
+            <>
+                {!assetsLoaded && (
+                    <div className="loading-screen">
+                        <p>Loading...</p>
                     </div>
+                )}
+            </>
+        );
+    } else {
+        return (
+
+            <div className={`game-play ${isMounted ? 'lvl-fade-in' : ''} ${isEnding ? 'lvl-fade-out' : ''}`}>
 
 
-                </>
-            ) : ( // NOT READY
-                <>
+                <div className={`gp-background ${isPaused ? 'paused' : ''}`}>
 
-                {!isEnding && (
-                        <>
-                            <button className="pause-button" onClick={() => {
-                                setIsPaused(true);
-                                audioRef.current.volume = 0;
-                            }}>
+                    {levelData.video ? (
+                        <ReactPlayer
+                            className="video-background"
+                            url={levelData.video.url}
+                            playing={videoPlaying}
+                            loop={false}
+                            muted={true}
+                            width="100%"
+                            height="100%"
+                            style={{position: 'absolute', top: 0, left: 0}}
+                        />
+                    ) : (
+                        <img src={require('./assets/tempbg.png')} alt="Background" className="image-background"
+                             style={{opacity: 0}}/>
+                    )}
+                </div>
+
+                {isReady && currentQuestion ? (
+                    <>
+
+
+                        {currentQuestion.question !== '...' && (
+                            <button className="pause-button" onClick={() => setIsPaused(true)}>
                                 | |
                             </button>
+                        )}
 
-                            {/* Pause Modal */}
-                            {isPaused && (
-                                <div className="pause-modal">
-                                    <div className="pause-modal-content">
-                                        <h3>Paused</h3>
-                                        <button onClick={handleRetry}>Retry</button>
-                                        <button onClick={handleMenu}>Menu</button>
-                                    </div>
+
+                        {/* Pause Modal */}
+                        {isPaused && (
+                            <div className="pause-modal">
+                                <div className="pause-modal-content">
+                                    <h3>Paused</h3>
+                                    <button onClick={() => setIsPaused(false)}>Resume</button>
+                                    <button onClick={handleRetry}>Retry</button>
+                                    <button onClick={handleMenu}>Menu</button>
                                 </div>
-                            )}
-                        </>
-                    )}
-
-                    <div className={`not-pause ${isPaused ? 'paused' : ''}`}>
-
-                        <div className={`gp-background`}></div>
-                        {/* Pre-Level Timer Fill-Up */}
-                        <div className={`initial-timer-bar`}>
-                            <div
-                                className="initial-timer-progress"
-                                style={{
-                                    width: `${((1.5 - timeLeft) / 1.5) * 100}%`,
-                                }}
-                            ></div>
-                        </div>
-
-                        <div className={`question-container ${isMounted ? 'lvl-slide-in' : ''}`}>
-                            <div className="question-bg">
-                            {!isEnding ? ( // second
-                                    <h2><sup></sup>{renderQuestion(levelData.questions[0].question)}</h2>
-                            ) : (
-                                <h2><sup></sup> ... <sup></sup></h2>
-                            )}
                             </div>
-                            <input autoFocus={true} className="input"
-                                   placeholder="GET READY..."
-                                   type="text"
-                                   value={userAnswer}
-                                   maxLength="15"
-                            />
-                            <p>
-                                score: {score} <br/>
-                                time: {Math.ceil(timeLeft * 10) / 10}
-                            </p>
+                        )}
 
+                        <div
+                            className={`not-pause ${isPaused ? 'paused' : ''} ${(levelData.levelNumber === 4 && currentQuestion.question === levelData.questions[4].question) ? 'inverse' : ''}`}>
+
+                            <div className={`timer-bar`}>
+                                <div
+                                    className="timer-progress"
+                                    style={{
+                                        width: `${(timeLeft / currentQuestion.time) * 100}%`,
+                                    }}
+                                ></div>
+                            </div>
+                            {/* Question and Answer Input */}
+                            <div className={`question-container `}>
+                                <div className="question-bg">
+                                    {!isEnding ? (   // first
+
+                                        <h2 className={`ques ${notLong(currentQuestion.question) ? '' : 'long'}`}>
+                                            <sup></sup>{renderQuestion(currentQuestion.question)}</h2>
+
+                                    ) : (
+                                        <h2><sup></sup> ... <sup></sup></h2>
+                                    )}
+                                </div>
+                                {wait ? (
+                                    <input autoFocus={true} className="input"
+                                           type="text"
+                                           placeholder={varPlaceholder()}
+                                           value={userAnswer}
+                                           maxLength="15"
+                                           onChange={(e) => {
+                                               setUserAnswer(e.target.value);
+
+                                           }}
+                                           onKeyDown={(e) => {
+                                               if (e.repeat) {
+                                                   e.preventDefault();
+                                               }
+                                           }}
+                                           disabled={isPaused}
+                                    />
+                                ) : (
+                                    <input
+                                    />
+                                )}
+
+                                {feedbackMessage && (
+                                    <div className="feedback-message"
+                                         style={{
+                                             opacity: `${(timeLeft / currentQuestion.time) * 3 - 0.5}`,
+                                         }}
+                                    >
+                                        {feedbackMessage}
+                                    </div>
+                                )}
+                                <p>
+                                    <div className="score">
+                                        score: <br/> <p> {Math.round(score * 100) / 100}</p>
+                                    </div>
+
+                                    <div className="time">
+                                        {Math.round(timeLeft * 10) / 10} <br/>
+                                    </div>
+
+
+                                </p>
+
+
+                            </div>
                         </div>
-                        {/*<div className="get-ready">GET READY...</div>*/}
-                    </div>
 
-                    <script> isReady = true;</script>
-                </>
 
-            )}
-            <div className="song-title"> Song: {levelData.songTitle}</div>
+                    </>
+                ) : ( // NOT READY
+                    <>
 
-        </div>
-    );
+                        {!isEnding && (
+                            <>
+                                <button className="pause-button" onClick={() => {
+                                    setIsPaused(true);
+                                    audioRef.current.volume = 0;
+                                }}>
+                                    | |
+                                </button>
+
+                                {/* Pause Modal */}
+                                {isPaused && (
+                                    <div className="pause-modal">
+                                        <div className="pause-modal-content">
+                                            <h3>Paused</h3>
+                                            <button onClick={handleRetry}>Retry</button>
+                                            <button onClick={handleMenu}>Menu</button>
+                                        </div>
+                                    </div>
+                                )}
+                            </>
+                        )}
+
+                        <div className={`not-pause ${isPaused ? 'paused' : ''}`}>
+
+                            {/* Pre-Level Timer Fill-Up */}
+                            <div className={`initial-timer-bar`}>
+                                <div
+                                    className="initial-timer-progress"
+                                    style={{
+                                        width: `${((1.5 - timeLeft) / 1.5) * 100}%`,
+                                    }}
+                                ></div>
+                            </div>
+
+                            <div className={`question-container ${isMounted ? 'lvl-slide-in' : ''}`}>
+                                <div className="question-bg">
+                                    {!isEnding ? ( // second
+                                        <h2><sup></sup>{renderQuestion(levelData.questions[0].question)}</h2>
+                                    ) : (
+                                        <h2><sup></sup> ... <sup></sup></h2>
+                                    )}
+                                </div>
+                                <input autoFocus={true} className="input"
+                                       placeholder="GET READY..."
+                                       type="text"
+                                       value={userAnswer}
+                                       maxLength="15"
+                                />
+                                <p>
+                                    <div className="score">
+                                        score: <br/> <p> {Math.round(score * 100) / 100}</p>
+                                    </div>
+
+                                    {/*time: {Math.ceil(timeLeft * 10) / 10}*/}
+                                </p>
+
+                            </div>
+                            {/*<div className="get-ready">GET READY...</div>*/}
+                        </div>
+
+                        <script> isReady = true;</script>
+                    </>
+
+                )}
+                <div className="song-title"> Song: {levelData.songTitle}</div>
+
+            </div>
+        );
+    }
 }
 
 export default Gameplay;

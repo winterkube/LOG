@@ -24,7 +24,7 @@ export const speedTrialI = {
     songTitle: 'BigGiantCircles - Chip Zeal',
     length: 99,
     offset: 1000,
-    volume: 0.8,
+    volume: 0.9,
     questions: [
         { question: '1' + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
