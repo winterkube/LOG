@@ -13,6 +13,8 @@ import backButtonImage from './assets/back button.png';
 import backButtonImageHover from './assets/back button hover.png';
 import trialsButtonImage from './assets/trials button.png';
 import trialsButtonImageHover from './assets/trials button hover.png';
+import difficultyButtonImage from './assets/difficulty button.png';
+import difficultyButtonImageHover from './assets/difficulty button hover.png';
 import trialBox from "./assets/trial box.png";
 import crumpledPaper from "./assets/crumpled paper.png";
 import cheeba1Image from "./assets/cheeba1.png";
@@ -25,7 +27,7 @@ import classroomImage3 from "./assets/classroom3.png";
 import classroomImage4 from "./assets/classroom4.png";
 import blackboardImage from "./assets/blackboard.png";
 
-function Menu({ onStart }, {setVolume}) {
+function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
 
 
     const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -35,10 +37,12 @@ function Menu({ onStart }, {setVolume}) {
     const [animateExit, setAnimateExit] = useState(false);
     const [flashExit, setFlashExit] = useState(false);
 
-    // const [openVolume, setOpenVolume] = useState(false);
+    const [openVolume, setOpenVolume] = useState(false);
 
     // New state variable to control initial animations
     const [animateEnter, setAnimateEnter] = useState(true);
+
+    const [isDifficultyModalOpen, setIsDifficultyModalOpen] = useState(false);
 
 
     const goToSettings = () => {
@@ -79,8 +83,8 @@ function Menu({ onStart }, {setVolume}) {
     };
 
     const volumeFunc = () => {
-        window.confirm('just lower your computer volume xd');
-        // setOpenVolume(true);
+        // window.confirm('just lower your computer volume xd');
+        setOpenVolume(true);
 
     };
 
@@ -104,7 +108,11 @@ function Menu({ onStart }, {setVolume}) {
     const [over3, setOver3] = useState(false);
     const [over4, setOver4] = useState(false);
     const [over5, setOver5] = useState(false);
+    const [over6, setOver6] = useState(false);
 
+    const difficultyFunc = () => {
+        setIsDifficultyModalOpen(true);
+    };
     // } else {
     {
         return (
@@ -147,21 +155,30 @@ function Menu({ onStart }, {setVolume}) {
 
                     {isSettingsOpen && (
                         <>
-                            {/*{openVolume && (*/}
+                            {openVolume && (
 
 
-                                {/*<label className="volume-slider">*/}
-                                {/*    Volume:*/}
-                                {/*    <input*/}
-                                {/*        type="range"*/}
-                                {/*        min="0"*/}
-                                {/*        max="1"*/}
-                                {/*        step="0.01"*/}
-                                {/*        onChange={handleVolumeChange}*/}
-                                {/*        defaultValue="0.5"*/}
-                                {/*    />*/}
-                                {/*</label>*/}
+                            <label className="volume-slider">
+                                Volume:
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="1"
+                                    step="0.01"
+                                    onChange={handleVolumeChange}
+                                    defaultValue="0.5"
+                                />
+                            </label>)}
 
+                            <img
+                                onMouseOver={() => setOver6(true)}
+                                onMouseOut={() => setOver6(false)}
+                                src={over6 ? difficultyButtonImageHover : difficultyButtonImage}
+                                alt="Difficulty Button"
+                                className={`difficulty-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
+                                onClick={difficultyFunc}
+                                width="230"
+                            />
 
                             <img
                                 onMouseOver={() => setOver3(true)}
@@ -205,6 +222,35 @@ function Menu({ onStart }, {setVolume}) {
                             />
                         </>
                     )}
+
+                    {isDifficultyModalOpen && (
+                        <div className="modal-overlay">
+                            <div className="difficulty-modal">
+                                <div className="difftext">SELECT DIFFICULTY</div>
+
+                                <button
+                                    onClick={() => {
+                                        setDifficulty('easy');
+                                    }}
+                                    className={`difficulty-option ${difficulty === 'easy' ? 'selected' : ''}`}
+                                >
+                                    Piss Easy Idiot Baby Brainlet Loser Freebie Noob Mode
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setDifficulty('normal');
+                                    }}
+                                    className={`difficulty-option ${'norm'} ${difficulty === 'normal' ? 'selected' : ''}`}
+                                >
+                                    Normal Mode
+                                </button>
+                                <div className="close-button" onClick={() => setIsDifficultyModalOpen(false)}>
+                                    X
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
 
                     <div className={`flash ${flashExit ? 'exit' : ''}`}></div>
                 </div>
