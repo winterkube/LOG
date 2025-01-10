@@ -172,4 +172,57 @@ export const algebraTrial = {
         // },
         // Add more questions...
     ],
+    easyQuestions: [
+        { question: (Math.round(Math.random() * 10)).toString() + ' + ' + (Math.round(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
+        { question: randomNum1().toString() + ' + ' +  randomNum1().toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
+        { question: randomNum1(1).toString() + ' + ' + randomNum1(2).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
+        { question: '3 + 7 = ?', answer: '10', time: (60 / bpm) * 3 },
+
+        { question: '3 + x = 7', variable: 'x', answer: '4', time: (60 / bpm) * 8 },
+        { question: '5 + x = 10', variable: 'x', answer: '5', time: (60 / bpm) * 8 },
+        { question: '4 - x = 5', variable: 'x', answer: '-1', time: (60 / bpm) * 8 },
+        { question: 'x + x = 2', variable: 'x', answer: '1', time: (60 / bpm) * 8 },
+
+        { question: '2x + x + x = 40', variable: 'x', answer: '10', time: (60 / bpm) * 16 },
+        { question: '2x + x - x + 2x = 4', variable: 'x', answer: '1', time: (60 / bpm) * 16 },
+
+        { question: 'x + x = 2', variable: 'x', answer: '1', time: (60 / bpm) * 3 },
+        { question: 'x + x + x = 3', variable: 'x', answer: '1', time: (60 / bpm) * 4 },
+        { question: 'x + x + x + x = 2', variable: 'x', answer: '0.5', time: (60 / bpm) * 4 },
+        { question: 'x + x + x + x + x = 10', variable: 'x', answer: '2', time: (60 / bpm) * 5 },
+
+        { question: randomNum1(2) + ' + 2x = ' + randomNum1(2), variable: 'x',  answer: 'idk', time: (60 / bpm) * 16 },
+        { question: randomNum1(2) + ' - x - 1 = ' + randomNum1(2), variable: 'x', answer: 'idk', time: (60 / bpm) * 16 },
+
+        { question: randomEq1(1,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 4 },
+        { question: randomEq1(1,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 4 },
+        { question: randomEq1(2,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 7 },
+        { question: '5y - y = 2' , variable: 'y', answer: 'idk', time: (60 / bpm) * 8 },
+        { question: randomEq1(2,'z'), variable: 'z', answer: 'idk', time: (60 / bpm) * 9 },
+
+        { question: randomEq1(2,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 8 },
+        { question: randomEq1(1,'a'), variable: 'a', answer: 'idk', time: (60 / bpm) * 8 },
+
+        { question: randomEq1(1,'v'), variable: 'v', answer: 'idk', time: (60 / bpm) * 8 },
+        { question: randomEq1(2,'M'), variable: 'M', answer: 'idk', time: (60 / bpm) * 8 }, // 8
+
+        { question: '(2z - 15y/z + x/x/x * 0.915) * 0 = x', variable: 'x', answer: '0', time: (60 / bpm) * 14 },
+
+
+        {
+            question: '...',
+            answer: '.',
+            time: 999,
+        },
+        // generateQuestion: () => {
+        //     const num1 = Math.floor(Math.random() * 10);
+        //     const num2 = Math.floor(Math.random() * 10);
+        //     return {
+        //         question: `${num1} + ${num2} = ?`,
+        //         answer: (num1 + num2).toString(),
+        //         time: 4, // Time in seconds
+        //     };
+        // },
+        // Add more questions...
+    ],
 };

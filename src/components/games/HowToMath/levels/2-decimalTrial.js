@@ -62,4 +62,45 @@ export const decimalTrial = {
         // },
         // Add more questions...
     ],
+    easyQuestions: [
+        { question: '2 / 1 = ?', answer: '2', time: (60 / bpm) * 4 },
+        { question: '2 / 2 = ?', answer: '1', time: (60 / bpm) * 4 },
+        { question: '1 / 2 = ?', answer: '0.5', time: (60 / bpm) * 4 },
+        { question: '1 / 1 = ?', answer: '1', time: (60 / bpm) * 4 },
+
+        { question: '0.5 + 0.5 = ?', answer: '1', time: (60 / bpm) * 4 },
+        { question: '1.1 + 2.2 = ?', answer: '3.3', time: (60 / bpm) * 4 },
+
+        { question: '0.5 * 2 = ?', answer: '1', time: (60 / bpm) * 4 },
+        { question: '0.5 * 0.5 = ?', answer: '0.25', time: (60 / bpm) * 4 },
+
+        { question: randomNum1(4).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: randomNum1(4).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: randomNum1(4).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' + ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: randomNum1(4).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' - ' + ((Math.floor(Math.random() * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+
+        { question: '2' + ' * ' + ((Math.floor((Math.random()+1) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 6,},
+        { question: ((Math.floor((Math.random()+2) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+
+        { question: ((Math.floor((Math.random()+2.5) * 10))/10).toString() + ' / ' + '2' + ' = ?', answer: 'idk', time: (60 / bpm) * 6,},
+        { question: ((Math.floor((Math.random()+10) * 10))/10).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+
+        { question: randomNum1(3).toString() + ' + ' + randomNum1(3).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 8,},
+        { question: randomNum1(3).toString() + ' + ' + randomNum1(3).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 8,},
+        {
+            question: '...',
+            answer: '.',
+            time: 999,
+        },
+        // generateQuestion: () => {
+        //     const num1 = Math.floor(Math.random() * 10);
+        //     const num2 = Math.floor(Math.random() * 10);
+        //     return {
+        //         question: `${num1} + ${num2} = ?`,
+        //         answer: (num1 + num2).toString(),
+        //         time: 4, // Time in seconds
+        //     };
+        // },
+        // Add more questions...
+    ],
 };
