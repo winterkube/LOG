@@ -64,6 +64,21 @@ function HowToMath() {
     const menuMusicRef = useRef(null);
     const [volume, setVolume] = useState(1); // Initial volume set to 0.5
 
+    const [difficulty, setDifficulty] = useState('normal'); // Default to 'normal' mode
+
+    // On component mount, load difficulty from localStorage
+    useEffect(() => {
+        const savedDifficulty = localStorage.getItem('difficulty');
+        if (savedDifficulty) {
+            setDifficulty(savedDifficulty);
+        }
+    }, []);
+
+    // Save difficulty to localStorage whenever it changes
+        useEffect(() => {
+            localStorage.setItem('difficulty', difficulty);
+        }, [difficulty]);
+
 
     // Initialize the audio object
     useEffect(() => {
@@ -256,16 +271,20 @@ function HowToMath() {
 
                     <Menu
                         onStart={() => setCurrentScene('levelSelect')}
-                        setVolume = {setVolume}
-                        key={currentScene} // Force re-mounting the component
+                        setVolume={setVolume}
+                        setDifficulty={setDifficulty}
+                        difficulty={difficulty}
+                        key={currentScene}
                     />
+
                 );
             case 'levelSelect':
                 return (
                     <LevelSelect
                         onLevelSelect={(levelNumber) => {
                             if (levelNumber > 0) {
-                                setGameData({ levelNumber });
+                                setGameData({ levelNumber, difficulty });
+
                                 const hasPreCutscene = Cutscenes[levelNumber]?.pre;
                                 if (hasPreCutscene) {
                                     setCurrentScene('cutscene');
@@ -298,6 +317,7 @@ function HowToMath() {
                         levelData={Levels[gameData.levelNumber]}
                         onGameEnd={handleGameEnd}
                         inGame={isInGame}
+                        difficulty={gameData.difficulty}
                     />
                 );
             case 'results':

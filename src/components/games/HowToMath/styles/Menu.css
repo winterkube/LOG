@@ -7,6 +7,7 @@
 
     --xPosSettings: 43%;
     --yPosSettings: 80%;
+    --yPosDiff: -110%;
 }
 .menu {
     user-select: none;
@@ -24,7 +25,7 @@
     width: 230px;
     height: 130px;
     position: absolute;
-    z-index: 3;
+    z-index: 6;
 }
 
 .behind-bg {
@@ -36,6 +37,8 @@
     background-repeat: no-repeat;
 
 }
+
+
 
 
 .bg {
@@ -66,6 +69,88 @@
     }
 
 }
+
+.difftext {
+    position: absolute;
+    text-align: center;
+    font-family: "Cabin Sketch", serif;
+    text-shadow: 1px 1px 6px black;
+    color: white;
+    font-weight: bold;
+    font-size: 60px;
+    top: 10%;
+    left: 10%;
+}
+
+.difficulty-modal {
+    scale: 75%;
+        position: absolute;
+        top: 0%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    text-align: center;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+    border-radius: 20px;
+        z-index: 10; /* Higher than other elements */
+
+    display: grid;
+}
+
+.difficulty-option {
+    background-color: #a1a1a1; /* Greyed out */
+    width: 360px;
+    height: 130px;
+    box-shadow: 0px 0px 8px white;
+    transform: scale(0.9); /* Slightly smaller */
+    transition: all 0.1s;
+    margin: 0px;
+
+    position: relative;
+    bottom: 0px;
+    text-shadow: 1px 1px 3px #334449;
+    font-family: 'Cabin Sketch', serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: white;
+    padding: 8px 5px;
+    cursor: pointer;
+    z-index: 2;
+    border:5px solid white;
+    border-radius: 2px;
+    top: 40%;
+}
+
+.difficulty-option.selected {
+    background-color: #82c485; /* Green */
+    /*transform: scale(1.1); !* Slightly larger *!*/
+    color: #fff;
+}
+.difficulty-option.norm{
+     font-size: 40px;
+     top: 0%;
+ }
+
+.difficulty-option:hover{
+    transform: scale(0.95); /* Slightly larger */
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    color: white;
+    border: none;
+    font-family: "Cabin Sketch", serif;
+    font-weight: bold;
+    font-size: 38px;
+    cursor: pointer;
+}
+
+
 
 .flash {
     position: absolute;
@@ -285,7 +370,22 @@
     }
 }
 
+@keyframes rotateDiffButton {
+    0% {
+        transform: translate(var(--xPosSettings), var(--yPosDiff)) rotate(1deg);
+    }
+    50% {
+        transform: translate(var(--xPosSettings), var(--yPosDiff)) rotate(-1deg);
+    }
+    100% {
+        transform: translate(var(--xPosSettings), var(--yPosDiff)) rotate(1deg);
+    }
+}
+
 /* Volume and Back Buttons */
+.difficulty-button{
+    left: 43%;
+}
 .volume-button{
     left: 43%;
 }
@@ -301,6 +401,12 @@
     transform: translate(var(--xPosPlay), var(--yPosPlay));
     animation: slideInSettings 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
 
+}
+
+.difficulty-button {
+    top: 55%;
+    transform: translate(var(--xPosPlay), var(--yPosDiff));
+    animation: slideInSettings 0.5s forwards ease-out, rotateDiffButton 0.5s infinite steps(1, end) 0.5s;
 }
 
 .trials-button {
@@ -326,6 +432,7 @@
 }
 
 .volume-button.enter,
+.difficulty-button.enter,
 .trials-button.enter {
     animation: slideInSettings 0.5s forwards ease-out, rotatePlayButton 0.5s infinite steps(1, end) 0.5s;
 }
@@ -346,6 +453,9 @@
 }
 
 .volume-button.exit {
+    animation: slideOutButtons 0.5s forwards ease-out 0.05s;
+}
+.difficulty-button.exit {
     animation: slideOutButtons 0.5s forwards ease-out 0.05s;
 }
 .trials-button.exit {

@@ -10,7 +10,7 @@ import crumpledPaper from "./assets/crumpled paper.png";
 
 import introTrialVideo from "./assets/vids/introTrialVid.mp4"
 
-function Gameplay({ levelData, onGameEnd, inGame}) {
+function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
     // State for user input and component animations
     // const [userAnswer, setUserAnswer] = useState('');
     const [isMounted, setIsMounted] = useState(false);
@@ -21,6 +21,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
     const [videoLoaded, setVideoLoaded] = useState(false);
     const videoPlayerRef = useRef(null);
 
+    const questions = difficulty === 'easy' ? levelData.easyQuestions : levelData.questions;
 
     function preloadVideos(videoArray, onProgress, onComplete) {
         let loadedVideos = 0;
@@ -95,10 +96,10 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
             if (videoPreloaded) {
                 setAssetsLoaded(true);
             }
+        } else {
+            setAssetsLoaded(true);
         }
     }, [videoPreloaded,  levelData.video]);
-
-
 
     // Function to handle the end of the game
     const handleGameEnd = (performanceData) => {
@@ -124,7 +125,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
         setIsPaused,
         currentVar,
         restartLevel,
-    } = useGameLogic(levelData, levelData.questions, handleGameEnd, 2); // Start delay of 1.5 seconds
+    } = useGameLogic(levelData, questions, handleGameEnd, 2, difficulty); // Start delay of 1.5 seconds
 
     // Mounting effect for animations
     useEffect(() => {
@@ -189,6 +190,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
             //     audioRef.current.pause();
             //     audioRef.current = null;
             // }
+            setVideoPlaying(false);
             setVideoPlaying(false);
         };
 
@@ -493,7 +495,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                             <div className={`question-container ${isMounted ? 'lvl-slide-in' : ''}`}>
                                 <div className="question-bg">
                                     {!isEnding ? ( // second
-                                        <h2><sup></sup>{renderQuestion(levelData.questions[0].question)}</h2>
+                                        <h2><sup></sup>{renderQuestion(questions[0].question)}</h2>
                                     ) : (
                                         <h2><sup></sup> ... <sup></sup></h2>
                                     )}
