@@ -40,6 +40,7 @@ export const introTrial = {
     video: {
         url: require('../assets/vids/introTrialVid.mp4'),
         offset: 1050, // Offset in milliseconds (e.g., 1000ms = 1s)
+        volume: 0.8
     },
     questions: [
 

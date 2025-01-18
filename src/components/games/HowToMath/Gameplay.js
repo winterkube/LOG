@@ -30,7 +30,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
             const video = document.createElement('video');
             video.src = src;
             video.preload = 'auto';
-            video.muted = true; // Mute the video to allow autoplay in some browsers
+            video.muted = false; // Mute the video to allow autoplay in some browsers
 
             // Event listener for when the video can play through
             const handleCanPlayThrough = () => {
@@ -105,7 +105,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
 
         setIsEnding(true);
         setTimeout(() => {
-            audioRef.current.pause();
+            // audioRef.current.pause();
             onGameEnd({...performanceData, levelNumber: levelData.levelNumber});
         }, 3000); // Duration of fade-out animation
     };
@@ -132,54 +132,63 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
     }, []);
 
     useEffect(() => {
-        if (audioRef.current) {
+
             if (isPaused) {
-                if (!isReady) {
-                    audioRef.current.pause();
-                    audioRef.current.load();
+                // if (!isReady) {
+                //     // audioRef.current.pause();
+                //     // audioRef.current.load();
+                // }
+                // audioRef.current.pause();
+                if (videoPlaying) {
+                    setVideoPlaying(false);
                 }
-                audioRef.current.pause();
                 setVideoPlaying(false);
             } else {
-                audioRef.current.play();
+                // audioRef.current.play();
                 if (levelData.video) {
-                    setVideoPlaying(true);
+                    if (isReady) {
+                        setVideoPlaying(true);
+                    }
                 }
             }
-        }
+
     }, [isPaused]);
 
     // Audio reference and effect to play level music
-    const audioRef = useRef(null);
+    // const audioRef = useRef(null);
 
     useEffect(() => {
-        audioRef.current = new Audio(levelData.song);
+        // audioRef.current = new Audio(levelData.song);
 
         if (inGame) {
 
-            audioRef.current.loop = false;
-            audioRef.current.volume = levelData.volume;
-            audioRef.current.load();
+            // audioRef.current.loop = false;
+            // audioRef.current.volume = levelData.volume;
+            // audioRef.current.load();
             setTimeout(function () {
-                audioRef.current.play();
+                // audioRef.current.play();
             }, 2000 - levelData.offset);
 
             if (levelData.video) {
                 const videoStartTime = levelData.video.offset;
 
                 setTimeout(() => {
-                    setVideoPlaying(true);
+                    if (!isPaused) {
+                        setVideoPlaying(true);
+                    } else {
+                        setVideoPlaying(false);
+                    }
                 }, videoStartTime);
             }
 
         } else {
-            audioRef.current.pause();
+            // audioRef.current.pause();
         }
         return () => {
-            if (audioRef.current) {
-                audioRef.current.pause();
-                audioRef.current = null;
-            }
+            // if (audioRef.current) {
+            //     audioRef.current.pause();
+            //     audioRef.current = null;
+            // }
             setVideoPlaying(false);
         };
 
@@ -337,7 +346,8 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                             url={levelData.video.url}
                             playing={videoPlaying}
                             loop={false}
-                            muted={true}
+                            muted={false}
+                            volume={levelData.video.volume}
                             width="100%"
                             height="100%"
                             style={{position: 'absolute', top: 0, left: 0}}
@@ -450,7 +460,7 @@ function Gameplay({ levelData, onGameEnd, inGame}) {
                             <>
                                 <button className="pause-button" onClick={() => {
                                     setIsPaused(true);
-                                    audioRef.current.volume = 0;
+                                    // audioRef.current.volume = 0;
                                 }}>
                                     | |
                                 </button>
