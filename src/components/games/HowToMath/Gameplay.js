@@ -133,69 +133,51 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
     }, []);
 
     useEffect(() => {
+        // If the user is paused or if there's no video, skip scheduling
+        if (!levelData.video || isPaused) return;
 
-            if (isPaused) {
-                // if (!isReady) {
-                //     // audioRef.current.pause();
-                //     // audioRef.current.load();
-                // }
-                // audioRef.current.pause();
-                if (videoPlaying) {
-                    setVideoPlaying(false);
-                }
-                setVideoPlaying(false);
-            } else {
-                // audioRef.current.play();
-                if (levelData.video) {
-                    if (isReady) {
-                        setVideoPlaying(true);
-                    }
-                }
-            }
+        const videoStartTime = levelData.video.offset;
+        const handle = setTimeout(() => {
+            setVideoPlaying(true);
+        }, videoStartTime);
 
-    }, [isPaused]);
+        return () => {
+            clearTimeout(handle);
+            setVideoPlaying(false);
+        };
+    }, [isPaused, levelData.video]);
 
     // Audio reference and effect to play level music
     // const audioRef = useRef(null);
 
+    // state variable to store the timer (or a ref)
+    const videoStartTimerRef = useRef(null);
+
     useEffect(() => {
-        // audioRef.current = new Audio(levelData.song);
+        if (inGame && levelData.video) {
+            // If there's an offset for the video
+            const videoStartTime = levelData.video.offset;
 
-        if (inGame) {
-
-            // audioRef.current.loop = false;
-            // audioRef.current.volume = levelData.volume;
-            // audioRef.current.load();
-            setTimeout(function () {
-                // audioRef.current.play();
-            }, 2000 - levelData.offset);
-
-            if (levelData.video) {
-                const videoStartTime = levelData.video.offset;
-
-                setTimeout(() => {
+            // Only schedule the video if we're not already paused
+            if (!isPaused) {
+                videoStartTimerRef.current = setTimeout(() => {
+                    // If at this moment, we are still not paused
                     if (!isPaused) {
                         setVideoPlaying(true);
-                    } else {
-                        setVideoPlaying(false);
                     }
                 }, videoStartTime);
             }
-
-        } else {
-            // audioRef.current.pause();
         }
+
         return () => {
-            // if (audioRef.current) {
-            //     audioRef.current.pause();
-            //     audioRef.current = null;
-            // }
-            setVideoPlaying(false);
-            setVideoPlaying(false);
+            // Clean up any timer
+            if (videoStartTimerRef.current) {
+                clearTimeout(videoStartTimerRef.current);
+                videoStartTimerRef.current = null;
+            }
         };
+    }, [inGame, levelData.video, isPaused]);
 
-
-    }, [levelData.song]);
 
     function notLong(name) {
         return (name.length <= 30);
