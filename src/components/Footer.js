@@ -17,7 +17,7 @@ function Footer() {
         <footer className="footer">
             <div className="footer-content">
                 <div className="footer-left">
-                    <p>&copy; 2024 LOG. All lefts reserved.</p>
+                    <p>&copy; 2025 LOG. All lefts reserved.</p>
                 </div>
                 <div className="footer-right">
                     <span onClick={terms}>Terms & Conditions</span>

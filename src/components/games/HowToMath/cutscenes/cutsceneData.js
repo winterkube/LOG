@@ -12,31 +12,31 @@ import {speed2PreCutscene} from "./8-speed2CS";
 
 export const Cutscenes = {
         1: {
-            pre: introPreCutscene,
-            post: introPostCutscene, // We'll define post-level cutscenes later
+            // pre: introPreCutscene,
+            // post: introPostCutscene, // We'll define post-level cutscenes later
         },
         2: {
-            pre: decimalPreCutscene,
-            post: decimalPostCutscene,
+            // pre: decimalPreCutscene,
+            // post: decimalPostCutscene,
         },
         3: {
-            pre: speed1PreCutscene,
+            // pre: speed1PreCutscene,
 
         },
         4: {
-            pre: algebraPreCutscene,
+            // pre: algebraPreCutscene,
         },
         5: {
-            pre: exponentPreCutscene,
+            // pre: exponentPreCutscene,
         },
         6: {
-            pre: trigPreCutscene,
+            // pre: trigPreCutscene,
         },
         7: {
-            pre: endurancePreCutscene,
+            // pre: endurancePreCutscene,
         },
         8: {
-            pre: speed2PreCutscene,
+            // pre: speed2PreCutscene,
         },
 
 

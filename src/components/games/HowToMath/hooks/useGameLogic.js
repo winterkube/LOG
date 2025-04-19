@@ -137,6 +137,8 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
     }
 
 
+
+
     useEffect(() => {
         if (isPausedRef.current) {
             // Pause the timers
@@ -387,5 +389,6 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
         setIsPaused,
         currentVar,
         restartLevel,
+        setCurrentQuestionIndex, // Expose the setter
     };
 }

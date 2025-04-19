@@ -89,29 +89,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
         }
     }, [levelData.video]);
 
-
-
-    useEffect(() => {
-        if (levelData.video) {
-            if (videoPreloaded) {
-                setAssetsLoaded(true);
-            }
-        } else {
-            setAssetsLoaded(true);
-        }
-    }, [videoPreloaded,  levelData.video]);
-
-    // Function to handle the end of the game
-    const handleGameEnd = (performanceData) => {
-
-        setIsEnding(true);
-        setTimeout(() => {
-            // audioRef.current.pause();
-            onGameEnd({...performanceData, levelNumber: levelData.levelNumber});
-        }, 3000); // Duration of fade-out animation
-    };
-
-    // Destructure variables returned by useGameLogic
+// Destructure variables returned by useGameLogic
     const {
         currentQuestion,
         timeLeft,
@@ -125,7 +103,82 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
         setIsPaused,
         currentVar,
         restartLevel,
+        setCurrentQuestionIndex, // Expose the setter
     } = useGameLogic(levelData, questions, handleGameEnd, 2, difficulty); // Start delay of 1.5 seconds
+
+    useEffect(() => {
+        if (levelData.video) {
+            if (videoPreloaded) {
+                setAssetsLoaded(true);
+            }
+        } else {
+            setAssetsLoaded(true);
+        }
+    }, [videoPreloaded,  levelData.video]);
+
+    // In your Gameplay component:
+    const [syncCheckpoints, setSyncCheckpoints] = useState([]);
+    const nextCheckpointIndexRef = useRef(0);
+
+// When assets are loaded and before gameplay begins, compute checkpoints:
+    useEffect(() => {
+        if (assetsLoaded) {
+            const L = levelData.length; // total level length in seconds
+            const cp = [L / 4, (2 * L) / 4, (3 * L) / 4];
+            setSyncCheckpoints(cp);
+            nextCheckpointIndexRef.current = 0;
+        }
+    }, [assetsLoaded, levelData.length]);
+
+    useEffect(() => {
+        let reqId;
+
+        // A helper function that computes the expected question index based on the video time.
+        // This example assumes questions are roughly evenly distributed.
+        const computeExpectedQuestionIndex = (currentTime) => {
+            const totalQuestions = questions.length;  // or processedQuestions.length if you're using that
+            const expected = Math.floor((currentTime / levelData.length) * totalQuestions);
+            return Math.min(expected, totalQuestions - 1);
+        };
+
+        const gameLoop = () => {
+            if (videoPlayerRef.current) {
+                const currentTime = videoPlayerRef.current.getCurrentTime() || 0;
+                if (nextCheckpointIndexRef.current < syncCheckpoints.length) {
+                    const cpTime = syncCheckpoints[nextCheckpointIndexRef.current];
+                    if (currentTime >= cpTime) {
+                        // Compute the expected question index
+                        const expectedIndex = computeExpectedQuestionIndex(currentTime);
+                        // Force a re-sync if there's a discrepancy
+                        setCurrentQuestionIndex(expectedIndex);
+                        nextCheckpointIndexRef.current++; // move to next checkpoint
+                    }
+                }
+            }
+            reqId = requestAnimationFrame(gameLoop);
+        };
+
+        if (videoPlaying) {
+            reqId = requestAnimationFrame(gameLoop);
+        }
+        return () => {
+            cancelAnimationFrame(reqId);
+        };
+    }, [videoPlaying, syncCheckpoints, levelData.length, questions.length]);
+
+
+
+    // Function to handle the end of the game
+    const handleGameEnd = (performanceData) => {
+
+        setIsEnding(true);
+        setTimeout(() => {
+            // audioRef.current.pause();
+            onGameEnd({...performanceData, levelNumber: levelData.levelNumber});
+        }, 3000); // Duration of fade-out animation
+    };
+
+
 
     // Mounting effect for animations
     useEffect(() => {
