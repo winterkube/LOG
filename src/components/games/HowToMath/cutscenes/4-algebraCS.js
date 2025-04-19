@@ -13,12 +13,22 @@ export const algebraPreCutscene = [
     // ... more steps
 ];
 
-// export const speed1PostCutscene = [
-//     {
-//         type: 'image',
-//         dialogues: [' bonk '],
-//         src: black,
-//     },
-//     // ... more steps
-// ];
+export const algebraPostCutscene = [
+    {
+        type: 'image',
+        dialogues: ['And thats the end of the How To Math demo!'],
+        src: black,
+    },
+    {
+        type: 'image',
+        dialogues: ['Stay tuned for more levels, actual cutscenes, and cooler backgrounds!'],
+        src: black,
+    },
+    {
+        type: 'image',
+        dialogues: ['Thanks for playing!'],
+        src: black,
+    },
+    // ... more steps
+];
 
