@@ -190,18 +190,26 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
         if (!levelData.video || isPaused) return;
 
         const videoStartTime = levelData.video.offset;
-        const handle = setTimeout(() => {
-            setVideoPlaying(true);
-        }, videoStartTime);
 
-        return () => {
-            clearTimeout(handle);
-            setVideoPlaying(false);
-        };
+        // if (!isReady) {
+            const handle = setTimeout(() => {
+                setVideoPlaying(true);
+
+            }, videoStartTime);
+
+
+
+
+            return () => {
+                clearTimeout(handle);
+                setVideoPlaying(false);
+            };
+        // }
+
+
+
     }, [isPaused, levelData.video]);
 
-    // Audio reference and effect to play level music
-    // const audioRef = useRef(null);
 
     // state variable to store the timer (or a ref)
     const videoStartTimerRef = useRef(null);
@@ -213,12 +221,18 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
 
             // Only schedule the video if we're not already paused
             if (!isPaused) {
-                videoStartTimerRef.current = setTimeout(() => {
-                    // If at this moment, we are still not paused
+                if (!isReady) {
+                    videoStartTimerRef.current = setTimeout(() => {
+                        // If at this moment, we are still not paused
+                        if (!isPaused) {
+                            setVideoPlaying(true);
+                        }
+                    }, videoStartTime);
+                } else {
                     if (!isPaused) {
                         setVideoPlaying(true);
                     }
-                }, videoStartTime);
+                }
             }
         }
 

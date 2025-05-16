@@ -55,13 +55,15 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
     };
 
     const goBack = () => {
-        setAnimateExit(true);
-        setAnimateEnter(false); // Stop enter animations
-        setTimeout(() => {
-            setIsSettingsOpen(false);
-            setIsPlayOpen(false);
-            setAnimateExit(false);
-        }, 300);
+        if (!openVolume && !isDifficultyModalOpen) {
+            setAnimateExit(true);
+            setAnimateEnter(false); // Stop enter animations
+            setTimeout(() => {
+                setIsSettingsOpen(false);
+                setIsPlayOpen(false);
+                setAnimateExit(false);
+            }, 300);
+        }
     };
 
     const goToPlay = () => {
@@ -84,7 +86,9 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
 
     const volumeFunc = () => {
         // window.confirm('just lower your computer volume xd');
-        setOpenVolume(true);
+        if (!openVolume && !isDifficultyModalOpen) {
+            setOpenVolume(true);
+        }
 
     };
 
@@ -111,7 +115,8 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
     const [over6, setOver6] = useState(false);
 
     const difficultyFunc = () => {
-        setIsDifficultyModalOpen(true);
+        if (!openVolume && !isDifficultyModalOpen)
+            setIsDifficultyModalOpen(true);
     };
     // } else {
     {
@@ -170,7 +175,7 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
                                             max="1"
                                             step="0.01"
                                             onChange={handleVolumeChange}
-                                            defaultValue="0.5"
+                                            defaultValue="1"
                                         />
                                     </label>
 
@@ -182,13 +187,14 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
                             </>
                     )}
 
-                    <img
-                        onMouseOver={() => setOver6(true)}
-                        onMouseOut={() => setOver6(false)}
+                            <img
+                                onMouseOver={() => setOver6(true)}
+                                onMouseOut={() => setOver6(false)}
                                 src={over6 ? difficultyButtonImageHover : difficultyButtonImage}
                                 alt="Difficulty Button"
                                 className={`difficulty-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
                                 onClick={difficultyFunc}
+
                                 width="230"
                             />
 
