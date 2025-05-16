@@ -104,7 +104,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
         currentVar,
         restartLevel,
         setCurrentQuestionIndex, // Expose the setter
-    } = useGameLogic(levelData, questions, handleGameEnd, 2, difficulty); // Start delay of 1.5 seconds
+    } = useGameLogic(levelData, questions, onGameEnd, 2, difficulty); // Start delay of 1.5 seconds
 
     useEffect(() => {
         if (levelData.video) {

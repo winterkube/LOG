@@ -155,24 +155,36 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
 
                     {isSettingsOpen && (
                         <>
-                            {openVolume && (
+                        {openVolume && (
+                            <>
+                            <div className="modal-overlay">
+                                <div className="volume-modal">
 
+                                    <div className="voltext">VOLUME</div>
 
-                            <label className="volume-slider">
-                                Volume:
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="1"
-                                    step="0.01"
-                                    onChange={handleVolumeChange}
-                                    defaultValue="0.5"
-                                />
-                            </label>)}
+                                    <label className="volume-slider">
 
-                            <img
-                                onMouseOver={() => setOver6(true)}
-                                onMouseOut={() => setOver6(false)}
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="1"
+                                            step="0.01"
+                                            onChange={handleVolumeChange}
+                                            defaultValue="0.5"
+                                        />
+                                    </label>
+
+                                    <div className="close-button" onClick={() => setOpenVolume(false)}>
+                                        X
+                                    </div>
+                                </div>
+                            </div>
+                            </>
+                    )}
+
+                    <img
+                        onMouseOver={() => setOver6(true)}
+                        onMouseOut={() => setOver6(false)}
                                 src={over6 ? difficultyButtonImageHover : difficultyButtonImage}
                                 alt="Difficulty Button"
                                 className={`difficulty-button button ${animateEnter ? 'enter' : ''} ${animateExit ? 'exit' : ''}`}
