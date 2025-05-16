@@ -107,4 +107,50 @@ export const introTrial = {
         },
         // Add more questions...
     ],
+    easyQuestions: [
+
+        { question: '0 + 1 = ?', answer: '2', time: (60 / bpm) * 3.4,},
+        { question: '1 + 1 = ?', answer: '4', time: (60 / bpm) * 4,},
+        { question: '2 + 2 = ?', answer: '6', time: (60 / bpm) * 4,},
+        { question: '0 + 0 = ?', answer: '0', time: (60 / bpm) * 4,},
+        { question: '3 - 1 = ?', answer: '1', time: (60 / bpm) * 8,}, // 2 beats},
+        { question: '1 - 2 = ?', answer: '2', time: (60 / bpm) * 8,},
+
+        { question: '1 * 2 = ?', answer: '1', time: (60 / bpm) * 8},
+        { question: '2 * 4 = ?', answer: '4', time: (60 / bpm) * 8},
+
+        { question: '1 + 1 + 1 = ?', answer: '3', time: (60 / bpm) * 4},
+        { question: '1 + 1 + 1 + 1 = ?', answer: '4', time: (60 / bpm) * 4},
+        { question: '1 + 1 + 1 + 1 + 1 = ?', answer: '5', time: (60 / bpm) * 4},
+        { question: '1 + 1 + 1 + 1 + 1 - 1 = ?', answer: '4', time: (60 / bpm) * 4},
+
+        { question: (randomNum1()).toString() + ' + ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 8,},
+        { question: (randomNum1()).toString() + ' + ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 8,},
+        { question: (randomNum1()).toString() + ' * ' + '1' + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: (randomNum1()).toString() + ' * ' + '3' + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: '5' + ' * ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: '7' + ' * ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+        { question: '1' + ' * ' + (randomNum1()).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 2,},
+
+        { question: '1 + ' + (randomNum1(2)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: '1 + 1 + 1 + ' + (randomNum1(2)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: (randomNum1(2)).toString() + ' + 1 + 1 + 1 + 1' + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+        { question: (randomNum1(2)).toString() + ' + 1 + 1' + ' = ?', answer: 'idk', time: (60 / bpm) * 4,},
+
+        { question: (randomNum1(2)).toString() + ' * ' + (randomNum1(2)).toString() + ' * ' + (randomNum1(2)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 16,},
+
+        { question: '6' + ' = ?', answer: '6', time: (60 / bpm) * 2,},
+        { question: '5' + ' = ?', answer: '5', time: (60 / bpm) * 2,},
+        { question: '4' + ' = ?', answer: '4', time: (60 / bpm) * 1,},
+        { question: '3' + ' = ?', answer: '3', time: (60 / bpm) * 1,},
+        { question: '2' + ' = ?', answer: '2', time: (60 / bpm) * 1,},
+        { question: '1' + ' = ?', answer: '1', time: (60 / bpm) * 1,},
+
+        {
+            question: '...',
+            answer: '.',
+            time: 999,
+        },
+        // Add more questions...
+    ],
 };
