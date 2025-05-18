@@ -20,10 +20,10 @@
 }
 .gp-background {
     position: absolute;
-    width: 850px;
+    width: 860px;
     height: 540px;
     top: -4%;
-    left: -16%;
+    left: -17%;
     background-image: url("../assets/tempbg.png");
     background-position: center;
     background-size: cover;

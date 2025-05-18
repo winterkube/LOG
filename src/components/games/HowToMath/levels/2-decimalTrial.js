@@ -12,6 +12,11 @@ export const decimalTrial = {
     length: 78, // 78 seconds
     offset: 50,
     volume: 0.6,
+    video: {
+        url: require('../assets/vids/decimalTrialVid.mp4'),
+        offset: 2000, // Offset in milliseconds (e.g., 1000ms = 1s)
+        volume: 0.5
+    },
     questions: [
         { question: '1 / 1 = ?', answer: '1', time: (60 / bpm) * 4 },
         { question: '2 / 2 = ?', answer: '1', time: (60 / bpm) * 4 },
