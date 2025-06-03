@@ -13,7 +13,7 @@ export const decimalTrial = {
     offset: 50,
     volume: 0.6,
     video: {
-        url: require('../assets/vids/decimalTrialVid.mp4'),
+        url: require('../assets/vids/decimalTrialVid2.mp4'),
         offset: 2000, // Offset in milliseconds (e.g., 1000ms = 1s)
         volume: 0.5
     },
