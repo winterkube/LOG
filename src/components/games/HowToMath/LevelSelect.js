@@ -97,9 +97,9 @@ function LevelSelect({ onLevelSelect }, {data}) {
     }
 
     const handleLevelClick = (levelNumber) => {
-        if (levelNumber <= highestUnlockedLevel) {
+        // if (levelNumber <= highestUnlockedLevel) {
             goToLvl(levelNumber);
-        }
+        // }
     };
 
 

@@ -28,7 +28,7 @@ export const randomNum1 = (what) => {
     return `__RANDOM_NUM1_${what || 'default'}_${randomNumCounter}__`;
 };
 
-export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
+export function useGameLogic(levelData, questions, onGameEnd, startDelay, assetsLoaded) {
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState('...');
@@ -159,10 +159,11 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay) {
 
 
         // Start initial timer
-        setIsReady(false);
-        setUserAnswer('');
-        setTimeLeft(startDelay);
-
+        if (assetsLoaded) {
+            setIsReady(false);
+            setUserAnswer('');
+            setTimeLeft(startDelay);
+        }
     }, []);
 
 

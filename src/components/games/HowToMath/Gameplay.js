@@ -106,6 +106,20 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
     }, [levelData.video]);
 
 // Destructure variables returned by useGameLogic
+
+
+    useEffect(() => {
+        if (levelData.video) {
+            if (videoPreloaded) {
+                setTimeout(() => {
+                    setAssetsLoaded(true);
+                }, 1000)
+
+            }
+        } else {
+            setAssetsLoaded(false);
+        }
+    }, [videoPreloaded,  levelData.video]);
     const {
         currentQuestion,
         timeLeft,
@@ -120,18 +134,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
         currentVar,
         restartLevel,
         setCurrentQuestionIndex, // Expose the setter
-    } = useGameLogic(levelData, questions, onGameEnd, 2, difficulty); // Start delay of 1.5 seconds
-
-    useEffect(() => {
-        if (levelData.video) {
-            if (videoPreloaded) {
-                setAssetsLoaded(true);
-            }
-        } else {
-            setAssetsLoaded(false);
-        }
-    }, [videoPreloaded,  levelData.video]);
-
+    } = useGameLogic(levelData, questions, onGameEnd, 2, difficulty, assetsLoaded); // Start delay of 1.5 seconds
     // In your Gameplay component:
     const [syncCheckpoints, setSyncCheckpoints] = useState([]);
     const nextCheckpointIndexRef = useRef(0);
@@ -198,7 +201,9 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
 
     // Mounting effect for animations
     useEffect(() => {
-        setIsMounted(true);
+
+            setIsMounted(true);
+
     }, []);
 
     useEffect(() => {
@@ -411,7 +416,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
     } else {
         return (
 
-            <div className={`game-play ${isMounted ? 'lvl-fade-in' : ''} ${isEnding ? 'lvl-fade-out' : ''}`}>
+            <div className={`game-play ${isMounted && assetsLoaded ? 'lvl-fade-in' : ''} ${isEnding ? 'lvl-fade-out' : ''}`}>
 
 
                 <div className={`gp-background ${isPaused ? 'paused' : ''}`}>
