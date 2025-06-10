@@ -24,7 +24,12 @@ export const speedTrialI = {
     songTitle: 'BigGiantCircles - Chip Zeal',
     length: 99,
     offset: 1000,
-    volume: 0.9,
+    volume: 1,
+    video: {
+        url: require('../assets/vids/speedTrialVid.mp4'),
+        offset: 1390, // Offset in milliseconds (e.g., 1000ms = 1s)
+        volume: 1
+    },
     questions: [
         { question: '1' + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
@@ -72,10 +77,10 @@ export const speedTrialI = {
         { question: '1.1 * 1.1 = ?', answer: '1.21', time: (60 / bpm) * 4 },
         { question: '1.1 / 1.1 = ?', answer: '1', time: (60 / bpm) * 4 },
 
+        { question: '1 * 2 = ?', answer: '2', time: (60 / bpm) * 8 },
         { question: '1 * 2 * 3 = ?', answer: '6', time: (60 / bpm) * 8 },
         { question: '1 * 2 * 3 * 4 = ?', answer: '24', time: (60 / bpm) * 8 },
-        { question: '1 * 2 * 3 * 4 * 5 = ?', answer: '120', time: (60 / bpm) * 8 },
-        { question: '5! = ?', answer: '120', time: (60 / bpm) * 8 },
+        { question: '4! = ?', answer: '24', time: (60 / bpm) * 8 },
 
         { question: '1' + randomNum2(2).toString() + randomNum2(2).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: '1' + randomNum2(2).toString() + randomNum2(2).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },

@@ -102,6 +102,11 @@ export const algebraTrial = {
     length: 99,
     offset: 1170,
     volume: 0.72,
+    video: {
+        url: require('../assets/vids/algebraTrialVid.mp4'),
+        offset: 1390, // Offset in milliseconds (e.g., 1000ms = 1s)
+        volume: 1
+    },
     questions: [
         { question: (Math.round(Math.random() * 10)).toString() + ' + ' + (Math.round(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1().toString() + ' + ' +  randomNum1().toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
