@@ -11,7 +11,7 @@ import { Levels } from './levels/levelData';
 import lofiThing from './assets/music/lofi thing.mp3';
 import birds from './assets/music/birds.mp3';
 import './HowToMath.css';
-
+import { useLocation } from 'react-router-dom';
 
 // Import all images used in your game
 import playButtonImage from './assets/play button.png';
@@ -94,7 +94,22 @@ function HowToMath() {
         }
     }, [volume]);
 
+    const location = useLocation();
 
+    // whenever the URL changes:
+    useEffect(() => {
+        if (location.pathname !== '/howtomath') {
+            menuMusicRef.current.pause();
+            menuMusicRef.current.load();
+        }
+    }, [location.pathname]);
+    useEffect(() => {
+        return () => {
+            // on unmount, definitely stop playback
+            menuMusicRef.current.pause();
+            menuMusicRef.current.load();
+        };
+    }, []);
     // Start or stop music based on currentScene
     useEffect(() => {
 
@@ -120,6 +135,13 @@ function HowToMath() {
         // restart
          else if (currentScene === 'results' ) {
             // Pause the music
+            if (menuMusicRef.current) {
+                menuMusicRef.current.pause();
+                menuMusicRef.current.load();
+            }
+        }
+
+         else {
             if (menuMusicRef.current) {
                 menuMusicRef.current.pause();
                 menuMusicRef.current.load();
@@ -264,7 +286,15 @@ function HowToMath() {
                     return <LoadingScreen />;
                 }
                 return (
-                    <div className="startButton" onClick={startGame}> </div>
+                    <>
+                        <div className="startButton" onClick={startGame}>
+
+                        </div>
+
+                        <div className="buttonText"> Headphones recommended!</div>
+                    </>
+
+
                 );
             case 'menu':
                 return (
@@ -295,6 +325,7 @@ function HowToMath() {
                                 setCurrentScene('menu');
                             }
                         }}
+                        data={gameData.performanceData}
                     />
                 );
             case 'cutscene':
@@ -318,6 +349,7 @@ function HowToMath() {
                         onGameEnd={handleGameEnd}
                         inGame={isInGame}
                         difficulty={gameData.difficulty}
+                        volume = {volume}
                     />
                 );
             case 'results':
@@ -344,7 +376,7 @@ function HowToMath() {
     return (
 
         <div className="how-to-math">
-            <h1>HOW TO MATH</h1>
+            <h1>HOW TO MATH</h1><h5> (demo) </h5>
             <h2>by WinterKube</h2>
 
             <div className="game-container">

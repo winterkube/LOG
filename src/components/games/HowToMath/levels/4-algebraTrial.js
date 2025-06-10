@@ -100,11 +100,11 @@ export const algebraTrial = {
     song: songVindicateMe,
     songTitle: 'BigGiantCircles - Vindicate Me',
     length: 99,
-    offset: 1170,
+    offset: 1140,
     volume: 0.72,
     video: {
         url: require('../assets/vids/algebraTrialVid.mp4'),
-        offset: 1390, // Offset in milliseconds (e.g., 1000ms = 1s)
+        offset: 1930, // Offset in milliseconds (e.g., 1000ms = 1s)
         volume: 1
     },
     questions: [
@@ -122,11 +122,11 @@ export const algebraTrial = {
         { question: '3x = 15', variable: 'x', answer: '5', time: (60 / bpm) * 4 },
         { question: 'x / 2 = 4', variable: 'x', answer: '8', time: (60 / bpm) * 5 },
 
-        { question: '2x + x + x = 40', variable: 'x', answer: '10', time: (60 / bpm) * 8 },
-        { question: 'x / x + 2 - x = 4', variable: 'x', answer: '9', time: (60 / bpm) * 8 },
+        { question: '2x + x = 30', variable: 'x', answer: '10', time: (60 / bpm) * 8 },
+        { question: 'x + x - 4 = 4', variable: 'x', answer: '4', time: (60 / bpm) * 8 },
 
         { question: '3x - 3 = 3', variable: 'x', answer: '2', time: (60 / bpm) * 8 },
-        { question: '2x + x - x + 2x = 4', variable: 'x', answer: '1', time: (60 / bpm) * 8 },
+        { question: '2x + 2x = 4', variable: 'x', answer: '1', time: (60 / bpm) * 8 },
 
         { question: 'x + x = 24', variable: 'x', answer: '12', time: (60 / bpm) * 3 },
         { question: 'x + x + x = 24', variable: 'x', answer: '8', time: (60 / bpm) * 4 },
@@ -158,7 +158,7 @@ export const algebraTrial = {
         { question: 's = ' + randomNum1(1), variable: 's', answer: 'idk', time: (60 / bpm) * 1 },
         { question: 'x * x = 4', variable: '|x|', answer: '2', time: (60 / bpm) * 4 },
 
-        { question: '(2z - 15y/z + x/x/x * 0.915) * 0 = x', variable: 'x', answer: '0', time: (60 / bpm) * 14 },
+        { question: '(2z - 15y/z + 4.536 * 0.915) * 0 = x', variable: 'x', answer: '0', time: (60 / bpm) * 14 },
 
 
         {
@@ -211,7 +211,7 @@ export const algebraTrial = {
         { question: randomEq1(1,'v'), variable: 'v', answer: 'idk', time: (60 / bpm) * 8 },
         { question: randomEq1(2,'M'), variable: 'M', answer: 'idk', time: (60 / bpm) * 8 }, // 8
 
-        { question: '(2z - 15y/z + x/x/x * 0.915) * 0 = x', variable: 'x', answer: '0', time: (60 / bpm) * 14 },
+        { question: '(2z - 15y/z + 4.536 * 0.915) * 0 = x', variable: 'x', answer: '0', time: (60 / bpm) * 14 },
 
 
         {

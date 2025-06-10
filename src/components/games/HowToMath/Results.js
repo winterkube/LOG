@@ -35,6 +35,10 @@ function Results({ data, onContinue, onRetry, onMenu }) {
     const failed = percent < 0.5;
     const levelNumber = data.levelNumber; // We need to pass levelNumber to Results
 
+    const levelKey = `level_${data.levelNumber}`;
+
+
+
     useEffect(() => {
         if (!failed) {
             // Player passed the level
@@ -147,6 +151,29 @@ function Results({ data, onContinue, onRetry, onMenu }) {
 
     const rank = getRank(percent);
     const rankImage = rankImages[rank] || rankIdkImage;
+
+
+    useEffect(() => {
+        // Read existing high score (default to -Infinity so any real score is higher)
+        const prevHigh = parseInt(localStorage.getItem(`${levelKey}_highscore`), 10);
+        // If we have no previous high (NaN) or our current is better, update it
+        if (isNaN(prevHigh) || percent > prevHigh) {
+            localStorage.setItem(`${levelKey}_highscore`, percent);
+            localStorage.setItem(`${levelKey}_rank`, rank);
+        }
+        // Also update unlocked level as before
+        if (percent >= 0.5) {
+            const unlocked = parseInt(localStorage.getItem('highestUnlockedLevel'), 10) || 1;
+            if (data.levelNumber + 1 > unlocked) {
+                localStorage.setItem('highestUnlockedLevel', data.levelNumber + 1);
+            }
+        }
+    }, [data.score, data.levelNumber, percent, rank, levelKey]);
+    // useEffect(() => {
+    //     // After computing percent and rank:
+    //     localStorage.setItem(`${levelKey}_highscore`, (percent*100).toString() + '%');
+    //     localStorage.setItem(`${levelKey}_rank`, rank);
+    // }, [data.score, rank, levelKey]);
 
     if (!imagesLoaded) {
         return (

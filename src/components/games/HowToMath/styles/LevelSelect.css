@@ -172,6 +172,13 @@
     text-shadow: 1px 1px 3px #373759;
 }
 
+/*.button.locked {*/
+/*    pointer-events: none;*/
+/*    cursor: default;*/
+/*    background-image: url("../assets/trial box locked.png");*/
+/*    !* Additional styles for locked buttons *!*/
+/*}*/
+
 .level-buttons-container button:hover {
     background-image: url("../assets/trial box hover.png");
 }
@@ -179,13 +186,17 @@
 
 
 .lvl-info {
-    left: 7%;
+    left: 5%;
     top: 40%;
     position: absolute;
     font-family: 'Cabin Sketch', serif;
-    font-size: 25px;
+    font-size: 22px;
+    text-shadow: 1px 1px 1px #000000;
     color: #000;
-    opacity: 1;
+    opacity: 0.8;
+    background: rgba(0,0,0,0.15);
+    border-radius: 10px;
+    padding: 15px;
 }
 
 

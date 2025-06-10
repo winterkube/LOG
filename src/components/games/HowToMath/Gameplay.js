@@ -9,8 +9,8 @@ import trialBoxHover from "./assets/trial box hover.png";
 import crumpledPaper from "./assets/crumpled paper.png";
 
 import introTrialVideo from "./assets/vids/introTrialVid.mp4"
-
-function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
+import { useLocation } from 'react-router-dom';
+function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
     // State for user input and component animations
     // const [userAnswer, setUserAnswer] = useState('');
     const [isMounted, setIsMounted] = useState(false);
@@ -22,6 +22,22 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
     const videoPlayerRef = useRef(null);
 
     const questions = difficulty === 'easy' ? levelData.easyQuestions : levelData.questions;
+
+    // near the top of Gameplay.js
+    useEffect(() => {
+        return () => {
+            // on unmount, definitely stop playback
+            setVideoPlaying(false);
+        };
+    }, []);
+    const location = useLocation();
+
+    // whenever the URL changes:
+    useEffect(() => {
+        if (location.pathname !== '/howtomath') {
+            setVideoPlaying(false);
+        }
+    }, [location.pathname]);
 
     function preloadVideos(videoArray, onProgress, onComplete) {
         let loadedVideos = 0;
@@ -112,7 +128,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
                 setAssetsLoaded(true);
             }
         } else {
-            setAssetsLoaded(true);
+            setAssetsLoaded(false);
         }
     }, [videoPreloaded,  levelData.video]);
 
@@ -265,6 +281,15 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
             return elements;
         }
 
+        if (levelData.levelNumber === 4 && currentQuestion.question === levelData.questions[questions.length - 2].question) {
+            elements.push('‎');
+            // elements.push('3 + x = 7');
+            elements.push(<h9>(2z - 15y/z + 4.536 * 0.915)</h9>);
+            elements.push(<h10> = x</h10>);
+            elements.push(<h8> * 0 </h8>);
+            return elements;
+        }
+
         // if (levelData.levelNumber === 4 && currentQuestion.question === levelData.questions[27].question) {
         //     // elements.push('‎');
         //     elements.push('5y - y = 2');
@@ -391,6 +416,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
 
                 <div className={`gp-background ${isPaused ? 'paused' : ''}`}>
 
+
                     {levelData.video ? (
                         <ReactPlayer
                             className="video-background"
@@ -398,9 +424,9 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty}) {
                             playing={videoPlaying}
                             loop={false}
                             muted={false}
-                            volume={levelData.video.volume}
-                            width="100%"
-                            height="100%"
+                            volume={levelData.video.volume * volume}
+                            width="110%"
+                            height="110%"
                             style={{position: 'absolute', top: 0, left: 0}}
                         />
                     ) : (

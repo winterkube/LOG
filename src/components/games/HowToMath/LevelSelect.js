@@ -11,7 +11,7 @@ import trialBoxLocked from "./assets/trial box locked.png";
 import crumpledPaper from "./assets/crumpled paper.png";
 
 
-function LevelSelect({ onLevelSelect }) {
+function LevelSelect({ onLevelSelect }, {data}) {
 
     const [currentDiff, setCurrentDiff] = useState('');
     const [highestUnlockedLevel, setHighestUnlockedLevel] = useState(1);
@@ -68,11 +68,13 @@ function LevelSelect({ onLevelSelect }) {
         { levelNumber: 1, name: 'Intro Trial', difficulty: '1/5' },
         { levelNumber: 2, name: 'Decimal Trial', difficulty: '1/5' },
         { levelNumber: 3, name: 'Speed Trial I', difficulty: '2/5'},
-        { levelNumber: 4, name: 'Algebra Trial', difficulty: '2/5'},
+        { levelNumber: 4, name: 'Algebra Trial', difficulty: '3/5'},
         { levelNumber: 5, name: 'Exponent Trial', difficulty: '3/5'},
         { levelNumber: 6, name: 'Trigonometry Trial', difficulty: '3/5'},
         { levelNumber: 7, name: 'Endurance Trial', difficulty: '2/5'},
         { levelNumber: 8, name: 'Speed Trial II', difficulty: '4/5'},
+        { levelNumber: 9, name: '(More to come...)', difficulty: '1/5'},
+
         // Add more levels...
     ];
 
@@ -102,13 +104,33 @@ function LevelSelect({ onLevelSelect }) {
 
 
     const [currentOpac, setCurrentOpac] = useState(0);
-    function showDifficulty(levelDiff) {
-        setCurrentOpac(0.4);
-        setCurrentDiff(levelDiff);
+
+    // const [currentHS, setCurrentHS] = useState('');
+    // const [currentRank, setCurrentRank] = useState('');
+
+    // function showDifficulty(levelDiff, levelHS, levelRank) {
+    //     setCurrentOpac(0.4);
+    //     setCurrentDiff(levelDiff);
+    //     // setCurrentHS(levelHS);
+    //     // setCurrentRank(levelRank);
+    // }
+    //
+    // function hideDifficulty() {
+    //     setCurrentOpac(0);
+    // }
+
+    const [hoveredLevel, setHoveredLevel] = useState(null);
+    function handleMouseEnter(level) {
+        setHoveredLevel(level.levelNumber);
+    }
+    function handleMouseLeave() {
+        setHoveredLevel(null);
     }
 
-    function hideDifficulty() {
-        setCurrentOpac(0);
+    // helper to fetch stored data or placeholder
+    function getStored(levelNumber, suffix) {
+        const value = localStorage.getItem(`level_${levelNumber}_${suffix}`);
+        return value === null || NaN ? '—' : value;
     }
 
 
@@ -213,33 +235,33 @@ function LevelSelect({ onLevelSelect }) {
                     {levels.map((level) => (
                         <button
                             key={level.levelNumber}
-                            className={`level-button ${notLong(level.name) ? '' : 'long'} ${level.levelNumber <= highestUnlockedLevel ? '' : 'locked'}`}
+                            className={`level-button ${notLong(level.name) ? '' : 'long'} ${(
+                                // level.levelNumber <= highestUnlockedLevel &&
+                                level.levelNumber <= 4) ? '' : 'locked'}`}
                             onClick={() => handleLevelClick(level.levelNumber)}
-                            onMouseOver={() => showDifficulty(level.difficulty)}
-                            onMouseOut={() => hideDifficulty()}
-                            disabled={level.levelNumber > highestUnlockedLevel}
+                            onMouseEnter={() => handleMouseEnter(level)}
+                            onMouseLeave={handleMouseLeave}
+                            disabled={
+                            // level.levelNumber > highestUnlockedLevel ||
+                                level.levelNumber > 4 }
                         >
                             {level.name}
 
                         </button>
                     ))}
 
-                    {/*<button onClick={() => goToLvl(1)}>Intro Trial</button>*/}
-                    {/*<button onClick={() => goToLvl(2)}>Decimal Trial</button>*/}
-                    {/*<button onClick={() => onLevelSelect(3)}>Speed Trial I</button>*/}
-                    {/*<button onClick={() => onLevelSelect(4)}>Algebra Trial</button>*/}
-                    {/*<button onClick={() => onLevelSelect(5)}>Exponent Trial</button>*/}
-                    {/* Uncomment and add more levels as needed */}
                 </div>
-                {levels.map((level) => (
-                    <div className="lvl-info"
-                         style={{opacity: currentOpac}}
-                    >
-                        Difficulty: {currentDiff} <br/><br/>
-                        Highscore: ? <br/><br/>
-                        Rank: ?
+                {hoveredLevel && (
+                    <div className="lvl-info" style={{opacity: 0.8}}>
+                        Difficulty: {levels.find(l => l.levelNumber === hoveredLevel).difficulty}<br/><br/>
+
+                        Highscore: {
+                        !isNaN(parseFloat(getStored(hoveredLevel, 'highscore')))?
+                        `${parseFloat(getStored(hoveredLevel, 'highscore'))*100}` + '%' : '—' }<br/><br/>
+
+                        Rank: {getStored(hoveredLevel, 'rank')}
                     </div>
-                ))}
+                )}
 
                 {/*<button onClick={() => onLevelSelect(1)}>Intro Trial</button>*/}
                 {/*<button onClick={() => onLevelSelect(2)}>Integer Trial</button>*/}

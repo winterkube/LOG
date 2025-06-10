@@ -20,10 +20,11 @@
 }
 .gp-background {
     position: absolute;
-    width: 860px;
-    height: 540px;
-    top: -4%;
-    left: -17%;
+    width: 880px;
+    height: 560px;
+    scale: 89%;
+    top: -11%;
+    left: -25%;
     background-image: url("../assets/tempbg.png");
     background-position: center;
     background-size: cover;
@@ -91,8 +92,55 @@
 .not-pause.inverse {
     filter: invert(0);
     opacity: 1;
-    animation: level4-5 0.8s;
+    animation: level4-5 0.75s;
 }
+.game-play h9 {
+    top: 31.5%;
+    left: 60px;
+    position: absolute;
+    font-size: 30px;
+    font-family: 'Cabin Sketch', serif;
+    font-weight: 400;
+    color: #ffffff;
+    text-shadow: 0px 0px 1px white;
+}
+.game-play h10 {
+    top: 31.5%;
+    left: 465px;
+    position: absolute;
+    font-size: 30px;
+    font-family: 'Cabin Sketch', serif;
+    font-weight: 400;
+    color: #ffffff;
+    text-shadow: 0px 0px 1px white;
+}
+.game-play h8 {
+    top: 31.5%;
+    left: 415px;
+    position: absolute;
+    font-size: 30px;
+    font-family: 'Cabin Sketch', serif;
+    font-weight: 400;
+    color: #ffffff;
+    text-shadow: 0px 0px 1px white;
+    animation: fadeInLast 10s linear;
+}
+
+@keyframes fadeInLast {
+     0% {
+        opacity: 0;
+
+    } 50% {
+          opacity: 0;
+
+      } 60% {
+    opacity: 1;
+                   }
+    100% {
+        opacity: 1;
+    }
+}
+
 
 .game-play h4 {
     position: absolute;
@@ -118,7 +166,7 @@
 }
 
 .game-play h7 {
-    top: 31.4%;
+    top: 31.5%;
     left: var(--leftPos4);
     position: absolute;
     font-size: 36px;
@@ -129,7 +177,7 @@
     animation: moveLeft2 0.8s linear;
 }
 .game-play h6 {
-    top: -63.1%;
+    top: -62%;
     left: var(--rightPos4);
     position: absolute;
     font-size: 36px;

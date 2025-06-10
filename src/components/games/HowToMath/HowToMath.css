@@ -36,6 +36,10 @@
 .how-to-math h3 {
     user-select: none;
 }
+.how-to-math h5 {
+    user-select: none;
+    margin-bottom: -30px;
+}
 
 .how-to-math img {
     user-select: none;
@@ -47,7 +51,7 @@
 
 .startButton {
 
-    color: black;
+    color: white;
     background-image: url("./assets/startbtn1.png");
     background-size: 100%;
     background-position: center;
@@ -63,6 +67,14 @@
     margin-right: 34%;
     cursor: pointer;
 
+}
+
+.buttonText {
+    font-family: "Lexend", serif;
+    font-size: 20px;
+    color: #8d8d8d;
+    margin-top: 28%;
+    align-content: center;
 }
 
 .startButton:active {
