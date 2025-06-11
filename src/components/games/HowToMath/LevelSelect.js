@@ -9,6 +9,7 @@ import trialBox from "./assets/trial box.png";
 import trialBoxHover from "./assets/trial box hover.png";
 import trialBoxLocked from "./assets/trial box locked.png";
 import crumpledPaper from "./assets/crumpled paper.png";
+import SfxButton from './hooks/SfxButton';
 
 
 function LevelSelect({ onLevelSelect }, {data}) {
@@ -224,30 +225,31 @@ function LevelSelect({ onLevelSelect }, {data}) {
 
 
                 {/* Position the back button */}
-                <button className="back-button2" onClick={goBack}>
+                <SfxButton className="back-button2" onClick={goBack}>
                     BACK
-                </button>
+                </SfxButton>
 
 
                 {/* Wrap level buttons in a scrollable container */}
                 <div className="level-buttons-container">
 
                     {levels.map((level) => (
-                        <button
+                        <SfxButton
                             key={level.levelNumber}
                             className={`level-button ${notLong(level.name) ? '' : 'long'} ${(
                                 // level.levelNumber <= highestUnlockedLevel &&
-                                level.levelNumber <= 4) ? '' : 'locked'}`}
+                                level.levelNumber <= 6) ? '' : 'locked'}`}
                             onClick={() => handleLevelClick(level.levelNumber)}
                             onMouseEnter={() => handleMouseEnter(level)}
                             onMouseLeave={handleMouseLeave}
+
                             disabled={
                             // level.levelNumber > highestUnlockedLevel ||
-                                level.levelNumber > 4 }
+                                level.levelNumber > 6 }
                         >
                             {level.name}
 
-                        </button>
+                        </SfxButton>
                     ))}
 
                 </div>

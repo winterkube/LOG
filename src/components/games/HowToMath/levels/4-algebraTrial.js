@@ -120,7 +120,7 @@ export const algebraTrial = {
         { question: 'x * 10 = 100', variable: 'x', answer: '10', time: (60 / bpm) * 4 },
         { question: 'x * 5 = 15', variable: 'x', answer: '3', time: (60 / bpm) * 4 },
         { question: '3x = 15', variable: 'x', answer: '5', time: (60 / bpm) * 4 },
-        { question: 'x / 2 = 4', variable: 'x', answer: '8', time: (60 / bpm) * 5 },
+        { question: 'x / 2 = 4', variable: 'x', answer: '8', time: (60 / bpm) * 5.3},
 
         { question: '2x + x = 30', variable: 'x', answer: '10', time: (60 / bpm) * 8 },
         { question: 'x + x - 4 = 4', variable: 'x', answer: '4', time: (60 / bpm) * 8 },
@@ -141,9 +141,9 @@ export const algebraTrial = {
 
         { question: randomEq1(1,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomEq1(1,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 4 },
-        { question: randomEq1(2,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 7 },
+        { question: '5x - x = 2' , variable: 'x', answer: 'idk', time: (60 / bpm) * 7 },
         { question: '5y - y = 2' , variable: 'y', answer: 'idk', time: (60 / bpm) * 8 },
-        { question: randomEq1(2,'z'), variable: 'z', answer: 'idk', time: (60 / bpm) * 9 },
+        { question: randomEq1(2,'z'), variable: 'z', answer: 'idk', time: (60 / bpm) * 9.1 },
 
         { question: randomEq1(2,'x') , variable: 'x', answer: 'idk', time: (60 / bpm) * 6 },
         { question: randomEq1(1,'a'), variable: 'a', answer: 'idk', time: (60 / bpm) * 5 },

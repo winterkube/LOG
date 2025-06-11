@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './HowToMath.css';
 import './styles/Results.css';
 
@@ -24,6 +24,10 @@ import rankDImage from './assets/rankD.png';
 import rankEImage from './assets/rankE.png';
 import rankFImage from './assets/rankF.png';
 import rankIdkImage from './assets/rankIdk.png'
+import exit from "./assets/music/exit.mp3";
+import {useLocation} from "react-router-dom";
+import SfxButton from './hooks/SfxButton';
+
 
 function Results({ data, onContinue, onRetry, onMenu }) {
 
@@ -36,6 +40,20 @@ function Results({ data, onContinue, onRetry, onMenu }) {
     const levelNumber = data.levelNumber; // We need to pass levelNumber to Results
 
     const levelKey = `level_${data.levelNumber}`;
+
+    const sfxRef = useRef(null);
+
+    const location = useLocation();
+
+
+
+
+    useEffect(() => {
+        if (location.pathname !== '/howtomath') {
+            // sfxRef.current.pause();
+            // sfxRef.current.load();
+        }
+    }, [location.pathname]);
 
 
 
@@ -116,6 +134,19 @@ function Results({ data, onContinue, onRetry, onMenu }) {
             setImagesLoaded(true);
         });
     }, []);
+
+
+    useEffect(() => {
+        sfxRef.current = new Audio(exit);
+        sfxRef.current.loop = false;
+        sfxRef.current.volume = 0.7; // Set initial volume (0.0 to 1.0)
+
+    }, []);
+    useEffect(() => {
+        if (sfxRef.current && imagesLoaded) {
+            sfxRef.current.play();
+        }
+    }, [sfxRef.current, imagesLoaded]);
 
     function getRank(percent) {
         if (percent === 1 && (data.score !== data.total)) {
@@ -280,15 +311,15 @@ function Results({ data, onContinue, onRetry, onMenu }) {
 
 
                 {!failed ? (
-                    <button className="continue-btn" onClick={() => resultsButton(0)}>CONTINUE</button>
+                    <SfxButton className="continue-btn" onClick={() => resultsButton(0)}>CONTINUE</SfxButton>
 
 
                 ) : (
-                    <button className="continue-btn" onClick={() => resultsButton(2)}>MENU</button>
+                    <SfxButton className="continue-btn" onClick={() => resultsButton(2)}>MENU</SfxButton>
 
                 )}
 
-                <button className="retry-btn" onClick={() => resultsButton(1)}>RETRY</button>
+                <SfxButton className="retry-btn" onClick={() => resultsButton(1)}>RETRY</SfxButton>
 
 
             </div>

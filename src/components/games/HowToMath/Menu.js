@@ -1,6 +1,6 @@
 // src/components/games/HowToMath/Menu.js
 
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './HowToMath.css';
 import './styles/Menu.css';
 import playButtonImage from './assets/play button.png';
@@ -26,6 +26,7 @@ import classroomImage2 from "./assets/classroom2.png";
 import classroomImage3 from "./assets/classroom3.png";
 import classroomImage4 from "./assets/classroom4.png";
 import blackboardImage from "./assets/blackboard.png";
+import buttonClickSfx from "./assets/music/buttonclick.mp3";
 
 function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
 
@@ -44,6 +45,19 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
 
     const [isDifficultyModalOpen, setIsDifficultyModalOpen] = useState(false);
 
+    const clickAudioRef = useRef(new Audio(buttonClickSfx));
+    // ensure the audio is ready
+    useEffect(() => {
+        const a = clickAudioRef.current;
+        a.load();
+    }, []);
+    // function to play the SFX (resetting time so it can play repeatedly)
+    const playClick = () => {
+        const a = clickAudioRef.current;
+        a.currentTime = 0;
+        a.volume = 1;
+        a.play();
+    };
 
     const goToSettings = () => {
         setAnimateExit(true);
@@ -52,6 +66,7 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
             setIsSettingsOpen(true);
             setAnimateExit(false);
         }, 300);
+        playClick();
     };
 
     const goBack = () => {
@@ -64,6 +79,7 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
                 setAnimateExit(false);
             }, 300);
         }
+        playClick();
     };
 
     const goToPlay = () => {
@@ -73,6 +89,7 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
             setIsPlayOpen(true);
             setAnimateExit(false);
         }, 300);
+        playClick();
     };
 
     const goToTrials = () => {
@@ -82,6 +99,7 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
         setTimeout(() => {
             onStart();
         }, 500);
+        playClick();
     };
 
     const volumeFunc = () => {
@@ -89,7 +107,7 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
         if (!openVolume && !isDifficultyModalOpen) {
             setOpenVolume(true);
         }
-
+        playClick();
     };
 
     // if (!imagesLoaded) {
@@ -117,6 +135,7 @@ function Menu({ onStart, setVolume, setDifficulty, difficulty }) {
     const difficultyFunc = () => {
         if (!openVolume && !isDifficultyModalOpen)
             setIsDifficultyModalOpen(true);
+        playClick();
     };
     // } else {
     {

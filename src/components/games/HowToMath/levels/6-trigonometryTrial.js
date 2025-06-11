@@ -14,8 +14,6 @@ export const trigonometryTrial = {
     questions: [
         { question: '2x = 1', answer: 'e', variable: 'x', time: (60 / bpm) * 4 },
         { question: '2y = 1', answer: 'e', variable: 'y', time: (60 / bpm) * 4 },
-        { question: '2z = 1', answer: 'e', variable: 'z', time: (60 / bpm) * 4 },
-        { question: '2y = 1', answer: 'e', variable: 'y', time: (60 / bpm) * 4 },
         {
             question: '...',
             answer: '.',

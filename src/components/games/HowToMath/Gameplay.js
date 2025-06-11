@@ -123,6 +123,10 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
         } else {
             setAssetsLoaded(false);
         }
+
+        if (!levelData.video) {
+            setAssetsLoaded(true);
+        }
     }, [videoPreloaded,  levelData.video]);
 
 

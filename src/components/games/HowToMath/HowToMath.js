@@ -1,6 +1,6 @@
 // src/components/games/HowToMath/HowToMath.js
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, {createContext, useEffect, useRef, useState} from 'react';
 import Menu from './Menu';
 import LevelSelect from './LevelSelect';
 import Gameplay from './Gameplay';
@@ -38,6 +38,11 @@ import startButton2 from './assets/startbtn2.png';
 import {wait} from "@testing-library/user-event/dist/utils";
 import levelSelect from "./LevelSelect";
 import {Cutscenes} from "./cutscenes/cutsceneData";
+import buttonClickSfx from './assets/music/buttonclick.mp3';  // adjust path
+import SfxButton from './hooks/SfxButton';
+export const ClickAudioContext = createContext(() => {});
+
+
 
 
 
@@ -64,7 +69,25 @@ function HowToMath() {
     const menuMusicRef = useRef(null);
     const [volume, setVolume] = useState(1); // Initial volume set to 0.5
 
+
+    const clickAudioRef = useRef(new Audio(buttonClickSfx));
+
+    // ensure the audio is ready
+    useEffect(() => {
+        const a = clickAudioRef.current;
+        a.load();
+    }, []);
+
+    // function to play the SFX (resetting time so it can play repeatedly)
+    const playClick = () => {
+        const a = clickAudioRef.current;
+        a.currentTime = 0;
+        a.volume = 1;
+        a.play();
+    };
+
     const [difficulty, setDifficulty] = useState('normal'); // Default to 'normal' mode
+
 
     // On component mount, load difficulty from localStorage
     useEffect(() => {
@@ -408,11 +431,12 @@ function HowToMath() {
         <div className="how-to-math">
             <h1>HOW TO MATH</h1><h5> (demo) </h5>
             <h2>by WinterKube</h2>
-
-            <div className="game-container">
-                <canvas ref={canvasRef} id="gameCanvas"></canvas>
-                {renderScene()}
-            </div>
+            <ClickAudioContext.Provider value={playClick}>
+                <div className="game-container">
+                    <canvas ref={canvasRef} id="gameCanvas"></canvas>
+                    {renderScene()}
+                </div>
+            </ClickAudioContext.Provider>
         </div>
     );
 }
