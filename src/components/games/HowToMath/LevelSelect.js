@@ -258,8 +258,8 @@ function LevelSelect({ onLevelSelect }, {data}) {
                         Difficulty: {levels.find(l => l.levelNumber === hoveredLevel).difficulty}<br/><br/>
 
                         Highscore: {
-                        !isNaN(parseFloat(getStored(hoveredLevel, 'highscore')))?
-                        `${parseFloat(getStored(hoveredLevel, 'highscore'))*100}` + '%' : '—' }<br/><br/>
+                        !isNaN(parseFloat(getStored(hoveredLevel, 'highscore'))) && parseFloat(getStored(hoveredLevel, 'highscore')) < 2 ?
+                        `${Math.round(parseFloat(getStored(hoveredLevel, 'highscore'))*1000) / 10 }` + '%' : '—' }<br/><br/>
 
                         Rank: {getStored(hoveredLevel, 'rank')}
                     </div>
