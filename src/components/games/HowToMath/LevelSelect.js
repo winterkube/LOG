@@ -238,14 +238,14 @@ function LevelSelect({ onLevelSelect }, {data}) {
                             key={level.levelNumber}
                             className={`level-button ${notLong(level.name) ? '' : 'long'} ${(
                                 // level.levelNumber <= highestUnlockedLevel &&
-                                level.levelNumber <= 6) ? '' : 'locked'}`}
+                                level.levelNumber <= 4) ? '' : 'locked'}`}
                             onClick={() => handleLevelClick(level.levelNumber)}
                             onMouseEnter={() => handleMouseEnter(level)}
                             onMouseLeave={handleMouseLeave}
 
                             disabled={
                             // level.levelNumber > highestUnlockedLevel ||
-                                level.levelNumber > 6 }
+                                level.levelNumber > 4 }
                         >
                             {level.name}
 
