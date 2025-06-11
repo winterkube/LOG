@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/LOG/static/css/main.71ec7aa8.css",
-    "main.js": "/LOG/static/js/main.f452be05.js",
+    "main.css": "/LOG/static/css/main.e4b2fa80.css",
+    "main.js": "/LOG/static/js/main.6526705e.js",
     "reactPlayerYouTube.js": "/LOG/static/js/reactPlayerYouTube.c4383ff3.chunk.js",
     "reactPlayerSoundCloud.js": "/LOG/static/js/reactPlayerSoundCloud.5eba22e1.chunk.js",
     "reactPlayerVimeo.js": "/LOG/static/js/reactPlayerVimeo.51151f74.chunk.js",
@@ -85,7 +85,6 @@
     "static/media/KaTeX_AMS-Regular.ttf": "/LOG/static/media/KaTeX_AMS-Regular.853be92419a6c3766b9a.ttf",
     "static/media/play button hover.png": "/LOG/static/media/play button hover.502d96be8bdf1b792cbb.png",
     "static/media/questionbg.png": "/LOG/static/media/questionbg.d6b1c21052a3eef83444.png",
-    "static/media/tempbg.png": "/LOG/static/media/tempbg.7fd3ff3d88d25e993f3a.png",
     "static/media/KaTeX_Main-Regular.ttf": "/LOG/static/media/KaTeX_Main-Regular.9eba1d77abcf2aa6e94e.ttf",
     "static/media/KaTeX_Main-Bold.ttf": "/LOG/static/media/KaTeX_Main-Bold.8169508bf58f8bd92ad8.ttf",
     "static/media/settings button hover.png": "/LOG/static/media/settings button hover.e529bb905d62a1a18896.png",
@@ -164,8 +163,8 @@
     "static/media/KaTeX_Size3-Regular.woff": "/LOG/static/media/KaTeX_Size3-Regular.7947224e8a9914fa332b.woff",
     "static/media/KaTeX_Size3-Regular.woff2": "/LOG/static/media/KaTeX_Size3-Regular.e1951519f6f0596f7356.woff2",
     "index.html": "/LOG/index.html",
-    "main.71ec7aa8.css.map": "/LOG/static/css/main.71ec7aa8.css.map",
-    "main.f452be05.js.map": "/LOG/static/js/main.f452be05.js.map",
+    "main.e4b2fa80.css.map": "/LOG/static/css/main.e4b2fa80.css.map",
+    "main.6526705e.js.map": "/LOG/static/js/main.6526705e.js.map",
     "reactPlayerYouTube.c4383ff3.chunk.js.map": "/LOG/static/js/reactPlayerYouTube.c4383ff3.chunk.js.map",
     "reactPlayerSoundCloud.5eba22e1.chunk.js.map": "/LOG/static/js/reactPlayerSoundCloud.5eba22e1.chunk.js.map",
     "reactPlayerVimeo.51151f74.chunk.js.map": "/LOG/static/js/reactPlayerVimeo.51151f74.chunk.js.map",
@@ -183,7 +182,7 @@
     "453.afd18887.chunk.js.map": "/LOG/static/js/453.afd18887.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.71ec7aa8.css",
-    "static/js/main.f452be05.js"
+    "static/css/main.e4b2fa80.css",
+    "static/js/main.6526705e.js"
   ]
 }
