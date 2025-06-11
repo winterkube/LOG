@@ -191,6 +191,36 @@ function HowToMath() {
             });
     }, []);
 
+    const [allVideosPreloaded, setAllVideosPreloaded] = useState(false);
+
+    // in HowToMath.js, alongside your image preload:
+    useEffect(() => {
+        const allVideoURLs = Object.values(Levels)
+            .map(l => l.levelNumber.video && l.levelNumber.video.url)
+            .filter(Boolean);
+
+        let loaded = 0;
+        allVideoURLs.forEach((src) => {
+            const v = document.createElement('video');
+            v.src = src;
+            v.preload = 'auto';
+            v.oncanplaythrough = () => {
+                loaded++;
+                if (loaded === allVideoURLs.length) {
+                    setAllVideosPreloaded(true);
+                }
+            };
+            v.onerror = () => {
+                loaded++;
+                if (loaded === allVideoURLs.length) {
+                    setAllVideosPreloaded(true);
+                }
+            };
+            v.load();
+        });
+    }, []);
+
+
     // Handle window resize
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -277,7 +307,7 @@ function HowToMath() {
         switch (currentScene) {
 
             case 'loading':
-                if (!imagesLoaded) {
+                if (!imagesLoaded || !allVideosPreloaded) {
                     return <LoadingScreen />;
                 }
                 return <LoadingScreen />;

@@ -156,15 +156,16 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay, assets
 
     // const [randomNum, setRandomNum] = useState(0);
     useEffect(() => {
+        if (!assetsLoaded) return;    // wait for the video to be ready
 
-
-        // Start initial timer
         if (assetsLoaded) {
             setIsReady(false);
             setUserAnswer('');
             setTimeLeft(startDelay);
         }
-    }, []);
+        // If you start your get-ready countdown here, do so now.
+    }, [assetsLoaded]);
+
 
 
     useEffect(() => {
@@ -381,6 +382,7 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay, assets
         currentQuestion,
         timeLeft,
         score: scoreRef.current,
+        setIsReady,
         isReady,
         userAnswer: _userAnswer,
         setUserAnswer,

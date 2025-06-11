@@ -21,6 +21,9 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
     const [videoLoaded, setVideoLoaded] = useState(false);
     const videoPlayerRef = useRef(null);
 
+    const [videoReady, setVideoReady] = useState(false);
+
+
     const questions = difficulty === 'easy' ? levelData.easyQuestions : levelData.questions;
 
     // near the top of Gameplay.js
@@ -113,17 +116,21 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
             if (videoPreloaded) {
                 setTimeout(() => {
                     setAssetsLoaded(true);
-                }, 1000)
+                    // setIsReady(true);
+                }, 0)
 
             }
         } else {
             setAssetsLoaded(false);
         }
     }, [videoPreloaded,  levelData.video]);
+
+
     const {
         currentQuestion,
         timeLeft,
         score,
+        setIsReady,
         isReady,
         userAnswer,
         setUserAnswer,
@@ -136,9 +143,17 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
         setCurrentQuestionIndex, // Expose the setter
     } = useGameLogic(levelData, questions, onGameEnd, 2, difficulty, assetsLoaded); // Start delay of 1.5 seconds
     // In your Gameplay component:
+
+
+    //
+    // useEffect(() => {
+    //     if (!assetsLoaded)
+    //         setIsReady(false);
+    //
+    // }, [assetsLoaded]);
+
     const [syncCheckpoints, setSyncCheckpoints] = useState([]);
     const nextCheckpointIndexRef = useRef(0);
-
 // // When assets are loaded and before gameplay begins, compute checkpoints:
 //     useEffect(() => {
 //         if (assetsLoaded) {
@@ -218,15 +233,11 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
 
             }, videoStartTime);
 
-
-
-
             return () => {
                 clearTimeout(handle);
                 setVideoPlaying(false);
             };
         // }
-
 
 
     }, [isPaused, levelData.video]);
@@ -242,7 +253,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
 
             // Only schedule the video if we're not already paused
             if (!isPaused) {
-                if (!isReady) {
+                if (!isReady || !assetsLoaded) {
                     videoStartTimerRef.current = setTimeout(() => {
                         // If at this moment, we are still not paused
                         if (!isPaused) {
@@ -403,6 +414,9 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
     }
 
 
+
+
+
     if (!assetsLoaded) {
         return (
             <>
@@ -427,6 +441,10 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
                             className="video-background"
                             url={levelData.video.url}
                             playing={videoPlaying}
+                            onReady={() => {
+                                console.log('ReactPlayer says video is ready');
+                                setVideoReady(true);
+                            }}
                             loop={false}
                             muted={false}
                             volume={levelData.video.volume * volume}
