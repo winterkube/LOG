@@ -471,9 +471,10 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
                             width="110%"
                             height="110%"
                             style={{position: 'absolute', top: 0, left: 0}}
+
                         />
                     ) : (
-                        <img src={require('./assets/tempbg.png')} alt="Background" className="image-background"
+                        <img src={require('./assets/black.jpg')} alt="Background" className="image-background"
                              style={{opacity: 0}}/>
                     )}
                 </div>

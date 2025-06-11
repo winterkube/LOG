@@ -25,13 +25,26 @@
     scale: 89%;
     top: -11%;
     left: -25%;
-    background-image: url("../assets/tempbg.png");
+    background-image: url("../assets/black.jpg");
     background-position: center;
     background-size: cover;
 }
 
 .gp-background.paused{
     filter: brightness(75%);
+}
+
+.video-background{
+    animation: fade-in-vid 1s;
+}
+
+@keyframes fade-in-vid {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
 }
 
 
