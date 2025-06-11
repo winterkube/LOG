@@ -23,6 +23,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
 
     const [videoReady, setVideoReady] = useState(false);
 
+    const [abcd, setAbcd] = useState(false);
 
     const questions = difficulty === 'easy' ? levelData.easyQuestions : levelData.questions;
 
@@ -42,66 +43,66 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
         }
     }, [location.pathname]);
 
-    // function preloadVideos(videoArray, onProgress, onComplete) {
-    //     let loadedVideos = 0;
-    //     const totalVideos = videoArray.length;
-    //
-    //     videoArray.forEach((src) => {
-    //         const video = document.createElement('video');
-    //         video.src = src;
-    //         video.preload = 'auto';
-    //         video.muted = false; // Mute the video to allow autoplay in some browsers
-    //
-    //         // Event listener for when the video can play through
-    //         const handleCanPlayThrough = () => {
-    //             loadedVideos++;
-    //             onProgress && onProgress(loadedVideos / totalVideos);
-    //
-    //             if (loadedVideos === totalVideos) {
-    //                 onComplete && onComplete();
-    //             }
-    //
-    //             // Clean up event listeners
-    //             video.removeEventListener('canplaythrough', handleCanPlayThrough);
-    //             video.removeEventListener('error', handleError);
-    //         };
-    //
-    //         const handleError = (e) => {
-    //             console.error(`Failed to preload video: ${src}`, e);
-    //             loadedVideos++;
-    //             onProgress && onProgress(loadedVideos / totalVideos);
-    //
-    //             if (loadedVideos === totalVideos) {
-    //                 onComplete && onComplete();
-    //             }
-    //
-    //             // Clean up event listeners
-    //             video.removeEventListener('canplaythrough', handleCanPlayThrough);
-    //             video.removeEventListener('error', handleError);
-    //         };
-    //
-    //         video.addEventListener('canplaythrough', handleCanPlayThrough);
-    //         video.addEventListener('error', handleError);
-    //
-    //         // Start loading the video
-    //         video.load();
-    //     });
-    // }
+    function preloadVideos(videoArray, onProgress, onComplete) {
+        let loadedVideos = 0;
+        const totalVideos = videoArray.length;
+
+        videoArray.forEach((src) => {
+            const video = document.createElement('video');
+            video.src = src;
+            video.preload = 'auto';
+            video.muted = false; // Mute the video to allow autoplay in some browsers
+
+            // Event listener for when the video can play through
+            const handleCanPlayThrough = () => {
+                loadedVideos++;
+                onProgress && onProgress(loadedVideos / totalVideos);
+
+                if (loadedVideos === totalVideos) {
+                    onComplete && onComplete();
+                }
+
+                // Clean up event listeners
+                video.removeEventListener('canplaythrough', handleCanPlayThrough);
+                video.removeEventListener('error', handleError);
+            };
+
+            const handleError = (e) => {
+                console.error(`Failed to preload video: ${src}`, e);
+                loadedVideos++;
+                onProgress && onProgress(loadedVideos / totalVideos);
+
+                if (loadedVideos === totalVideos) {
+                    onComplete && onComplete();
+                }
+
+                // Clean up event listeners
+                video.removeEventListener('canplaythrough', handleCanPlayThrough);
+                video.removeEventListener('error', handleError);
+            };
+
+            video.addEventListener('canplaythrough', handleCanPlayThrough);
+            video.addEventListener('error', handleError);
+
+            // Start loading the video
+            video.load();
+        });
+    }
     const [videoLoadingProgress, setVideoLoadingProgress] = useState(0);
     const [videoPreloaded, setVideoPreloaded] = useState(false);
 
     useEffect(() => {
         if (levelData.video) {
-            // preloadVideos(
-            //     [levelData.video.url],
-            //     (progress) => {
-            //         setVideoLoadingProgress(progress);
-            //     },
-            //     () => {
-            //         setVideoPreloaded(true);
-            //         console.log('Video is preloaded');
-            //     }
-            // );
+            preloadVideos(
+                [levelData.video.url],
+                (progress) => {
+                    setVideoLoadingProgress(progress);
+                },
+                () => {
+                    setVideoPreloaded(true);
+                    console.log('Video is preloaded');
+                }
+            );
             setVideoPreloaded(true);
         } else {
             // No video to preload
@@ -111,6 +112,10 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
 
 // Destructure variables returned by useGameLogic
 
+    // at the top of Gameplay:
+    // const [videoReady, setVideoReady] = useState(false);
+    // const canStart = videoReady && assetsLoaded && !isPaused;
+
 
     useEffect(() => {
         if (levelData.video) {
@@ -118,7 +123,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
                 setTimeout(() => {
                     setAssetsLoaded(true);
                     // setIsReady(true);
-                }, 0)
+                }, 1000)
 
             }
         } else {
@@ -149,13 +154,21 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
     } = useGameLogic(levelData, questions, onGameEnd, 2, difficulty, assetsLoaded); // Start delay of 1.5 seconds
     // In your Gameplay component:
 
+    //
+    useEffect(() => {
+        if (!isReady) {
+            if (!assetsLoaded) {
+                setIsPaused(true);
+                setAbcd(true);
+            } else if (assetsLoaded && abcd) {
+                setIsPaused(false);
+                setAbcd(false);
+            }
 
-    //
-    // useEffect(() => {
-    //     if (!assetsLoaded)
-    //         setIsReady(false);
-    //
-    // }, [assetsLoaded]);
+        }
+
+    }, [assetsLoaded, isPaused, abcd]);
+
 
     const [syncCheckpoints, setSyncCheckpoints] = useState([]);
     const nextCheckpointIndexRef = useRef(0);
@@ -214,7 +227,7 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
         setTimeout(() => {
             // audioRef.current.pause();
             onGameEnd({...performanceData, levelNumber: levelData.levelNumber});
-        }, 3000); // Duration of fade-out animation
+        }, 3500); // Duration of fade-out animation
     };
 
 
@@ -265,12 +278,14 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
                             setVideoPlaying(true);
                         }
                     }, videoStartTime);
-                } else {
+
+                }  else {
                     if (!isPaused) {
                         setVideoPlaying(true);
                     }
                 }
             }
+
         }
 
         return () => {

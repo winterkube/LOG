@@ -28,7 +28,7 @@ export const randomNum1 = (what) => {
     return `__RANDOM_NUM1_${what || 'default'}_${randomNumCounter}__`;
 };
 
-export function useGameLogic(levelData, questions, onGameEnd, startDelay, assetsLoaded) {
+export function useGameLogic(levelData, questions, onGameEnd, startDelay, assetsLoaded, canStart) {
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [currentQuestion, setCurrentQuestion] = useState('...');
@@ -140,7 +140,7 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay, assets
 
 
     useEffect(() => {
-        if (isPausedRef.current) {
+        if (isPausedRef.current || !assetsLoaded) {
             // Pause the timers
             if (timerRef.current) {
                 clearInterval(timerRef.current);
@@ -148,7 +148,7 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay, assets
             }
         } else {
             // Resume the timers
-            if (!timerRef.current && isReady) {
+            if (!timerRef.current && isReady && assetsLoaded ) {
                 startQuestionTimer(currentQuestion, true); // Pass true to indicate resume
             }
         }
@@ -159,6 +159,9 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay, assets
         if (!assetsLoaded) return;    // wait for the video to be ready
 
         if (assetsLoaded) {
+
+            setIsPaused(false);
+
             setIsReady(false);
             setUserAnswer('');
             setTimeLeft(startDelay);
@@ -183,12 +186,12 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay, assets
             setCurrentQuestion(questionData);
             setUserAnswer('');
 
-            if (!isPausedRef.current) {
+            if (!isPausedRef.current && assetsLoaded) {
                 setTimeLeft(startDelay);
             }
 
             timerRef.current = setInterval(() => {
-                if (!isPausedRef.current) {
+                if (!isPausedRef.current && assetsLoaded ) {
                     setTimeLeft((prevTime) => {
 
                         if (prevTime <= 0) {
@@ -249,7 +252,7 @@ export function useGameLogic(levelData, questions, onGameEnd, startDelay, assets
 
         timerRef.current = setInterval(() => {
 
-            if (!isPausedRef.current) {
+            if (!isPausedRef.current && assetsLoaded) {
 
                 setTimeLeft((prevTime) => {
 
