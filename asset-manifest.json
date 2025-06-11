@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/LOG/static/css/main.3a8e5fff.css",
-    "main.js": "/LOG/static/js/main.82675cca.js",
+    "main.css": "/LOG/static/css/main.71ec7aa8.css",
+    "main.js": "/LOG/static/js/main.015208cf.js",
     "reactPlayerYouTube.js": "/LOG/static/js/reactPlayerYouTube.c4383ff3.chunk.js",
     "reactPlayerSoundCloud.js": "/LOG/static/js/reactPlayerSoundCloud.5eba22e1.chunk.js",
     "reactPlayerVimeo.js": "/LOG/static/js/reactPlayerVimeo.51151f74.chunk.js",
@@ -65,6 +65,7 @@
     "static/media/dialogue paper.png": "/LOG/static/media/dialogue paper.2acb0f515827b5ceda40.png",
     "static/media/startbtn2.png": "/LOG/static/media/startbtn2.76b35ae6ac4880443d5e.png",
     "static/media/startbtn1.png": "/LOG/static/media/startbtn1.cdda9130bf296f36a820.png",
+    "static/media/exit.mp3": "/LOG/static/media/exit.00cdf87ec6f7469cdc36.mp3",
     "static/media/cheebaHead1.png": "/LOG/static/media/cheebaHead1.4a65b88151205742903e.png",
     "static/media/cheebaHead2.png": "/LOG/static/media/cheebaHead2.4a65b88151205742903e.png",
     "static/media/cheebaHead3.png": "/LOG/static/media/cheebaHead3.4a65b88151205742903e.png",
@@ -90,6 +91,7 @@
     "static/media/settings button hover.png": "/LOG/static/media/settings button hover.e529bb905d62a1a18896.png",
     "static/media/bgleft.png": "/LOG/static/media/bgleft.3a20f5a3e288a7656fdf.png",
     "static/media/bgright.png": "/LOG/static/media/bgright.4c8dc14b40e6f3732cb7.png",
+    "static/media/buttonclick.mp3": "/LOG/static/media/buttonclick.f48a97f94d341605dc49.mp3",
     "static/media/KaTeX_Main-Italic.ttf": "/LOG/static/media/KaTeX_Main-Italic.fa675e5e4bec9eb250b6.ttf",
     "static/media/KaTeX_AMS-Regular.woff": "/LOG/static/media/KaTeX_AMS-Regular.d562e886c52f12660a41.woff",
     "static/media/KaTeX_Main-BoldItalic.ttf": "/LOG/static/media/KaTeX_Main-BoldItalic.828abcb200061cffbaae.ttf",
@@ -162,8 +164,8 @@
     "static/media/KaTeX_Size3-Regular.woff": "/LOG/static/media/KaTeX_Size3-Regular.7947224e8a9914fa332b.woff",
     "static/media/KaTeX_Size3-Regular.woff2": "/LOG/static/media/KaTeX_Size3-Regular.e1951519f6f0596f7356.woff2",
     "index.html": "/LOG/index.html",
-    "main.3a8e5fff.css.map": "/LOG/static/css/main.3a8e5fff.css.map",
-    "main.82675cca.js.map": "/LOG/static/js/main.82675cca.js.map",
+    "main.71ec7aa8.css.map": "/LOG/static/css/main.71ec7aa8.css.map",
+    "main.015208cf.js.map": "/LOG/static/js/main.015208cf.js.map",
     "reactPlayerYouTube.c4383ff3.chunk.js.map": "/LOG/static/js/reactPlayerYouTube.c4383ff3.chunk.js.map",
     "reactPlayerSoundCloud.5eba22e1.chunk.js.map": "/LOG/static/js/reactPlayerSoundCloud.5eba22e1.chunk.js.map",
     "reactPlayerVimeo.51151f74.chunk.js.map": "/LOG/static/js/reactPlayerVimeo.51151f74.chunk.js.map",
@@ -181,7 +183,7 @@
     "453.afd18887.chunk.js.map": "/LOG/static/js/453.afd18887.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3a8e5fff.css",
-    "static/js/main.82675cca.js"
+    "static/css/main.71ec7aa8.css",
+    "static/js/main.015208cf.js"
   ]
 }
