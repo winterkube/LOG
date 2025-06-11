@@ -42,66 +42,67 @@ function Gameplay({ levelData, onGameEnd, inGame, difficulty, volume}) {
         }
     }, [location.pathname]);
 
-    function preloadVideos(videoArray, onProgress, onComplete) {
-        let loadedVideos = 0;
-        const totalVideos = videoArray.length;
-
-        videoArray.forEach((src) => {
-            const video = document.createElement('video');
-            video.src = src;
-            video.preload = 'auto';
-            video.muted = false; // Mute the video to allow autoplay in some browsers
-
-            // Event listener for when the video can play through
-            const handleCanPlayThrough = () => {
-                loadedVideos++;
-                onProgress && onProgress(loadedVideos / totalVideos);
-
-                if (loadedVideos === totalVideos) {
-                    onComplete && onComplete();
-                }
-
-                // Clean up event listeners
-                video.removeEventListener('canplaythrough', handleCanPlayThrough);
-                video.removeEventListener('error', handleError);
-            };
-
-            const handleError = (e) => {
-                console.error(`Failed to preload video: ${src}`, e);
-                loadedVideos++;
-                onProgress && onProgress(loadedVideos / totalVideos);
-
-                if (loadedVideos === totalVideos) {
-                    onComplete && onComplete();
-                }
-
-                // Clean up event listeners
-                video.removeEventListener('canplaythrough', handleCanPlayThrough);
-                video.removeEventListener('error', handleError);
-            };
-
-            video.addEventListener('canplaythrough', handleCanPlayThrough);
-            video.addEventListener('error', handleError);
-
-            // Start loading the video
-            video.load();
-        });
-    }
+    // function preloadVideos(videoArray, onProgress, onComplete) {
+    //     let loadedVideos = 0;
+    //     const totalVideos = videoArray.length;
+    //
+    //     videoArray.forEach((src) => {
+    //         const video = document.createElement('video');
+    //         video.src = src;
+    //         video.preload = 'auto';
+    //         video.muted = false; // Mute the video to allow autoplay in some browsers
+    //
+    //         // Event listener for when the video can play through
+    //         const handleCanPlayThrough = () => {
+    //             loadedVideos++;
+    //             onProgress && onProgress(loadedVideos / totalVideos);
+    //
+    //             if (loadedVideos === totalVideos) {
+    //                 onComplete && onComplete();
+    //             }
+    //
+    //             // Clean up event listeners
+    //             video.removeEventListener('canplaythrough', handleCanPlayThrough);
+    //             video.removeEventListener('error', handleError);
+    //         };
+    //
+    //         const handleError = (e) => {
+    //             console.error(`Failed to preload video: ${src}`, e);
+    //             loadedVideos++;
+    //             onProgress && onProgress(loadedVideos / totalVideos);
+    //
+    //             if (loadedVideos === totalVideos) {
+    //                 onComplete && onComplete();
+    //             }
+    //
+    //             // Clean up event listeners
+    //             video.removeEventListener('canplaythrough', handleCanPlayThrough);
+    //             video.removeEventListener('error', handleError);
+    //         };
+    //
+    //         video.addEventListener('canplaythrough', handleCanPlayThrough);
+    //         video.addEventListener('error', handleError);
+    //
+    //         // Start loading the video
+    //         video.load();
+    //     });
+    // }
     const [videoLoadingProgress, setVideoLoadingProgress] = useState(0);
     const [videoPreloaded, setVideoPreloaded] = useState(false);
 
     useEffect(() => {
         if (levelData.video) {
-            preloadVideos(
-                [levelData.video.url],
-                (progress) => {
-                    setVideoLoadingProgress(progress);
-                },
-                () => {
-                    setVideoPreloaded(true);
-                    console.log('Video is preloaded');
-                }
-            );
+            // preloadVideos(
+            //     [levelData.video.url],
+            //     (progress) => {
+            //         setVideoLoadingProgress(progress);
+            //     },
+            //     () => {
+            //         setVideoPreloaded(true);
+            //         console.log('Video is preloaded');
+            //     }
+            // );
+            setVideoPreloaded(true);
         } else {
             // No video to preload
             setVideoPreloaded(true);
