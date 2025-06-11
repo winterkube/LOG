@@ -60,7 +60,7 @@ function randomEq1(huh, vari) {
         if (b === 0) {
             b++;
         }
-        if (b === aCoeff) {
+        if (b === aCoeff || b === -1 * aCoeff ) {
             b++;
         }
         // Step 4: Calculate c = a * x + b * x
@@ -108,7 +108,7 @@ export const algebraTrial = {
         volume: 1
     },
     questions: [
-        { question: (Math.round(Math.random() * 10)).toString() + ' + ' + (Math.round(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
+        { question: (Math.round(Math.random() * 10)).toString() + ' + ' + (Math.round(Math.random() * 10)).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4.1 },
         { question: randomNum1().toString() + ' + ' +  randomNum1().toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: randomNum1(1).toString() + ' + ' + randomNum1(2).toString() + ' = ?', answer: 'idk', time: (60 / bpm) * 4 },
         { question: '3 + 7 = ?', answer: '10', time: (60 / bpm) * 3 },
